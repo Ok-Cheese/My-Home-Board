@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import Home from './Home';
 import styles from './routes.module.scss';
 
 const App = () => {
@@ -6,7 +7,7 @@ const App = () => {
     <div className={styles.appWrapper}>
       <div className={styles.app}>
         <Routes>
-          <Route path='/' element={<div />} />
+          <Route path='/' element={<Home />} />
         </Routes>
       </div>
     </div>
