@@ -8,6 +8,8 @@ import styles from './customBoard.module.scss';
 import 'react-grid-layout/css/styles.css';
 import Bookmarks from './Plugins/Bookmarks';
 import BOJ from './Plugins/BOJ';
+import Today from './Plugins/Today';
+import Setting from './Plugins/Setting';
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -19,7 +21,7 @@ const initialLayout: Layout[] = [
   { i: 'bookmark', w: 7, h: 2, x: 0, y: 1, resizeHandles: ['se'] },
   { i: 'github', w: 3, h: 2, x: 7, y: 1, resizeHandles: ['se'] },
   { i: 'todolist', w: 3, h: 7, x: 0, y: 3, resizeHandles: ['se'] },
-  { i: 'BOJ', w: 7, h: 5, x: 3, y: 3, resizeHandles: ['se'] },
+  { i: 'today', w: 7, h: 5, x: 3, y: 3, resizeHandles: ['se'] },
   { i: 'hello', w: 7, h: 2, x: 3, y: 8, resizeHandles: ['se'] },
 ];
 
@@ -36,7 +38,9 @@ const CustomBoard = () => {
           search: <SearchBar key={lo.i} />,
           github: <Github key={lo.i} />,
           bookmark: <Bookmarks key={lo.i} />,
+          today: <Today />,
           BOJ: <BOJ />,
+          setting: <Setting />,
         }[lo.i];
 
         return (
