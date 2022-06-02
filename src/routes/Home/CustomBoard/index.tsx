@@ -2,6 +2,7 @@ import RGL, { Layout, WidthProvider } from 'react-grid-layout';
 import { useMemo, useState } from 'react';
 
 import SearchBar from './Plugins/SearchBar';
+import Github from './Plugins/Github';
 
 import styles from './customBoard.module.scss';
 import 'react-grid-layout/css/styles.css';
@@ -14,10 +15,10 @@ const initialLayout: Layout[] = [
   { i: 'search', w: 8, h: 1, x: 0, y: 0, resizeHandles: ['se'] },
   { i: 'setting', w: 2, h: 1, x: 8, y: 0, resizeHandles: ['se'] },
   { i: 'bookmark', w: 7, h: 2, x: 0, y: 1, resizeHandles: ['se'] },
-  { i: 'dday', w: 3, h: 2, x: 7, y: 1, resizeHandles: ['se'] },
+  { i: 'github', w: 3, h: 2, x: 7, y: 1, resizeHandles: ['se'] },
   { i: 'todolist', w: 3, h: 7, x: 0, y: 3, resizeHandles: ['se'] },
   { i: 'undefined', w: 7, h: 5, x: 3, y: 3, resizeHandles: ['se'] },
-  { i: 'quote', w: 7, h: 2, x: 3, y: 8, resizeHandles: ['se'] },
+  { i: 'hello', w: 7, h: 2, x: 3, y: 8, resizeHandles: ['se'] },
 ];
 
 const CustomBoard = () => {
@@ -30,7 +31,8 @@ const CustomBoard = () => {
     () =>
       layoutState.map((lo) => {
         const plugin = {
-          search: <SearchBar />,
+          search: <SearchBar key={lo.i} />,
+          github: <Github key={lo.i} />,
         }[lo.i];
 
         return (
