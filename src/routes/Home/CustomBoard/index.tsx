@@ -6,6 +6,7 @@ import Github from './Plugins/Github';
 
 import styles from './customBoard.module.scss';
 import 'react-grid-layout/css/styles.css';
+import Bookmarks from './Plugins/Bookmarks';
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -33,6 +34,7 @@ const CustomBoard = () => {
         const plugin = {
           search: <SearchBar key={lo.i} />,
           github: <Github key={lo.i} />,
+          bookmark: <Bookmarks key={lo.i} />,
         }[lo.i];
 
         return (
@@ -82,6 +84,7 @@ const CustomBoard = () => {
       style={{ background: '#aaaaaa', width: '90vw', height: '90vh' }}
       cols={COLUMNS}
       isBounded
+      isDraggable={false}
       layout={layoutState}
       rowHeight={rowHeight}
     >
