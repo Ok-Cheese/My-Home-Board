@@ -77,6 +77,7 @@ const Github = () => {
         <VictoryAxis tickCount={8} tickFormat={(x) => x} />
         <VictoryAxis dependentAxis tickValues={intervalValues} />
       </VictoryChart>
+      <img src='https://ghchart.rshah.org/Ok-Cheese' alt='commits' />
     </div>
   );
 };
