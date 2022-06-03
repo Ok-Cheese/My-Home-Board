@@ -4,12 +4,12 @@ import { useState } from 'react';
 import styles from './today.module.scss';
 
 const Today = () => {
-  const [currentCity, setCurrentCity] = useState(null);
-  const [currentWeather, setCurrentWeather] = useState(null);
-  const [currentTemp, setCurrentTemp] = useState(null);
+  const [currentCity, setCurrentCity] = useState('Seoul');
+  const [currentWeather, setCurrentWeather] = useState('Clear');
+  const [currentTemp, setCurrentTemp] = useState('0');
 
-  const currentTime = dayjs().format('mm시 ss분');
-  const currentDate = dayjs().format('MM월 DD일');
+  const currentTime = dayjs().format('hh : mm');
+  const currentDate = dayjs().format('MMM DD');
   const currentDay = dayjs().format('ddd');
 
   const catchPosition = () => {
@@ -49,7 +49,19 @@ const Today = () => {
   console.log(currentDate, currentDay, currentTime);
   console.log(currentCity, currentWeather, currentTemp);
 
-  return <div>today</div>;
+  return (
+    <div>
+      <div className={styles.date}>
+        <p>{`${currentDate} / ${currentDay}`}</p>
+      </div>
+      <div className={styles.date}>
+        <p>{`${currentTime}`}</p>
+      </div>
+      <div className={styles.date}>
+        <p>{`${currentCity} / ${currentTemp}°C`}</p>
+      </div>
+    </div>
+  );
 };
 
 export default Today;
