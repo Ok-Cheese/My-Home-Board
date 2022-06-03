@@ -7,6 +7,7 @@ import { backgroundColorState, blockColorState } from 'states/plugin';
 
 import styles from './colorPicker.module.scss';
 import 'rc-slider/assets/index.css';
+import { isArray } from 'lodash';
 
 interface IProps {
   editTarget: string;
@@ -62,7 +63,9 @@ const ColorPicker = ({ editTarget }: IProps) => {
     });
   };
 
-  const angleChangeHandler = (angle: number) => {
+  const angleChangeHandler = (angle: number | number[]) => {
+    if (isArray(angle)) return;
+
     if (editTarget === 'background') {
       setBgColor((prev) => {
         return {
@@ -82,7 +85,9 @@ const ColorPicker = ({ editTarget }: IProps) => {
     });
   };
 
-  const gradientPointChangeHandler = (point: number) => {
+  const gradientPointChangeHandler = (point: number | number[]) => {
+    if (isArray(point)) return;
+
     if (editTarget === 'background') {
       setBgColor((prev) => {
         return {

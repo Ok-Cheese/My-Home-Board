@@ -12,6 +12,8 @@ import Today from './Plugins/Today';
 import Setting from './Plugins/Setting';
 import { useRecoilValue } from 'recoil';
 import { backgroundColorState, blockColorState } from 'states/plugin';
+import Todolist from './Plugins/Todolist';
+import TodoChart from './Plugins/TodoChart';
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -24,7 +26,7 @@ const initialLayout: Layout[] = [
   { i: 'github', w: 3, h: 2, x: 7, y: 1, resizeHandles: ['se'] },
   { i: 'todolist', w: 3, h: 7, x: 0, y: 3, resizeHandles: ['se'] },
   { i: 'today', w: 7, h: 5, x: 3, y: 3, resizeHandles: ['se'] },
-  { i: 'hello', w: 7, h: 2, x: 3, y: 8, resizeHandles: ['se'] },
+  { i: 'todoChart', w: 7, h: 2, x: 3, y: 8, resizeHandles: ['se'] },
 ];
 
 const CustomBoard = () => {
@@ -45,6 +47,8 @@ const CustomBoard = () => {
           today: <Today />,
           BOJ: <BOJ />,
           setting: <Setting />,
+          todolist: <Todolist />,
+          todoChart: <TodoChart />,
         }[lo.i];
 
         return (

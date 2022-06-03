@@ -7,11 +7,11 @@ import styles from './colorPickerModal.module.scss';
 const ColorPickModal = () => {
   const [editTarget, setEditTarget] = useState('background');
 
-  const changeTargetToBackground = (e: MouseEvent<HTMLButtonElement>) => {
+  const changeTargetToBackground = () => {
     setEditTarget('background');
   };
 
-  const changeTargetToBlock = (e: MouseEvent<HTMLButtonElement>) => {
+  const changeTargetToBlock = () => {
     setEditTarget('block');
   };
 
