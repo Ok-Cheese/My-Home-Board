@@ -1,9 +1,31 @@
-import { VictoryAxis, VictoryChart, VictoryLine } from 'victory';
+import {
+  createContainer,
+  Line,
+  VictoryArea,
+  VictoryAxis,
+  VictoryChart,
+  VictoryCursorContainerProps,
+  VictoryLabel,
+  VictoryScatter,
+  VictoryTooltip,
+  VictoryVoronoiContainerProps,
+} from 'victory';
 import dayjs from 'dayjs';
 
 import { GitHubIcon } from 'assets/svgs';
 
 import { testData } from './test_data';
+
+import styles from './github.module.scss';
+import {
+  areaStyle,
+  chartStyle,
+  cursorLineStyle,
+  labelStyle,
+  TOOLTIP_FLYOUT_STYLE,
+  TOOLTIP_STYLE,
+  victoryEvent,
+} from './chartStyles';
 
 const Github = () => {
   /* axios
@@ -66,18 +88,48 @@ const Github = () => {
 
   const intervalValues = [0.2, 0.4, 0.6, 0.8, 1].map((el) => Math.ceil(el * getMaxValue()));
 
+  const VictoryVoronoiContainer = createContainer<VictoryVoronoiContainerProps, VictoryCursorContainerProps>(
+    'voronoi',
+    'cursor'
+  );
+
   return (
-    <div>
-      <div>
+    <div className={styles.github}>
+      <div className={styles.title}>
         <GitHubIcon />
-        <h2>Github Events</h2>
+        <h2>Github commits</h2>
       </div>
-      <VictoryChart domainPadding={{ x: 10 }}>
-        <VictoryLine data={eventData} />
+      <VictoryChart
+        domainPadding={10}
+        {...chartStyle.size}
+        theme={chartStyle.theme}
+        containerComponent={<VictoryVoronoiContainer cursorComponent={<Line style={cursorLineStyle.style} />} />}
+      >
+        <VictoryLabel text='Commits' {...labelStyle.position} style={labelStyle.style} />
+        <VictoryArea data={eventData} interpolation='natural' animate={areaStyle.animation} />
+        <VictoryScatter
+          data={eventData}
+          y={(datum) => datum.y}
+          animate={{
+            duration: 1000,
+            easing: 'bounce',
+          }}
+          style={{ data: { fill: 'transparent' } }}
+          labels={({ datum }) => `${datum.y} commits`}
+          labelComponent={
+            <VictoryTooltip
+              style={TOOLTIP_STYLE}
+              flyoutStyle={TOOLTIP_FLYOUT_STYLE}
+              flyoutWidth={100}
+              dx={50}
+              dy={50}
+            />
+          }
+          events={[{ target: 'data', eventHandlers: { ...victoryEvent } }]}
+        />
         <VictoryAxis tickCount={8} tickFormat={(x) => x} />
         <VictoryAxis dependentAxis tickValues={intervalValues} />
       </VictoryChart>
-      <img src='https://ghchart.rshah.org/Ok-Cheese' alt='commits' />
     </div>
   );
 };
