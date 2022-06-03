@@ -4,3 +4,6 @@ export { ReactComponent as YoutubeIcon } from './youtube.svg';
 export { ReactComponent as GitHubIcon } from './github.svg';
 export { ReactComponent as HelpIcon } from './help.svg';
 export { ReactComponent as SettingIcon } from './setting.svg';
+export { ReactComponent as ColorIcon } from './color.svg';
+export { ReactComponent as CheckboxIcon } from './checkbox.svg';
+export { ReactComponent as BlankBoxIcon } from './blankBox.svg';

@@ -1,1 +1,7 @@
 @use 'src/styles/mixins/flexbox';
+
+.home {
+  @include flexbox.flexbox;
+  width: 100%;
+  height: 100%;
+}

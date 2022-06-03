@@ -10,6 +10,8 @@ import Bookmarks from './Plugins/Bookmarks';
 import BOJ from './Plugins/BOJ';
 import Today from './Plugins/Today';
 import Setting from './Plugins/Setting';
+import { useRecoilValue } from 'recoil';
+import { backgroundColorState, blockColorState } from 'states/plugin';
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -28,6 +30,8 @@ const initialLayout: Layout[] = [
 const CustomBoard = () => {
   const [tempSavedLayout, setTempSavedLayout] = useState<Layout[]>(initialLayout);
   const [layoutState, setLayoutState] = useState<Layout[]>(initialLayout);
+  const blockColor = useRecoilValue(blockColorState);
+  const bgColor = useRecoilValue(backgroundColorState);
 
   const rowHeight = window.outerHeight * 0.07;
 
@@ -44,7 +48,13 @@ const CustomBoard = () => {
         }[lo.i];
 
         return (
-          <div key={lo.i} className={styles.block}>
+          <div
+            key={lo.i}
+            className={styles.block}
+            style={{
+              background: `linear-gradient(${bgColor.gradientAngle}deg, ${bgColor.firstColor} 0%, ${bgColor.secondColor} ${bgColor.gradientPoint}%)`,
+            }}
+          >
             {plugin || lo.i}
           </div>
         );
