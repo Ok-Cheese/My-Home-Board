@@ -1,5 +1,8 @@
+import Button from 'components/Button';
+import AddSchedule from 'components/Modal/AddSchedule';
+import ModalPortal from 'components/Modal/Potal';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { todolistState } from 'states/todolist';
 import styles from './dday.module.scss';
@@ -12,70 +15,63 @@ interface IRemainTime {
   sign: '+' | '-';
 }
 
-interface ISchedule {
+export interface ISchedule {
   title: string;
-  deadline: dayjs.Dayjs;
+  deadline: Date;
 }
 
 const Dday = () => {
-  const [remainTime, setRemainTime] = useState<IRemainTime[]>([]);
-  const [schedules, setSchedules] = useState<ISchedule[]>([]);
-  const todoList = useRecoilValue(todolistState);
+  const [dday, setDday] = useState<ISchedule | null>(null);
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
-  useEffect(() => {
-    setSchedules(
-      todoList
-        .filter((item) => Boolean(item.deadline))
-        .map((item) => {
-          return { title: item.content, deadline: dayjs(item.deadline) };
-        })
-    );
-  }, [todoList]);
+  const buttonContent = dday ? '수정' : '등록';
 
-  /* useEffect(() => {
-    const interval = setInterval(() => {
-      schedules.forEach((schedule, index) => {
-        const today = dayjs();
-        const expired = schedule.deadline;
-        const newRemainTime: IRemainTime = {
-          date: Math.abs(expired.diff(today, 'day')).toString(),
-          hour: Math.abs(expired.diff(today, 'hour')).toString().padStart(2, '0'),
-          min: Math.abs(expired.diff(today, 'minute') % 60)
-            .toString()
-            .padStart(2, '0'),
-          sec: Math.abs(expired.diff(today, 'second') % 60)
-            .toString()
-            .padStart(2, '0'),
-          sign: expired.diff(today, 'second') > 0 ? '-' : '+',
-        };
+  const modalOpen = () => {
+    setIsModalOpened(true);
+  };
 
-        setRemainTime((prev) => {
-          const newRemainTimes = prev.slice();
-          prev.splice(index, 1, newRemainTime);
+  const modalClose = () => {
+    setIsModalOpened(false);
+  };
 
-          return newRemainTimes;
-        });
-      });
-    }, 1_000);
+  const contents = useMemo(() => {
+    if (!dday)
+      return (
+        <div className={styles.dday}>
+          <p>일정을 등록해주세요.</p>
+        </div>
+      );
 
-    return () => clearTimeout(interval);
-  }, [schedules]); */
+    const today = dayjs();
+    const expired = dayjs(dday.deadline);
+    const sign = Number(today.format('YYMMDDhhmmss')) - Number(expired.format('YYMMDDhhmmss')) > 0 ? '+' : '-';
 
-  console.log(remainTime.length);
+    const remainTime = {
+      hour: expired.diff(today, 'hour').toString().padStart(2, '0'),
+      min: (expired.diff(today, 'minute') % 60).toString().padStart(2, '0'),
+      sec: (expired.diff(today, 'second') % 60).toString().padStart(2, '0'),
+    };
 
-  const ddays = schedules.map((schedule, index) => {
     return (
-      <div key={schedule.title} className={styles.dday}>
-        <p>{schedule.title}까지</p>
-        {/* <p>{`D ${remainTime[index].sign} ${remainTime[index].date}`}</p>
-        <p>{`${remainTime[index].sign} ${remainTime[index].hour}:${remainTime[index].min}:${remainTime[index].sec}`}</p> */}
+      <div className={styles.remain}>
+        <p>{dday.title}</p>
+        <p>{`D${sign}${expired.diff(today, 'day')}`}</p>
+        <p>{`${sign}${remainTime.hour}:${remainTime.min}:${remainTime.sec}`}</p>
       </div>
     );
-  });
+  }, [dday]);
 
-  const contents = schedules.length ? ddays : <p>Todo List를 먼저 추가해주세요.</p>;
-
-  return <div className={styles.dday}>{contents}</div>;
+  return (
+    <div className={styles.dday}>
+      {contents}
+      <Button size='normal' onClick={modalOpen}>
+        {buttonContent}
+      </Button>
+      <ModalPortal>
+        {isModalOpened && <AddSchedule schedule={dday || undefined} setSchedule={setDday} closeModal={modalClose} />}
+      </ModalPortal>
+    </div>
+  );
 };
 
 export default Dday;
