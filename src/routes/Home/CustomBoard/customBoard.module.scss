@@ -1,6 +1,13 @@
 @use 'src/styles/constants/colors';
 
 .block {
+  position: relative;
   background: #eeeeee;
   border-radius: 5px;
+
+  .removeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
 }

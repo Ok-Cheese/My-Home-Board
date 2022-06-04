@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { Layout } from 'react-grid-layout';
 import { useRecoilState } from 'recoil';
 import { layoutAtom, toolBoxAtom } from 'states/plugin';
+import styles from './toolboxItem.module.scss';
 
 interface IProps {
   item: Layout;
@@ -40,7 +41,7 @@ const ToolBoxItem = ({ item }: IProps) => {
 
   return (
     <div>
-      <button type='button' className='toolbox__items__item' onClick={addItemToLayout}>
+      <button type='button' className={styles.toolboxItem} onClick={addItemToLayout}>
         {item.i}
       </button>
       <ModalPortal>

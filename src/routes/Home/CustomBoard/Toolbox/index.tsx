@@ -1,3 +1,4 @@
+import styles from './toolbox.module.scss';
 import ToolBoxItem from './ToolBoxItem';
 
 interface IProps {
@@ -6,7 +7,7 @@ interface IProps {
 
 const ToolBox = ({ items }: IProps) => {
   return (
-    <div className='toolbox'>
+    <div className={styles.toolbox}>
       <span className='toolbox__title'>Toolbox</span>
       <div className='toolbox__items'>
         {items.map((item) => (

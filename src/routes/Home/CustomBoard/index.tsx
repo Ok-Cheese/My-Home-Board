@@ -1,5 +1,5 @@
 import RGL, { Layout, WidthProvider } from 'react-grid-layout';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMount } from 'react-use';
 
 import SearchBar from './Plugins/SearchBar';
@@ -17,6 +17,7 @@ import Todolist from './Plugins/Todolist';
 import TodoChart from './Plugins/TodoChart';
 import Dday from './Plugins/Dday';
 import ToolBox from './Toolbox';
+import { cx } from 'styles';
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -34,10 +35,13 @@ const CustomBoard = () => {
 
   useMount(() => setTempSavedLayout(layoutState));
 
-  const removePlugin = (item: Layout) => {
-    setLayoutState((prev) => [...prev.filter(({ i }) => i !== item.i)]);
-    setToolBoxState((prev) => [...prev, item]);
-  };
+  const removePlugin = useCallback(
+    (item: Layout) => {
+      setLayoutState((prev) => [...prev.filter(({ i }) => i !== item.i)]);
+      setToolBoxState((prev) => [...prev, item]);
+    },
+    [setLayoutState, setToolBoxState]
+  );
 
   const dom = useMemo(
     () =>
@@ -46,12 +50,12 @@ const CustomBoard = () => {
           search: <SearchBar key={lo.i} />,
           github: <Github key={lo.i} />,
           bookmark: <Bookmarks key={lo.i} />,
-          today: <Today />,
-          BOJ: <BOJ />,
-          setting: <Setting />,
-          todolist: <Todolist />,
-          todoChart: <TodoChart />,
-          dday: <Dday />,
+          today: <Today key={lo.i} />,
+          BOJ: <BOJ key={lo.i} />,
+          setting: <Setting key={lo.i} />,
+          todolist: <Todolist key={lo.i} />,
+          todoChart: <TodoChart key={lo.i} />,
+          dday: <Dday key={lo.i} />,
         }[lo.i];
 
         return (
@@ -63,48 +67,16 @@ const CustomBoard = () => {
             }}
           >
             {plugin || lo.i}
-            {isEditMode && (
-              <button type='button' onClick={() => removePlugin(lo)}>
+            {isEditMode && lo.i !== 'setting' && (
+              <button type='button' className={styles.removeButton} onClick={() => removePlugin(lo)}>
                 X
               </button>
             )}
           </div>
         );
       }),
-    [layoutState]
+    [bgColor, isEditMode, layoutState, removePlugin]
   );
-
-  /* const editLayoutHandler = (currentLayout: Layout[]) => {
-    setTempSavedLayout(currentLayout);
-  };
-
-  useEffect(() => {
-    console.log(tempSavedLayout);
-  }, [tempSavedLayout]);
-
-  const layoutChangeHandler = (currentLayout: Layout[]) => {
-    const overflowedLayout = currentLayout.filter((layout) => layout.h + layout.y > COLUMNS);
-
-    console.log(overflowedLayout);
-
-    if (overflowedLayout.length) {
-      setLayoutState(tempSavedLayout);
-      return;
-    }
-
-    console.log(2);
-    setLayoutState(currentLayout);
-    setTempSavedLayout(currentLayout);
-  };
-
-  
-
-  useEffect(() => {
-    console.log(layoutState);
-    const overflowedLayout = layoutState.filter((layout) => layout.h + layout.y > COLUMNS);
-
-    console.log(overflowedLayout);
-  }, [layoutState]); */
 
   const layoutChangeHandler = (currentLayout: Layout[]) => {
     setLayoutState(currentLayout);
@@ -112,15 +84,20 @@ const CustomBoard = () => {
 
   return (
     <div>
-      <ToolBox items={toolBoxState || []} />
+      {isEditMode && <ToolBox items={toolBoxState || []} />}
       <ReactGridLayout
-        className={styles.layout}
-        style={{ background: '#aaaaaa', width: '90vw', height: '90vh' }}
+        style={{
+          background: '#aaaaaa',
+          width: '90vw',
+          height: '90vh',
+          opacity: isEditMode ? 0.75 : 1,
+        }}
         cols={COLUMNS}
         isBounded
-        isDraggable
-        layout={layoutState}
+        isDraggable={isEditMode}
+        isResizable={isEditMode}
         rowHeight={rowHeight}
+        layout={layoutState}
         onLayoutChange={layoutChangeHandler}
       >
         {dom}

@@ -1,5 +1,6 @@
 import { Layout } from 'react-grid-layout';
 import { atom } from 'recoil';
+import store from 'store';
 
 const totalPlugins: Layout[] = [
   { i: 'BOJ', w: 2, h: 2, x: 0, y: 0, minW: 2, minH: 2, resizeHandles: ['se'] },
@@ -22,7 +23,9 @@ const initailLayout: Layout[] = [
   { i: 'dday', w: 5, h: 3, x: 5, y: 7, minW: 2, minH: 2, resizeHandles: ['se'] },
 ];
 
-const defaultLayout = initailLayout;
+const storedLayout: Layout[] = store.get('layout');
+
+const defaultLayout = storedLayout || initailLayout;
 
 const idOfLayout = defaultLayout.map((layout) => layout.i);
 
