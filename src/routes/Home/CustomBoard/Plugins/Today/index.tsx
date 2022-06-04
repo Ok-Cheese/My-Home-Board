@@ -1,7 +1,10 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import store from 'store';
+import { useQuery } from 'react-query';
 import styles from './today.module.scss';
+import { getLocaleInform } from './utils';
 
 const Today = () => {
   const [currentCity, setCurrentCity] = useState('Seoul');
@@ -12,6 +15,8 @@ const Today = () => {
   const currentDate = dayjs().format('MMM DD');
   const currentDay = dayjs().format('ddd');
 
+  const [coordinate, setCoordinate] = useState({ lat: 0, lon: 0 });
+
   const catchPosition = () => {
     navigator.geolocation.getCurrentPosition(getCoords, showErrorMessage);
   };
@@ -21,23 +26,9 @@ const Today = () => {
       lat: position.coords.latitude,
       lon: position.coords.longitude,
     };
-    console.log(coords);
-    getWeather(coords);
-  };
 
-  interface ICoords {
-    lat: number;
-    lon: number;
-  }
-
-  const getWeather = (coords: ICoords) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&appid=${process.env.REACT_APP_WEATHER_KEY}&units=metric`;
-
-    /* axios.get(url).then((res) => {
-      setCurrentCity(res.data.name);
-      setCurrentWeather(res.data.weather[0].main);
-      setCurrentTemp(res.data.main.temp);
-    }); */
+    store.set('coordinate', coords);
+    setCoordinate(coords);
   };
 
   const showErrorMessage = () => {
@@ -46,8 +37,9 @@ const Today = () => {
 
   catchPosition();
 
-  console.log(currentDate, currentDay, currentTime);
-  console.log(currentCity, currentWeather, currentTemp);
+  const { data, isLoading, isError } = useQuery(['getLocaleData', coordinate], () => {
+    getLocaleInform(coordinate);
+  });
 
   return (
     <div>
