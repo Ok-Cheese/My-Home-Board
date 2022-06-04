@@ -106,6 +106,10 @@ const CustomBoard = () => {
     console.log(overflowedLayout);
   }, [layoutState]); */
 
+  const layoutChangeHandler = (currentLayout: Layout[]) => {
+    setLayoutState(currentLayout);
+  };
+
   return (
     <div>
       <ToolBox items={toolBoxState || []} />
@@ -114,9 +118,10 @@ const CustomBoard = () => {
         style={{ background: '#aaaaaa', width: '90vw', height: '90vh' }}
         cols={COLUMNS}
         isBounded
-        isDraggable={false}
+        isDraggable
         layout={layoutState}
         rowHeight={rowHeight}
+        onLayoutChange={layoutChangeHandler}
       >
         {dom}
       </ReactGridLayout>

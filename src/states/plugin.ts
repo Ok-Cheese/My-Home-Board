@@ -15,11 +15,11 @@ const totalPlugins: Layout[] = [
 const initailLayout: Layout[] = [
   { i: 'search', w: 8, h: 1, x: 0, y: 0, minH: 1, resizeHandles: ['se'] },
   { i: 'setting', w: 2, h: 1, x: 8, y: 0, minW: 2, minH: 1, maxW: 2, maxH: 1, resizeHandles: ['se'] },
-  { i: 'bookmark', w: 2, h: 2, x: 0, y: 1, minW: 2, minH: 2, resizeHandles: ['se'] },
-  { i: 'github', w: 2, h: 3, x: 8, y: 1, resizeHandles: ['se'] },
-  { i: 'todolist', w: 3, h: 5, x: 0, y: 3, minW: 2, minH: 4, resizeHandles: ['se'] },
-  { i: 'today', w: 2, h: 2, x: 2, y: 3, minW: 2, minH: 2, resizeHandles: ['se'] },
-  { i: 'dday', w: 2, h: 2, x: 5, y: 5, minW: 2, minH: 2, resizeHandles: ['se'] },
+  { i: 'bookmark', w: 5, h: 4, x: 0, y: 1, minW: 2, minH: 2, resizeHandles: ['se'] },
+  { i: 'github', w: 5, h: 4, x: 5, y: 1, resizeHandles: ['se'] },
+  { i: 'todolist', w: 5, h: 5, x: 0, y: 5, minW: 2, minH: 4, resizeHandles: ['se'] },
+  { i: 'today', w: 5, h: 2, x: 5, y: 5, minW: 2, minH: 2, resizeHandles: ['se'] },
+  { i: 'dday', w: 5, h: 3, x: 5, y: 7, minW: 2, minH: 2, resizeHandles: ['se'] },
 ];
 
 const defaultLayout = initailLayout;
