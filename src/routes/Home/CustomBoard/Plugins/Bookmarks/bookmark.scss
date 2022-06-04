@@ -1,0 +1,45 @@
+/* stylelint-disable selector-class-pattern */
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/colors';
+
+.slick-list {
+  width: 100%;
+  height: 100%;
+
+  .slick-track {
+    @include flexbox.flexbox;
+    width: 100%;
+    height: 100%;
+
+    .slick-slide {
+      width: 30%;
+      height: 50%;
+
+      & > div {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.slick-active {
+  transition: 0.2s;
+  transform: scale(1.5);
+}
+
+.slick-prev {
+  left: 0% !important;
+  z-index: 1;
+  width: 30% !important;
+  height: 50% !important;
+  opacity: 0;
+}
+
+.slick-next {
+  right: 0% !important;
+  z-index: 1;
+  width: 30% !important;
+  height: 50% !important;
+  opacity: 0;
+}
