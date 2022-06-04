@@ -1,0 +1,18 @@
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/colors';
+
+.backdrop {
+  @include flexbox.flexbox;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+
+  .modal {
+    @include flexbox.flexbox;
+    background: colors.$MODAL;
+    border-radius: 5px;
+  }
+}

@@ -1,0 +1,64 @@
+@use '/src/styles/constants/colors';
+
+.button {
+  font-size: 12px;
+  font-weight: 500;
+  background-color: colors.$BG_WHITE;
+  border: 1px solid colors.$BORDER;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 2%) 1.95px 1.95px 2.6px;
+  opacity: 1;
+  transition: opacity 0.3s;
+
+  &.xsmall {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &.small {
+    width: 40px;
+    height: 20px;
+    font-size: 8px;
+    font-weight: bold;
+  }
+
+  &.normal {
+    width: 80px;
+    height: 40px;
+  }
+
+  &.large {
+    width: 108px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  &.extraLarge {
+    width: 300px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 600;
+    color: colors.$TEXT_PURPLE;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &.primary {
+    color: colors.$BT_WHITE;
+    background-color: colors.$BT_BASIC;
+    border-color: transparent;
+  }
+
+  &.isActive {
+    color: colors.$BT_WHITE;
+    background-color: colors.$TEXT_PURPLE;
+  }
+
+  &.secondary {
+    background-color: colors.$BT_SECONDARY;
+    border: none;
+  }
+}

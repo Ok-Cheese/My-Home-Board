@@ -1,6 +1,8 @@
-import { GoogleIcon, SearchIcon, YoutubeIcon } from 'assets/svgs';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { cx } from 'styles';
+
+import { GoogleIcon, SearchIcon, YoutubeIcon } from 'assets/svgs';
+
 import styles from './searchBar.module.scss';
 
 type TSearchSite = 'google' | 'youtube';

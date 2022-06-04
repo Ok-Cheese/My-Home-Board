@@ -9,8 +9,6 @@ const COLORS = {
 };
 
 const chartStyle = {
-  size: { width: 540, height: 340 },
-
   theme: {
     area: {
       style: {
@@ -47,13 +45,13 @@ const chartStyle = {
 
 const labelStyle = {
   position: {
-    x: 16,
-    y: 18,
+    x: 345,
+    y: 30,
   },
 
   style: {
     fill: COLORS.LABEL,
-    fontSize: '18px',
+    fontSize: '16px',
     fontWeight: 'bold',
   },
 };
