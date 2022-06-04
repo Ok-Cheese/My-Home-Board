@@ -61,7 +61,7 @@ const BOJ = () => {
     }
 
     return <UserInform inform={informData} />;
-  }, [isError, isLoading, userId]);
+  }, [data?.data, isError, isLoading, userId]);
 
   const buttonContent = userId || 'ID 추가';
 
