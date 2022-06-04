@@ -38,7 +38,7 @@ const Github = () => {
   return (
     <div className={styles.github}>
       <ModalPortal>
-        {isModalOpened && <IdInputModal setUserId={setUserId} setIsModalOpened={setIsModalOpened} />}
+        {isModalOpened && <IdInputModal type='github' setUserId={setUserId} setIsModalOpened={setIsModalOpened} />}
       </ModalPortal>
       <div className={styles.title}>
         <GitHubIcon />

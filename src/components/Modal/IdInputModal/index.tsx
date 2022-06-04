@@ -7,11 +7,12 @@ import Button from 'components/Button';
 import styles from './idInputModal.module.scss';
 
 interface IProps {
+  type: 'github' | 'BOJ';
   setUserId: Dispatch<SetStateAction<string>>;
   setIsModalOpened: Dispatch<SetStateAction<boolean>>;
 }
 
-const IdInputModal = ({ setUserId, setIsModalOpened }: IProps) => {
+const IdInputModal = ({ type, setUserId, setIsModalOpened }: IProps) => {
   const [idInput, setIdInput] = useState('');
 
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +27,7 @@ const IdInputModal = ({ setUserId, setIsModalOpened }: IProps) => {
       return;
     }
 
-    store.set('github_id', idInput);
+    type === 'github' ? store.set('github_id', idInput) : store.set('BOJ_id', idInput);
 
     setUserId(idInput);
     setIsModalOpened(false);
