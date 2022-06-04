@@ -1,5 +1,6 @@
 import RGL, { Layout, WidthProvider } from 'react-grid-layout';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useMount } from 'react-use';
 
 import SearchBar from './Plugins/SearchBar';
 import Github from './Plugins/Github';
@@ -10,33 +11,33 @@ import Bookmarks from './Plugins/Bookmarks';
 import BOJ from './Plugins/BOJ';
 import Today from './Plugins/Today';
 import Setting from './Plugins/Setting';
-import { useRecoilValue } from 'recoil';
-import { backgroundColorState, blockColorState } from 'states/plugin';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { backgroundColorState, blockColorState, isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
 import Todolist from './Plugins/Todolist';
 import TodoChart from './Plugins/TodoChart';
 import Dday from './Plugins/Dday';
+import ToolBox from './Toolbox';
 
 const ReactGridLayout = WidthProvider(RGL);
 
 const COLUMNS = 10;
 
-const initialLayout: Layout[] = [
-  { i: 'search', w: 8, h: 1, x: 0, y: 0, resizeHandles: ['se'] },
-  { i: 'setting', w: 2, h: 1, x: 8, y: 0, resizeHandles: ['se'] },
-  { i: 'bookmark', w: 7, h: 2, x: 0, y: 1, resizeHandles: ['se'] },
-  { i: 'github', w: 3, h: 2, x: 7, y: 1, resizeHandles: ['se'] },
-  { i: 'todolist', w: 3, h: 7, x: 0, y: 3, resizeHandles: ['se'] },
-  { i: 'today', w: 7, h: 5, x: 3, y: 3, resizeHandles: ['se'] },
-  { i: 'dday', w: 7, h: 2, x: 3, y: 8, resizeHandles: ['se'] },
-];
-
 const CustomBoard = () => {
-  const [tempSavedLayout, setTempSavedLayout] = useState<Layout[]>(initialLayout);
-  const [layoutState, setLayoutState] = useState<Layout[]>(initialLayout);
+  const [layoutState, setLayoutState] = useRecoilState<Layout[]>(layoutAtom);
+  const [toolBoxState, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
+  const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom);
+  const [tempSavedLayout, setTempSavedLayout] = useState<Layout[]>([]);
   const blockColor = useRecoilValue(blockColorState);
   const bgColor = useRecoilValue(backgroundColorState);
 
   const rowHeight = window.outerHeight * 0.07;
+
+  useMount(() => setTempSavedLayout(layoutState));
+
+  const removePlugin = (item: Layout) => {
+    setLayoutState((prev) => [...prev.filter(({ i }) => i !== item.i)]);
+    setToolBoxState((prev) => [...prev, item]);
+  };
 
   const dom = useMemo(
     () =>
@@ -62,6 +63,11 @@ const CustomBoard = () => {
             }}
           >
             {plugin || lo.i}
+            {isEditMode && (
+              <button type='button' onClick={() => removePlugin(lo)}>
+                X
+              </button>
+            )}
           </div>
         );
       }),
@@ -101,17 +107,20 @@ const CustomBoard = () => {
   }, [layoutState]); */
 
   return (
-    <ReactGridLayout
-      className={styles.layout}
-      style={{ background: '#aaaaaa', width: '90vw', height: '90vh' }}
-      cols={COLUMNS}
-      isBounded
-      isDraggable={false}
-      layout={layoutState}
-      rowHeight={rowHeight}
-    >
-      {dom}
-    </ReactGridLayout>
+    <div>
+      <ToolBox items={toolBoxState || []} />
+      <ReactGridLayout
+        className={styles.layout}
+        style={{ background: '#aaaaaa', width: '90vw', height: '90vh' }}
+        cols={COLUMNS}
+        isBounded
+        isDraggable={false}
+        layout={layoutState}
+        rowHeight={rowHeight}
+      >
+        {dom}
+      </ReactGridLayout>
+    </div>
   );
 };
 

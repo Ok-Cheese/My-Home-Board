@@ -1,25 +1,41 @@
+import { Layout } from 'react-grid-layout';
 import { atom } from 'recoil';
 
-interface IPluginStandard {
-  id: string;
-  name: string;
-  maxWidth?: number;
-  minWidth?: number;
-  maxHeight?: number;
-  minHeight?: number;
-}
+const totalPlugins: Layout[] = [
+  { i: 'BOJ', w: 2, h: 2, x: 0, y: 0, minW: 2, minH: 2, resizeHandles: ['se'] },
+  { i: 'search', w: 5, h: 1, x: 0, y: 0, minH: 1, resizeHandles: ['se'] },
+  { i: 'bookmark', w: 2, h: 2, x: 0, y: 0, minW: 2, minH: 2, resizeHandles: ['se'] },
+  { i: 'dday', w: 2, h: 2, x: 0, y: 0, minW: 2, minH: 2, resizeHandles: ['se'] },
+  { i: 'setting', w: 2, h: 1, x: 0, y: 0, minW: 2, minH: 1, maxW: 2, maxH: 1, resizeHandles: ['se'] },
+  { i: 'todolist', w: 2, h: 4, x: 0, y: 0, minW: 2, minH: 4, resizeHandles: ['se'] },
+  { i: 'today', w: 2, h: 2, x: 0, y: 0, minW: 2, minH: 2, resizeHandles: ['se'] },
+  { i: 'github', w: 3, h: 2, x: 7, y: 1, resizeHandles: ['se'] },
+];
 
-export const totalPluginState = atom<IPluginStandard[]>({
-  key: '#totalPluginState',
-  default: [
-    { id: 'BOJ', name: '백준', minWidth: 2, minHeight: 2 },
-    { id: 'search', name: '검색', maxHeight: 1 },
-    { id: 'bookmark', name: '즐겨찾기', minWidth: 2, minHeight: 2 },
-    { id: 'dday', name: 'D-day', minWidth: 2, minHeight: 2 },
-    { id: 'setting', name: '설정', minWidth: 2, minHeight: 1, maxWidth: 2, maxHeight: 1 },
-    { id: 'todolist', name: 'Todo List', minWidth: 2, minHeight: 4 },
-    { id: 'today', name: 'Today', minWidth: 2, minHeight: 2 },
-  ],
+const initailLayout: Layout[] = [
+  { i: 'search', w: 8, h: 1, x: 0, y: 0, minH: 1, resizeHandles: ['se'] },
+  { i: 'setting', w: 2, h: 1, x: 8, y: 0, minW: 2, minH: 1, maxW: 2, maxH: 1, resizeHandles: ['se'] },
+  { i: 'bookmark', w: 2, h: 2, x: 0, y: 1, minW: 2, minH: 2, resizeHandles: ['se'] },
+  { i: 'github', w: 2, h: 3, x: 8, y: 1, resizeHandles: ['se'] },
+  { i: 'todolist', w: 3, h: 5, x: 0, y: 3, minW: 2, minH: 4, resizeHandles: ['se'] },
+  { i: 'today', w: 2, h: 2, x: 2, y: 3, minW: 2, minH: 2, resizeHandles: ['se'] },
+  { i: 'dday', w: 2, h: 2, x: 5, y: 5, minW: 2, minH: 2, resizeHandles: ['se'] },
+];
+
+const defaultLayout = initailLayout;
+
+const idOfLayout = defaultLayout.map((layout) => layout.i);
+
+const toolBoxDefault = totalPlugins.filter(({ i }) => !idOfLayout.find((id) => id === i));
+
+export const toolBoxAtom = atom<Layout[]>({
+  key: '#toolBoxAtom',
+  default: toolBoxDefault,
+});
+
+export const layoutAtom = atom<Layout[]>({
+  key: '#layoutAtom',
+  default: defaultLayout,
 });
 
 interface IColorPicker {
@@ -50,4 +66,9 @@ export const blockColorState = atom<IColorPicker>({
     secondColor: '#fefefe',
     opacity: 1,
   },
+});
+
+export const isEditModeAtom = atom<boolean>({
+  key: '#isEditModeAtom',
+  default: false,
 });
