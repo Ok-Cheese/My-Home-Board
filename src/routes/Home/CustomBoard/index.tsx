@@ -1,9 +1,8 @@
 import RGL, { Layout, WidthProvider } from 'react-grid-layout';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useMount } from 'react-use';
 
 import SearchBar from './Plugins/SearchBar';
-import Github from './Plugins/Github';
 
 import styles from './customBoard.module.scss';
 import 'react-grid-layout/css/styles.css';
@@ -46,7 +45,6 @@ const CustomBoard = () => {
       layoutState.map((lo) => {
         const plugin = {
           search: <SearchBar key={lo.i} />,
-          github: <Github key={lo.i} />,
           bookmark: <Bookmarks key={lo.i} />,
           today: <Today key={lo.i} />,
           BOJ: <BOJ key={lo.i} />,

@@ -12,7 +12,7 @@ const settings = {
   className: styles.slider,
   centerMode: true,
   infinite: true,
-  centerPadding: '200px',
+  centerPadding: '250px',
   slidesToShow: 1,
   speed: 500,
 };

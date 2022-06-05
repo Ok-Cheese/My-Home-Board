@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
 
-import styles from './addTodoModal.module.scss';
+import styles from './addTodo.module.scss';
 import { ITodoItem } from 'routes/Home/CustomBoard/Plugins/Todolist';
 import Button from 'components/Button';
 import Modal from '..';
