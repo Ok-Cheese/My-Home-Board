@@ -8,7 +8,6 @@ interface IProps {
 const ToolBox = ({ items }: IProps) => {
   return (
     <div className={styles.toolbox}>
-      <span className='toolbox__title'>Toolbox</span>
       <div className='toolbox__items'>
         {items.map((item) => (
           <ToolBoxItem key={item.i} item={item} />

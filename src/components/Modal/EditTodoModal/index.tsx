@@ -1,8 +1,7 @@
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { IEditTarget, ITodoItem } from 'routes/Home/CustomBoard/Plugins/Todolist';
-import DatePicker from 'react-datepicker';
 import styles from './editTodoModal.module.scss';
-import 'react-datepicker/dist/react-datepicker.css';
+import Modal from '..';
 
 interface IProps {
   editTarget: IEditTarget;
@@ -11,14 +10,7 @@ interface IProps {
 }
 
 const EditTodoModal = ({ editTarget, setTodoList, setIsEditModalOpened }: IProps) => {
-  const [deadline, setDeadline] = useState<Date | null>(editTarget.item.deadline);
   const [todoContent, setTodoContent] = useState(editTarget.item.content);
-
-  const dateChangeHandler = (date: Date) => {
-    if (!date) return;
-
-    setDeadline(date);
-  };
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTodoContent(e.currentTarget.value);
@@ -27,7 +19,7 @@ const EditTodoModal = ({ editTarget, setTodoList, setIsEditModalOpened }: IProps
   const createTodoHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const editedItem = { id: editTarget.item.id, content: todoContent, deadline, complete: editTarget.item.complete };
+    const editedItem = { id: editTarget.item.id, content: todoContent, complete: editTarget.item.complete };
 
     setTodoList((prev) => {
       const editedList = prev.slice();
@@ -50,19 +42,9 @@ const EditTodoModal = ({ editTarget, setTodoList, setIsEditModalOpened }: IProps
   };
 
   return (
-    <div className={styles.backdrop}>
+    <Modal>
       <form className={styles.addTodoForm} onSubmit={createTodoHandler}>
         <input type='text' onChange={inputChangeHandler} value={todoContent} />
-        <div className={styles.datePicker}>
-          <DatePicker
-            selected={deadline}
-            onChange={dateChangeHandler}
-            placeholderText='마감일을 선택해주세요.'
-            timeInputLabel='Time:'
-            dateFormat='MM/dd/yyyy h:mm aa'
-            showTimeInput
-          />
-        </div>
         <div className={styles.buttonWrapper}>
           <button type='submit'>완료</button>
           <button type='button' onClick={deleteHandler}>
@@ -70,7 +52,7 @@ const EditTodoModal = ({ editTarget, setTodoList, setIsEditModalOpened }: IProps
           </button>
         </div>
       </form>
-    </div>
+    </Modal>
   );
 };
 

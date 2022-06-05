@@ -1,9 +1,12 @@
+import { useMemo, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { Layout } from 'react-grid-layout';
+
+import { layoutAtom, toolBoxAtom } from 'states/plugin';
+
 import ModalPortal from 'components/Modal/Potal';
 import WarningModal from 'components/Modal/WarningModal';
-import { useMemo, useState } from 'react';
-import { Layout } from 'react-grid-layout';
-import { useRecoilState } from 'recoil';
-import { layoutAtom, toolBoxAtom } from 'states/plugin';
+
 import styles from './toolboxItem.module.scss';
 
 interface IProps {
@@ -12,7 +15,7 @@ interface IProps {
 
 const ToolBoxItem = ({ item }: IProps) => {
   const [layoutState, setLayoutState] = useRecoilState<Layout[]>(layoutAtom);
-  const [toolBoxState, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
+  const [, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const emptySpace = useMemo(() => {
@@ -23,8 +26,6 @@ const ToolBoxItem = ({ item }: IProps) => {
 
   const addItemToLayout = () => {
     const itemSize = item.w * item.h;
-
-    console.log(itemSize, emptySpace);
 
     if (itemSize > emptySpace) {
       setIsModalOpened(true);

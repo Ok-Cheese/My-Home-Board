@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import store from 'store';
 
-import { getBOJData, tierList } from './utiles';
+import { getBOJData } from './utiles';
 
 import Button from 'components/Button';
 import ModalPortal from 'components/Modal/Potal';

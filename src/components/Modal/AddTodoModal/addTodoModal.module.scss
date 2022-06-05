@@ -1,45 +1,35 @@
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/constants/colors';
 
-.backdrop {
+.addTodoForm {
   @include flexbox.flexbox;
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100vw;
-  height: 100vh;
+  flex-direction: column;
+  width: 500px;
+  height: 300px;
+  padding: 10px;
+  background: colors.$GRAYD;
 
-  .addTodoForm {
+  input {
+    width: 90%;
+    height: 40px;
+    padding: 20px 40px;
+    margin: 12px 0;
+    font-weight: 600;
+    color: colors.$TEXT_PRIMARY;
+    letter-spacing: 0.5px;
+    background: colors.$BG_WHITE;
+    border-radius: 10px;
+  }
+
+  .buttonWrapper {
     @include flexbox.flexbox;
-    position: absolute;
-    flex-direction: column;
-    width: 500px;
-    height: 300px;
-    padding: 10px;
-    background: colors.$GRAYD;
+    width: 100%;
 
-    input {
-      width: 100%;
+    button {
+      width: 100px;
       height: 40px;
-      border: 1px solid black;
-    }
-
-    .datePicker {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-
-    .buttonWrapper {
-      @include flexbox.flexbox;
-      width: 100%;
-
-      button {
-        width: 100px;
-        height: 40px;
-        background: colors.$TEAL;
-      }
+      margin: 0 20px;
     }
   }
 }

@@ -10,7 +10,6 @@ import styles from './todolist.module.scss';
 export interface ITodoItem {
   id: number;
   content: string;
-  deadline: Date | null;
   complete: boolean;
 }
 

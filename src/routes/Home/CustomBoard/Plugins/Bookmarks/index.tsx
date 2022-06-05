@@ -4,8 +4,7 @@ import styles from './bookmarks.module.scss';
 import './bookmark.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { isEditModeAtom } from 'states/plugin';
+import { useRecoilValue } from 'recoil';
 import { bookmarkAtom } from 'states/bookmark';
 import { getBookmarkIcon } from './utils';
 
@@ -19,8 +18,7 @@ const settings = {
 };
 
 const Bookmarks = () => {
-  const isEditMode = useRecoilValue(isEditModeAtom);
-  const [bookmarks, setBookmarks] = useRecoilState(bookmarkAtom);
+  const bookmarks = useRecoilValue(bookmarkAtom);
 
   const visitBookmark = (url: string) => {
     window.open(`${url}`, '_blank');

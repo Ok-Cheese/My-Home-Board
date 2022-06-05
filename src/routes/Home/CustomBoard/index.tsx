@@ -15,7 +15,6 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
 import { backgroundColorState } from 'states/color';
 import Todolist from './Plugins/Todolist';
-import Dday from './Plugins/Dday';
 import ToolBox from './Toolbox';
 import { cx } from 'styles';
 
@@ -53,7 +52,6 @@ const CustomBoard = () => {
           BOJ: <BOJ key={lo.i} />,
           setting: <Setting key={lo.i} />,
           todolist: <Todolist key={lo.i} />,
-          dday: <Dday key={lo.i} />,
         }[lo.i];
 
         return (

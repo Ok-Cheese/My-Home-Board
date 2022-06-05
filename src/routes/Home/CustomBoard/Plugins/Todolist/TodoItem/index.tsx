@@ -1,6 +1,5 @@
 import { BlankBoxIcon, CheckboxIcon } from 'assets/svgs';
-import dayjs from 'dayjs';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { cx } from 'styles';
 import { IEditTarget, ITodoItem } from 'routes/Home/CustomBoard/Plugins/Todolist/index';
 import styles from './todoItem.module.scss';
@@ -32,24 +31,6 @@ const TodoItem = ({ ...props }: IProps) => {
       return editedList;
     });
   };
-
-  useEffect(() => {
-    const beforeThreeHour = Number(dayjs(props.item.deadline).subtract(3, 'hour').format('YYMMDDhhmm'));
-    const now = Number(dayjs().format('YYMMDDhhmm'));
-
-    const interval = setInterval(() => {
-      if (beforeThreeHour < now && !props.item.complete) {
-        setIsWarning(true);
-        return;
-      }
-
-      setIsWarning(false);
-    }, 10_000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [props.item.complete, props.item.deadline]);
 
   return (
     <li

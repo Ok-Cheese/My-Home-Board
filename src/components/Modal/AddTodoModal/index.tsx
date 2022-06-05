@@ -1,9 +1,9 @@
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
-import DatePicker from 'react-datepicker';
 
 import styles from './addTodoModal.module.scss';
-import 'react-datepicker/dist/react-datepicker.css';
 import { ITodoItem } from 'routes/Home/CustomBoard/Plugins/Todolist';
+import Button from 'components/Button';
+import Modal from '..';
 
 interface IProps {
   setTodoList: Dispatch<SetStateAction<ITodoItem[]>>;
@@ -11,14 +11,7 @@ interface IProps {
 }
 
 const AddTodoModal = ({ setTodoList, setIsModalOpened }: IProps) => {
-  const [deadline, setDeadline] = useState<Date | null>(null);
   const [todoContent, setTodoContent] = useState('');
-
-  const dateChangeHandler = (date: Date) => {
-    if (!date) return;
-
-    setDeadline(date);
-  };
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTodoContent(e.currentTarget.value);
@@ -27,7 +20,7 @@ const AddTodoModal = ({ setTodoList, setIsModalOpened }: IProps) => {
   const createTodoHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setTodoList((prev) => [...prev, { id: prev.length + 1, content: todoContent, deadline, complete: false }]);
+    setTodoList((prev) => [...prev, { id: prev.length + 1, content: todoContent, complete: false }]);
 
     setIsModalOpened(false);
   };
@@ -37,27 +30,19 @@ const AddTodoModal = ({ setTodoList, setIsModalOpened }: IProps) => {
   };
 
   return (
-    <div className={styles.backdrop}>
+    <Modal>
       <form className={styles.addTodoForm} onSubmit={createTodoHandler}>
         <input type='text' onChange={inputChangeHandler} value={todoContent} />
-        <div className={styles.datePicker}>
-          <DatePicker
-            selected={deadline}
-            onChange={dateChangeHandler}
-            placeholderText='마감일을 선택해주세요.'
-            timeInputLabel='Time:'
-            dateFormat='MM/dd/yyyy h:mm aa'
-            showTimeInput
-          />
-        </div>
         <div className={styles.buttonWrapper}>
-          <button type='submit'>완료</button>
-          <button type='button' onClick={cancelHandler}>
+          <Button type='submit' size='normal'>
+            완료
+          </Button>
+          <Button type='button' size='normal' onClick={cancelHandler}>
             취소
-          </button>
+          </Button>
         </div>
       </form>
-    </div>
+    </Modal>
   );
 };
 
