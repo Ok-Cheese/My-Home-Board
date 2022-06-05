@@ -1,6 +1,5 @@
 import { BlankBoxIcon, CheckboxIcon } from 'assets/svgs';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { cx } from 'styles';
+import { Dispatch, SetStateAction } from 'react';
 import { IEditTarget, ITodoItem } from 'routes/Home/CustomBoard/Plugins/Todolist/index';
 import styles from './todoItem.module.scss';
 import { SetterOrUpdater } from 'recoil';
@@ -14,8 +13,6 @@ interface IProps {
 }
 
 const TodoItem = ({ ...props }: IProps) => {
-  const [isWarning, setIsWarning] = useState(false);
-
   const openEditModal = () => {
     props.setIsEditModalOpened(true);
     props.setEditTarget({ index: props.index, item: props.item });
@@ -33,12 +30,7 @@ const TodoItem = ({ ...props }: IProps) => {
   };
 
   return (
-    <li
-      key={`${props.item.content}`}
-      className={cx({
-        [styles.warning]: isWarning,
-      })}
-    >
+    <li key={`${props.item.content}`}>
       <button type='button' className={styles.todoCheck} onClick={checkItemHandler}>
         {props.item.complete ? <CheckboxIcon /> : <BlankBoxIcon />}
       </button>

@@ -11,7 +11,6 @@ import 'rc-slider/assets/index.css';
 import { isArray } from 'lodash';
 import store from 'store';
 import Button from 'components/Button';
-import { Dispatch, SetStateAction } from 'react';
 
 interface IProps {
   closeModal: () => void;

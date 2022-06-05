@@ -15,7 +15,6 @@ import { isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
 import { backgroundColorState } from 'states/color';
 import Todolist from './Plugins/Todolist';
 import ToolBox from './Toolbox';
-import { cx } from 'styles';
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -24,8 +23,8 @@ const COLUMNS = 10;
 const CustomBoard = () => {
   const [layoutState, setLayoutState] = useRecoilState<Layout[]>(layoutAtom);
   const [toolBoxState, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
-  const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom);
-  const [tempSavedLayout, setTempSavedLayout] = useState<Layout[]>([]);
+  const isEditMode = useRecoilValue(isEditModeAtom);
+  const [, setTempSavedLayout] = useState<Layout[]>([]);
   const bgColor = useRecoilValue(backgroundColorState);
 
   const rowHeight = window.outerHeight * 0.07;
