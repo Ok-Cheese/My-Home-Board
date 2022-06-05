@@ -3,7 +3,6 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { useMount } from 'react-use';
 import RGL, { Layout, WidthProvider } from 'react-grid-layout';
 
-import { backgroundColorState } from 'states/color';
 import { isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
 
 import BOJ from './Plugins/BOJ';
