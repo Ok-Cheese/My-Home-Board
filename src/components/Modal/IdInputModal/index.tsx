@@ -40,7 +40,7 @@ const IdInputModal = ({ type, setUserId, setIsModalOpened }: IProps) => {
   return (
     <Modal size={{ width: '300px', height: '200px' }}>
       <form className={styles.changeIdForm} onSubmit={changeUserId}>
-        <input type='text' onChange={inputHandler} spellCheck={false} />
+        <input type='text' onChange={inputHandler} spellCheck={false} placeholder='조회할 아이디를 입력하세요.' />
         <div className={styles.buttonWrapper}>
           <Button size='normal' type='submit'>
             확인

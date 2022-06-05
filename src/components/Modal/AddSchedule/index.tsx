@@ -4,23 +4,17 @@ import DatePicker from 'react-datepicker';
 import { ISchedule } from 'routes/Home/CustomBoard/Plugins/Dday';
 import Modal from '..';
 import styles from './addSchedule.module.scss';
+import store from 'store';
+import Input from 'components/Input';
 
 interface IProps {
-  schedule?: ISchedule;
   setSchedule: Dispatch<SetStateAction<ISchedule | null>>;
   closeModal: () => void;
 }
 
-const AddSchedule = ({ schedule, setSchedule, closeModal }: IProps) => {
+const AddSchedule = ({ setSchedule, closeModal }: IProps) => {
   const [title, setTitle] = useState('');
   const [deadline, setDeadline] = useState<Date | null>(null);
-
-  useEffect(() => {
-    if (schedule) {
-      setTitle(schedule.title);
-      setDeadline(schedule.deadline);
-    }
-  }, [schedule]);
 
   const titleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value);
@@ -39,14 +33,15 @@ const AddSchedule = ({ schedule, setSchedule, closeModal }: IProps) => {
     }
 
     const newSchedule = { title, deadline };
+    store.set('schedule', newSchedule);
     setSchedule(newSchedule);
     closeModal();
   };
 
   return (
-    <Modal size={{ width: '400px', height: '400px' }}>
+    <Modal>
       <form className={styles.changeScheduleForm} onSubmit={submitHandler}>
-        <input type='text' value={title} onChange={titleChangeHandler} spellCheck={false} />
+        <Input value={title} setValue={titleChangeHandler} placeholder='일정을 입력하세요.' />
         <div className={styles.datePicker}>
           <DatePicker
             selected={deadline}

@@ -2,7 +2,7 @@
 
 .block {
   position: relative;
-  background: #eeeeee;
+  background: colors.$BG_BLOCK !important;
   border-radius: 5px;
 
   .removeButton {

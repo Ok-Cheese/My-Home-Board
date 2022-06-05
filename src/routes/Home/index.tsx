@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { backgroundColorState } from 'states/plugin';
+import { backgroundColorState } from 'states/color';
 import CustomBoard from './CustomBoard';
 
 import styles from './home.module.scss';

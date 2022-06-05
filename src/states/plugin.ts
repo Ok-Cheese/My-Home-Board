@@ -41,36 +41,6 @@ export const layoutAtom = atom<Layout[]>({
   default: defaultLayout,
 });
 
-interface IColorPicker {
-  gradientAngle: number;
-  gradientPoint: number;
-  opacity: number;
-  firstColor: string;
-  secondColor: string;
-}
-
-export const backgroundColorState = atom<IColorPicker>({
-  key: '#backgroundColorState',
-  default: {
-    gradientAngle: 0,
-    gradientPoint: 0,
-    firstColor: '#fefefe',
-    secondColor: '#fefefe',
-    opacity: 1,
-  },
-});
-
-export const blockColorState = atom<IColorPicker>({
-  key: '#blockColorState',
-  default: {
-    gradientAngle: 0,
-    gradientPoint: 0,
-    firstColor: 'red',
-    secondColor: '#fefefe',
-    opacity: 1,
-  },
-});
-
 export const isEditModeAtom = atom<boolean>({
   key: '#isEditModeAtom',
   default: false,

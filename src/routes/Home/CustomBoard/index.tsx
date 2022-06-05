@@ -12,7 +12,8 @@ import BOJ from './Plugins/BOJ';
 import Today from './Plugins/Today';
 import Setting from './Plugins/Setting';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { backgroundColorState, blockColorState, isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
+import { isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
+import { backgroundColorState } from 'states/color';
 import Todolist from './Plugins/Todolist';
 import Dday from './Plugins/Dday';
 import ToolBox from './Toolbox';
@@ -27,7 +28,6 @@ const CustomBoard = () => {
   const [toolBoxState, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom);
   const [tempSavedLayout, setTempSavedLayout] = useState<Layout[]>([]);
-  const blockColor = useRecoilValue(blockColorState);
   const bgColor = useRecoilValue(backgroundColorState);
 
   const rowHeight = window.outerHeight * 0.07;
@@ -85,7 +85,6 @@ const CustomBoard = () => {
       {isEditMode && <ToolBox items={toolBoxState || []} />}
       <ReactGridLayout
         style={{
-          background: '#aaaaaa',
           width: '90vw',
           height: '90vh',
           opacity: isEditMode ? 0.75 : 1,

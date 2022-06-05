@@ -8,7 +8,7 @@ interface ISize {
 
 interface IProps {
   children: ReactNode;
-  size: ISize;
+  size?: ISize;
 }
 
 const Modal = ({ children, size }: IProps) => {

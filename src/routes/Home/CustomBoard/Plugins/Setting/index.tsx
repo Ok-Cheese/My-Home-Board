@@ -1,14 +1,16 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { ColorIcon, SettingIcon } from 'assets/svgs';
+import { useState } from 'react';
+import { ColorIcon, GitHubIcon, SettingIcon } from 'assets/svgs';
 import store from 'store';
 
 import styles from './setting.module.scss';
-import ColorPickModal from 'components/Modal/ColorPickModal';
+import ColorPickModal from 'components/Modal/ColorPicker';
 import ModalPortal from 'components/Modal/Potal';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isEditModeAtom, layoutAtom } from 'states/plugin';
 import { cx } from 'styles';
 import WarningModal from 'components/Modal/WarningModal';
+
+const GITHUB_URL = 'https://github.com/Ok-Cheese/My-Home-Board';
 
 const Setting = () => {
   const [isColorPickerModalOpened, setIsColorPickerModalOpened] = useState(false);
@@ -39,6 +41,14 @@ const Setting = () => {
     setIsWarningModalOpened(false);
   };
 
+  const moveToGithub = () => {
+    window.open(GITHUB_URL, '_blank');
+  };
+
+  const closeColorModal = () => {
+    setIsColorPickerModalOpened(false);
+  };
+
   return (
     <div className={styles.setting}>
       <button type='button' onClick={toggleColorModal}>
@@ -47,8 +57,12 @@ const Setting = () => {
       <button type='button' onClick={toggleEditModeHandler}>
         <SettingIcon className={cx({ [styles.active]: isEditMode })} />
       </button>
+
+      <button type='button' onClick={moveToGithub}>
+        <GitHubIcon />
+      </button>
       <ModalPortal>
-        {isColorPickerModalOpened && <ColorPickModal />}
+        {isColorPickerModalOpened && <ColorPickModal closeModal={closeColorModal} />}
         {isWarningModalOpened && (
           <WarningModal message='외부로 벗어난 플러그인이 있습니다. 다시 확인해주세요' closeEvent={closeWarning} />
         )}

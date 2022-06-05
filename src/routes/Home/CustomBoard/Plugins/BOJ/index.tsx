@@ -71,7 +71,7 @@ const BOJ = () => {
         {isModalOpened && <IdInputModal type='BOJ' setUserId={setUserId} setIsModalOpened={setIsModalOpened} />}
       </ModalPortal>
       <div className={styles.title}>
-        <span>백준</span>
+        <span>BAEKJOON</span>
         <Button size='normal' onClick={openModal}>
           {buttonContent}
         </Button>

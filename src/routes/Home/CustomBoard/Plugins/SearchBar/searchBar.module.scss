@@ -9,9 +9,8 @@
   height: 100%;
   padding: 0 10px;
 
-  .button {
-    width: 32px;
-    height: 32px;
+  button {
+    margin: 10px;
   }
 
   input {
@@ -29,7 +28,7 @@
   }
 
   .searchYoutube {
-    background: #ffa8a8;
-    border: 1px solid #ff8787;
+    background: colors.$YOUTUBE_INPUT;
+    border: 1px solid colors.$YOUTUBE_INPUT_BORDER;
   }
 }

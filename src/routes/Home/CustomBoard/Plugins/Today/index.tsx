@@ -42,16 +42,10 @@ const Today = () => {
   });
 
   return (
-    <div>
-      <div className={styles.date}>
-        <p>{`${currentDate} / ${currentDay}`}</p>
-      </div>
-      <div className={styles.date}>
-        <p>{`${currentTime}`}</p>
-      </div>
-      <div className={styles.date}>
-        <p>{`${currentCity} / ${currentTemp}°C`}</p>
-      </div>
+    <div className={styles.today}>
+      <p className={styles.date}>{`${currentDate} / ${currentDay}`}</p>
+      <p className={styles.time}>{`${currentTime}`}</p>
+      <p className={styles.local}>{`${currentCity} / ${currentTemp}°C`}</p>
     </div>
   );
 };
