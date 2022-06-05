@@ -24,11 +24,10 @@ const COLUMNS = 10;
 const rowHeight = window.outerHeight * 0.07;
 
 const CustomBoard = () => {
+  const [, setTempSavedLayout] = useState<Layout[]>([]);
+  const isEditMode = useRecoilValue(isEditModeAtom);
   const [layoutState, setLayoutState] = useRecoilState<Layout[]>(layoutAtom);
   const [toolBoxState, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
-  const isEditMode = useRecoilValue(isEditModeAtom);
-  const [, setTempSavedLayout] = useState<Layout[]>([]);
-  const bgColor = useRecoilValue(backgroundColorState);
 
   useMount(() => setTempSavedLayout(layoutState));
 
