@@ -1,5 +1,7 @@
 import { useRecoilValue } from 'recoil';
+
 import { backgroundColorState } from 'states/color';
+
 import CustomBoard from './CustomBoard';
 
 import styles from './home.module.scss';
@@ -7,13 +9,12 @@ import styles from './home.module.scss';
 const Home = () => {
   const bgColor = useRecoilValue(backgroundColorState);
 
+  const homeStyle = {
+    background: `linear-gradient(${bgColor.gradientAngle}deg, ${bgColor.firstColor} ${bgColor.gradientPoint}%, ${bgColor.secondColor} 100%)`,
+  };
+
   return (
-    <div
-      className={styles.home}
-      style={{
-        background: `linear-gradient(${bgColor.gradientAngle}deg, ${bgColor.firstColor} ${bgColor.gradientPoint}%, ${bgColor.secondColor} 100%)`,
-      }}
-    >
+    <div className={styles.home} style={homeStyle}>
       <CustomBoard />
     </div>
   );

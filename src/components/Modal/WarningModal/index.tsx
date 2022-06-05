@@ -1,3 +1,6 @@
+import Button from 'components/Button';
+import Modal from '..';
+
 import styles from './warningModal.module.scss';
 
 interface IProps {
@@ -11,14 +14,14 @@ const WarningModal = ({ message, closeEvent }: IProps) => {
   };
 
   return (
-    <div className={styles.backdrop}>
-      <div className={styles.modal}>
+    <Modal>
+      <div className={styles.warning}>
         <p className={styles.message}>{message}</p>
-        <button type='button' onClick={confirmHandler}>
+        <Button size='normal' onClick={confirmHandler}>
           확인
-        </button>
+        </Button>
       </div>
-    </div>
+    </Modal>
   );
 };
 

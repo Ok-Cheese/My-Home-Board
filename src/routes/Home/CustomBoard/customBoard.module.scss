@@ -1,20 +1,32 @@
 @use 'src/styles/constants/colors';
+@use 'src/styles/mixins/flexbox';
 
 .block {
+  @include flexbox.flexbox;
   position: relative;
   background: colors.$BG_BLOCK !important;
   border-radius: 5px;
+
+  .name {
+    font-size: 48px;
+  }
 
   .removeButton {
     position: absolute;
     top: 0;
     right: 0;
-    width: 30px;
-    height: 30px;
-    font-weight: 600;
-    color: colors.$WHITE;
-    background: colors.$RED;
-    border-radius: 50%;
+    z-index: 100;
+    opacity: 1;
     transform: translate(50%, -50%);
+
+    svg {
+      width: 32px;
+      height: 32px;
+      fill: colors.$RED;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
   }
 }

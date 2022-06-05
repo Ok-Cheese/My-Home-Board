@@ -1,16 +1,16 @@
-import Modal from '..';
-
 import { useRecoilState } from 'recoil';
 import { ChromePicker, ColorResult } from 'react-color';
 import Slider from 'rc-slider';
+import { isArray } from 'lodash';
+import store from 'store';
 
 import { backgroundColorState } from 'states/color';
 
+import Modal from '..';
+import Button from 'components/Button';
+
 import styles from './colorPicker.module.scss';
 import 'rc-slider/assets/index.css';
-import { isArray } from 'lodash';
-import store from 'store';
-import Button from 'components/Button';
 
 interface IProps {
   closeModal: () => void;

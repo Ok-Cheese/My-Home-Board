@@ -1,12 +1,13 @@
 import Slider from 'react-slick';
+import { useRecoilValue } from 'recoil';
+
+import { getBookmarkIcon } from './utils';
+import { bookmarkAtom } from 'states/bookmark';
 
 import styles from './bookmarks.module.scss';
-import './bookmark.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useRecoilValue } from 'recoil';
-import { bookmarkAtom } from 'states/bookmark';
-import { getBookmarkIcon } from './utils';
+import './bookmark.scss';
 
 const settings = {
   className: styles.slider,
@@ -27,7 +28,7 @@ const Bookmarks = () => {
   const sliderItems = bookmarks.map((bm) => (
     <button key={bm.name} type='button' className={styles.bookmarkBox} onClick={() => visitBookmark(bm.url)}>
       {getBookmarkIcon(bm.icon)}
-      <h3>{bm.name}</h3>
+      <span>{bm.name}</span>
     </button>
   ));
 

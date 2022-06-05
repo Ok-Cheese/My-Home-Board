@@ -11,8 +11,8 @@ const GOOGLE = 'https://google.com/search?q=';
 const YOUTUBE = 'https://www.youtube.com/results?search_query=';
 
 const SearchBar = () => {
-  const [searchType, setSearchType] = useState<TSearchSite>('google');
   const [searchInput, setSearchInput] = useState('');
+  const [searchType, setSearchType] = useState<TSearchSite>('google');
 
   const serachSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,6 +21,9 @@ const SearchBar = () => {
     window.open(`${searchUrl}${searchInput}`, '_blank');
   };
 
+  const typeButtonIcon = searchType === 'google' ? <GoogleIcon /> : <YoutubeIcon />;
+  const placeholder = searchType === 'google' ? 'Search to Google...' : 'Serach to Youtube...';
+
   const toggleSearchType = () => {
     setSearchType(searchType === 'google' ? 'youtube' : 'google');
   };
@@ -28,9 +31,6 @@ const SearchBar = () => {
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.currentTarget.value);
   };
-
-  const typeButtonIcon = searchType === 'google' ? <GoogleIcon /> : <YoutubeIcon />;
-  const placeholder = searchType === 'google' ? 'Search to Google...' : 'Serach to Youtube...';
 
   return (
     <form className={styles.searchBar} onSubmit={serachSubmitHandler}>

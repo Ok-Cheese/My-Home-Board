@@ -1,4 +1,5 @@
 import { tierList } from '../utiles';
+
 import styles from './userInform.module.scss';
 
 interface IInform {

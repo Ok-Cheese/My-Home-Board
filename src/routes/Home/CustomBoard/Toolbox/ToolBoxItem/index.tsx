@@ -14,9 +14,9 @@ interface IProps {
 }
 
 const ToolBoxItem = ({ item }: IProps) => {
+  const [isModalOpened, setIsModalOpened] = useState(false);
   const [layoutState, setLayoutState] = useRecoilState<Layout[]>(layoutAtom);
   const [, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
-  const [isModalOpened, setIsModalOpened] = useState(false);
 
   const emptySpace = useMemo(() => {
     return layoutState.reduce((acc, layout) => {

@@ -1,7 +1,9 @@
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
-import { IEditTarget, ITodoItem } from 'routes/Home/CustomBoard/Plugins/Todolist';
-import styles from './editTodo.module.scss';
+
 import Modal from '..';
+import { IEditTarget, ITodoItem } from 'routes/Home/CustomBoard/Plugins/Todolist';
+
+import styles from './editTodo.module.scss';
 
 interface IProps {
   editTarget: IEditTarget;

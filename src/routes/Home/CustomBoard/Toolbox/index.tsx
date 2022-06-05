@@ -1,5 +1,6 @@
-import styles from './toolbox.module.scss';
 import ToolBoxItem from './ToolBoxItem';
+
+import styles from './toolbox.module.scss';
 
 interface IProps {
   items: any[];

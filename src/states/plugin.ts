@@ -22,11 +22,8 @@ const initailLayout: Layout[] = [
 ];
 
 const storedLayout: Layout[] = store.get('layout');
-
 const defaultLayout = storedLayout || initailLayout;
-
 const idOfLayout = defaultLayout.map((layout) => layout.i);
-
 const toolBoxDefault = totalPlugins.filter(({ i }) => !idOfLayout.find((id) => id === i));
 
 export const toolBoxAtom = atom<Layout[]>({

@@ -1,8 +1,6 @@
 import { atom } from 'recoil';
 import store from 'store';
 
-const savedColorState = store.get('backgroundColor');
-
 interface IColorPicker {
   gradientAngle: number;
   gradientPoint: number;
@@ -10,6 +8,8 @@ interface IColorPicker {
   firstColor: string;
   secondColor: string;
 }
+
+const savedColorState = store.get('backgroundColor');
 
 export const backgroundColorState = atom<IColorPicker>({
   key: '#backgroundColorState',

@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { ColorIcon, GitHubIcon, SettingIcon } from 'assets/svgs';
 import store from 'store';
+import { cx } from 'styles';
 
-import styles from './setting.module.scss';
+import { isEditModeAtom, layoutAtom } from 'states/plugin';
+
 import ColorPickModal from 'components/Modal/ColorPicker';
 import ModalPortal from 'components/Modal/Potal';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { isEditModeAtom, layoutAtom } from 'states/plugin';
-import { cx } from 'styles';
 import WarningModal from 'components/Modal/WarningModal';
+
+import styles from './setting.module.scss';
 
 const GITHUB_URL = 'https://github.com/Ok-Cheese/My-Home-Board';
 
@@ -33,7 +35,6 @@ const Setting = () => {
     }
 
     setIsEditMode((prev) => !prev);
-
     store.set('layout', layoutState);
   };
 

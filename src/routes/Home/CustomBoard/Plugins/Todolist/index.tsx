@@ -1,12 +1,14 @@
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import store from 'store';
+
+import TodoItem from './TodoItem';
 import AddTodoModal from 'components/Modal/AddTodo';
 import EditTodoModal from 'components/Modal/EditTodo';
 import ModalPortal from 'components/Modal/Potal';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import { todolistState } from 'states/todolist';
-import TodoItem from './TodoItem';
+
 import styles from './todolist.module.scss';
-import store from 'store';
 
 export interface ITodoItem {
   id: number;
@@ -20,10 +22,14 @@ export interface IEditTarget {
 }
 
 const Todolist = () => {
+  const [editTarget, setEditTarget] = useState<IEditTarget | null>();
   const [todolist, setTodolist] = useRecoilState<ITodoItem[]>(todolistState);
   const [isAddModalOpened, setIsAddModalOpened] = useState(false);
   const [isEditMidalOpened, setIsEditModalOpened] = useState(false);
-  const [editTarget, setEditTarget] = useState<IEditTarget | null>();
+
+  useEffect(() => {
+    store.set('todolist', todolist);
+  }, [todolist]);
 
   const todoItems = todolist.map((item, index) => {
     return (
@@ -41,10 +47,6 @@ const Todolist = () => {
   const openAddTodoModal = () => {
     setIsAddModalOpened(true);
   };
-
-  useEffect(() => {
-    store.set('todolist', todolist);
-  }, [todolist]);
 
   return (
     <div className={styles.todolist}>

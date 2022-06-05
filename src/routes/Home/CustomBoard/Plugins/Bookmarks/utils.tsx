@@ -1,40 +1,14 @@
 import {
-  ComputerIcon,
-  EmailIcon,
   GitHubIcon,
   GoogleIcon,
-  HeartIcon,
-  HouseIcon,
   InstagramIcon,
-  LikeIcon,
-  LocationIcon,
   NetflixIcon,
-  PeopleIcon,
-  PhotoIcon,
   StackOverflowIcon,
-  StarIcon,
   WantedIcon,
   YoutubeIcon,
 } from 'assets/svgs';
 
-export const iconIds = [
-  'google',
-  'youtube',
-  'github',
-  'instagram',
-  'netflix',
-  'wanted',
-  'sof',
-  'computer',
-  'email',
-  'heart',
-  'house',
-  'people',
-  'photo',
-  'star',
-  'like',
-  'location',
-];
+export const iconIds = ['google', 'youtube', 'github', 'instagram', 'netflix', 'wanted', 'sof'];
 
 export const getBookmarkIcon = (iconId: string) => {
   return {
@@ -45,14 +19,5 @@ export const getBookmarkIcon = (iconId: string) => {
     netflix: <NetflixIcon />,
     wanted: <WantedIcon />,
     sof: <StackOverflowIcon />,
-    computer: <ComputerIcon />,
-    email: <EmailIcon />,
-    heart: <HeartIcon />,
-    house: <HouseIcon />,
-    people: <PeopleIcon />,
-    photo: <PhotoIcon />,
-    star: <StarIcon />,
-    like: <LikeIcon />,
-    location: <LocationIcon />,
   }[iconId];
 };

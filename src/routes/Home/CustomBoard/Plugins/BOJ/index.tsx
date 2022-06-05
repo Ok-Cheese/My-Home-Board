@@ -7,15 +7,17 @@ import { getBOJData } from './utiles';
 import Button from 'components/Button';
 import ModalPortal from 'components/Modal/Potal';
 import IdInputModal from 'components/Modal/IdInputModal';
+import UserInform from './userInform';
 
 import styles from './boj.module.scss';
-import UserInform from './userInform';
 
 const BOJ = () => {
   const [userId, setUserId] = useState('');
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const { data, isLoading, isError } = useQuery(['getBOJData', userId], () => getBOJData(userId));
+
+  const buttonContent = userId || 'ID 추가';
 
   useEffect(() => {
     const savedId = store.get('BOJ_id');
@@ -62,8 +64,6 @@ const BOJ = () => {
 
     return <UserInform inform={informData} />;
   }, [data?.data, isError, isLoading, userId]);
-
-  const buttonContent = userId || 'ID 추가';
 
   return (
     <div className={styles.boj}>

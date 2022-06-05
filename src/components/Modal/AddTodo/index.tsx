@@ -1,9 +1,10 @@
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
 
-import styles from './addTodo.module.scss';
+import Modal from '..';
 import { ITodoItem } from 'routes/Home/CustomBoard/Plugins/Todolist';
 import Button from 'components/Button';
-import Modal from '..';
+
+import styles from './addTodo.module.scss';
 
 interface IProps {
   setTodoList: Dispatch<SetStateAction<ITodoItem[]>>;
