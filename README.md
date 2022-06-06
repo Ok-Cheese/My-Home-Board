@@ -1,6 +1,6 @@
 # Home-Board 
 
-[✔️ 배포주소]([https://moadata7.netlify.app/](https://main--dulcet-kitten-ac0451.netlify.app/)<br />
+[✔️ 배포주소](https://main--dulcet-kitten-ac0451.netlify.app/)<br />
 #### * 미완성 (스타일 및 일부 기능이 구현되지 않음) *
 
 <br />
