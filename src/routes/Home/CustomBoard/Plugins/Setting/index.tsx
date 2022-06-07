@@ -6,8 +6,8 @@ import { cx } from 'styles';
 
 import { isEditModeAtom, layoutAtom } from 'states/plugin';
 
-import ColorPickModal from 'components/Modal/ColorPicker';
 import ModalPortal from 'components/Modal/Potal';
+import Preference from 'components/Modal/Preference';
 import WarningModal from 'components/Modal/WarningModal';
 
 import styles from './setting.module.scss';
@@ -15,13 +15,13 @@ import styles from './setting.module.scss';
 const GITHUB_URL = 'https://github.com/Ok-Cheese/My-Home-Board';
 
 const Setting = () => {
-  const [isColorPickerModalOpened, setIsColorPickerModalOpened] = useState(false);
+  const [isSettingOpened, setIsSettingOpened] = useState(false);
   const [isWarningModalOpened, setIsWarningModalOpened] = useState(false);
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom);
   const layoutState = useRecoilValue(layoutAtom);
 
-  const toggleColorModal = () => {
-    setIsColorPickerModalOpened(true);
+  const toggleSetting = () => {
+    setIsSettingOpened(true);
   };
 
   const toggleEditModeHandler = () => {
@@ -46,13 +46,13 @@ const Setting = () => {
     window.open(GITHUB_URL, '_blank');
   };
 
-  const closeColorModal = () => {
-    setIsColorPickerModalOpened(false);
+  const closeSetting = () => {
+    setIsSettingOpened(false);
   };
 
   return (
     <div className={styles.setting}>
-      <button type='button' onClick={toggleColorModal}>
+      <button type='button' onClick={toggleSetting}>
         <ColorIcon />
       </button>
       <button type='button' onClick={toggleEditModeHandler}>
@@ -63,7 +63,7 @@ const Setting = () => {
         <GitHubIcon />
       </button>
       <ModalPortal>
-        {isColorPickerModalOpened && <ColorPickModal closeModal={closeColorModal} />}
+        {isSettingOpened && <Preference closeModal={closeSetting} />}
         {isWarningModalOpened && (
           <WarningModal message='외부로 벗어난 플러그인이 있습니다. 다시 확인해주세요' closeEvent={closeWarning} />
         )}
