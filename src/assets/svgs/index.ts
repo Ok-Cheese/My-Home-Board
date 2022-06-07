@@ -11,3 +11,4 @@ export { ReactComponent as ColorIcon } from './color.svg';
 export { ReactComponent as CheckboxIcon } from './checkbox.svg';
 export { ReactComponent as BlankBoxIcon } from './blankBox.svg';
 export { ReactComponent as CloseIcon } from './close.svg';
+export { ReactComponent as ArrowIcon } from './arrow.svg';
