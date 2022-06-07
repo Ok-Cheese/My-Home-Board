@@ -6,7 +6,7 @@ import RGL, { Layout, WidthProvider } from 'react-grid-layout';
 import { isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
 
 import BOJ from './Plugins/BOJ';
-import Today from './Plugins/Today';
+import Clock from './Plugins/Clock';
 import Setting from './Plugins/Setting';
 import Todolist from './Plugins/Todolist';
 import SearchBar from './Plugins/SearchBar';
@@ -44,7 +44,7 @@ const CustomBoard = () => {
         const plugin = {
           search: <SearchBar key={layout.i} />,
           bookmark: <Bookmarks key={layout.i} />,
-          today: <Today key={layout.i} />,
+          clock: <Clock key={layout.i} layout={layout} />,
           BOJ: <BOJ key={layout.i} />,
           setting: <Setting key={layout.i} />,
           todolist: <Todolist key={layout.i} />,
