@@ -7,6 +7,7 @@ import { isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
 
 import BOJ from './Plugins/BOJ';
 import Time from './Plugins/Time';
+import ClockPlugin from './Plugins/ClockPlugin';
 import Setting from './Plugins/Setting';
 import Todolist from './Plugins/Todolist';
 import SearchBar from './Plugins/SearchBar';
@@ -45,6 +46,7 @@ const CustomBoard = () => {
           search: <SearchBar key={layout.i} />,
           bookmark: <Bookmarks key={layout.i} />,
           time: <Time key={layout.i} layout={layout} />,
+          clock: <ClockPlugin key={layout.i} />,
           BOJ: <BOJ key={layout.i} />,
           setting: <Setting key={layout.i} />,
           todolist: <Todolist key={layout.i} />,
