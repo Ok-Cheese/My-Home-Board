@@ -11,7 +11,7 @@ export type TDateFormat =
 export type TTimeFormat = 'HH : mm' | 'hh : mm' | 'HH시 mm분' | 'hh시 mm분';
 
 interface ISettings {
-  clockLocale: 'ko' | 'en';
+  timeLocale: 'ko' | 'en';
   dateType: TDateFormat;
   timeType: TTimeFormat;
 }
@@ -19,7 +19,7 @@ interface ISettings {
 const savedSetting = store.get('setting');
 
 const basicSetting: ISettings = {
-  clockLocale: 'en',
+  timeLocale: 'en',
   dateType: 'dddd MMM D',
   timeType: 'HH : mm',
 };

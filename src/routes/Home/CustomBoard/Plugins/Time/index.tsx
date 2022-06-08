@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 import { settingAtom } from 'states/settings';
 
-import styles from './clock.module.scss';
+import styles from './time.module.scss';
 import 'dayjs/locale/ko';
 import 'dayjs/locale/en';
 
@@ -13,12 +13,12 @@ interface IProps {
   layout: Layout;
 }
 
-const Clock = ({ layout }: IProps) => {
+const Time = ({ layout }: IProps) => {
   const setting = useRecoilValue(settingAtom);
 
   useEffect(() => {
-    dayjs.locale(setting.clockLocale);
-  }, [setting.clockLocale]);
+    dayjs.locale(setting.timeLocale);
+  }, [setting.timeLocale]);
 
   const currentTime = {
     date: dayjs().format(setting.dateType),
@@ -38,4 +38,4 @@ const Clock = ({ layout }: IProps) => {
   );
 };
 
-export default Clock;
+export default Time;

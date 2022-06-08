@@ -5,7 +5,7 @@ import { TDateFormat, tempSettingAtom, TTimeFormat } from 'states/settings';
 
 import Dropdown from 'components/Dropdown';
 
-import styles from './clockSetting.module.scss';
+import styles from './timeSetting.module.scss';
 
 interface IDatePreset {
   locale: 'ko' | 'en';
@@ -37,14 +37,14 @@ const timePresets: ITimePreset[] = [
 const dateFomats = datePresets.map((preset) => preset.ex);
 const timeFomats = timePresets.map((preset) => preset.ex);
 
-const ClockSetting = () => {
+const TimeSetting = () => {
   const [tempSetting, setTempSetting] = useRecoilState(tempSettingAtom);
 
   const setDateFormat = (value: string) => {
     const selectedPreset = datePresets[datePresets.findIndex(({ ex }) => ex === value)];
 
     setTempSetting((prev) => {
-      return { ...prev, clockLocale: selectedPreset.locale, dateType: selectedPreset.format };
+      return { ...prev, timeLocale: selectedPreset.locale, dateType: selectedPreset.format };
     });
   };
 
@@ -78,4 +78,4 @@ const ClockSetting = () => {
   );
 };
 
-export default ClockSetting;
+export default TimeSetting;

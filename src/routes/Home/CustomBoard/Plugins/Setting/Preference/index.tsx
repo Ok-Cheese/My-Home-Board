@@ -6,15 +6,15 @@ import Modal from '../../../../../../components/Modal';
 import styles from './preference.module.scss';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { settingAtom, tempSettingAtom } from 'states/settings';
-import ClockSetting from './menu/Clock';
+import TimeSetting from './menu/Time';
 
-type TPreferMenu = 'General' | 'Clock';
+type TPreferMenu = 'General' | 'Time';
 
 interface IProps {
   closeModal: () => void;
 }
 
-const sidebarMenuArr: TPreferMenu[] = ['General', 'Clock'];
+const sidebarMenuArr: TPreferMenu[] = ['General', 'Time'];
 
 const Preference = ({ closeModal }: IProps) => {
   const [currentMenu, setCurrentMenu] = useState<TPreferMenu>('General');
@@ -38,7 +38,7 @@ const Preference = ({ closeModal }: IProps) => {
   const decideContent = (name: TPreferMenu) => {
     return {
       General: '',
-      Clock: <ClockSetting />,
+      Time: <TimeSetting />,
     }[name];
   };
 
