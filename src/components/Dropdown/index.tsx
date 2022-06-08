@@ -1,18 +1,20 @@
-import { ArrowIcon } from 'assets/svgs';
 import { SetStateAction, MouseEvent, useState } from 'react';
+import { SetterOrUpdater } from 'recoil';
+
+import { ArrowIcon } from 'assets/svgs';
 
 import styles from './dropdown.module.scss';
 
 interface IProps {
   optionValue: string;
   optionArray: string[];
-  setOption: SetStateAction<any>;
+  setOption: SetStateAction<any> | SetterOrUpdater<any>;
 }
 
 const Dropdown = ({ optionValue, optionArray, setOption }: IProps) => {
   const [isOptionOpened, setIsOptionOpened] = useState(false);
 
-  const arrowStyle = { transform: isOptionOpened ? 'rotate(180deg)' : '' };
+  const arrowStyle = { transform: isOptionOpened ? '' : 'rotate(180deg)' };
 
   const toggleDropdown = () => {
     setIsOptionOpened((prev) => !prev);
