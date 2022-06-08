@@ -17,17 +17,17 @@ const Clock = ({ layout }: IProps) => {
   const setting = useRecoilValue(settingAtom);
 
   useEffect(() => {
-    dayjs.locale(setting.clockType);
-  }, [setting.clockType]);
+    dayjs.locale(setting.clockLocale);
+  }, [setting.clockLocale]);
 
   const currentTime = {
-    date: dayjs().format(setting.clockType === 'ko' ? 'MM월 DD일 ddd요일' : 'dddd MMM D'),
-    time: dayjs().format('hh : mm'),
+    date: dayjs().format(setting.dateType),
+    time: dayjs().format(setting.timeType),
   };
 
   const pulginStyles = {
     date: { fontSize: `${Math.min(layout.w, layout.h) * 10}px` },
-    time: { fontSize: `${Math.min(layout.w, layout.h) * 24}px` },
+    time: { fontSize: `${Math.min(layout.w, layout.h) * 20}px` },
   };
 
   return (

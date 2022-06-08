@@ -1,11 +1,12 @@
 import { useState, MouseEvent } from 'react';
 import { cx } from 'styles';
 
-import Modal from '..';
+import Modal from '../../../../../../components/Modal';
 
 import styles from './preference.module.scss';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { settingAtom, tempSettingAtom } from 'states/settings';
+import ClockSetting from './menu/Clock';
 
 type TPreferMenu = 'General' | 'Clock';
 
@@ -34,6 +35,13 @@ const Preference = ({ closeModal }: IProps) => {
     setCurrentMenu(e.currentTarget.dataset.menu as TPreferMenu);
   };
 
+  const decideContent = (name: TPreferMenu) => {
+    return {
+      General: '',
+      Clock: <ClockSetting />,
+    }[name];
+  };
+
   const sidebarMenu = sidebarMenuArr.map((menu) => (
     <button
       key={menu}
@@ -51,7 +59,7 @@ const Preference = ({ closeModal }: IProps) => {
       <div className={styles.preference}>
         <div className={styles.sidebar}>{sidebarMenu}</div>
         <div className={styles.main}>
-          <div className={styles.content} />
+          <div className={styles.content}>{decideContent(currentMenu)}</div>
           <div className={styles.bottom}>
             <button type='button' onClick={confirmSetting}>
               확인

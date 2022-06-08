@@ -7,7 +7,7 @@ import { cx } from 'styles';
 import { isEditModeAtom, layoutAtom } from 'states/plugin';
 
 import ModalPortal from 'components/Modal/Potal';
-import Preference from 'components/Modal/Preference';
+import Preference from 'routes/Home/CustomBoard/Plugins/Setting/Preference';
 import WarningModal from 'components/Modal/WarningModal';
 
 import styles from './setting.module.scss';
