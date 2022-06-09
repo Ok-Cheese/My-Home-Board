@@ -10,6 +10,7 @@ import styles from './weather.module.scss';
 import WeatherContent from './WeatherContent';
 import { Layout } from 'react-grid-layout';
 import NoCoords from './NoCoords';
+import Loading from 'components/Loading';
 
 interface IProps {
   layout: Layout;
@@ -60,11 +61,15 @@ const Weather = ({ layout }: IProps) => {
     }
   );
 
+  const loadingSize = `${Math.min(layout.w, layout.h) * 30}px`;
+
   const contents = useMemo(() => {
     if (data) return <WeatherContent data={data.data} layout={layout} />;
 
+    if (isLoading) return <Loading size={loadingSize} />;
+
     return <NoCoords layout={layout} getCoordinates={getCoordinates} isError={isError} />;
-  }, [layout, coordiantes, data, isError, getCoordinates]);
+  }, [layout, data, isLoading, loadingSize, isError, getCoordinates]);
 
   return <div className={styles.weather}>{contents}</div>;
 };
