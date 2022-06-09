@@ -13,3 +13,6 @@ export { ReactComponent as BlankBoxIcon } from './blankBox.svg';
 export { ReactComponent as CloseIcon } from './close.svg';
 export { ReactComponent as ArrowIcon } from './arrow.svg';
 export { ReactComponent as ReloadIcon } from './reload.svg';
+export { ReactComponent as AddIcon } from './add.svg';
+export { ReactComponent as CircleIcon } from './circle.svg';
+export { ReactComponent as CheckCircleIcon } from './check_circle.svg';
