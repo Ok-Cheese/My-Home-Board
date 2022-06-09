@@ -11,6 +11,7 @@ import WeatherContent from './WeatherContent';
 import { Layout } from 'react-grid-layout';
 import NoCoords from './NoCoords';
 import Loading from 'components/Loading';
+import { ReloadIcon } from 'assets/svgs';
 
 interface IProps {
   layout: Layout;
@@ -61,6 +62,11 @@ const Weather = ({ layout }: IProps) => {
     }
   );
 
+  const reloadHandler = () => {
+    store.remove('coordinates');
+    getCoordinates();
+  };
+
   const loadingSize = `${Math.min(layout.w, layout.h) * 30}px`;
 
   const contents = useMemo(() => {
@@ -71,7 +77,14 @@ const Weather = ({ layout }: IProps) => {
     return <NoCoords layout={layout} getCoordinates={getCoordinates} isError={isError} />;
   }, [layout, data, isLoading, loadingSize, isError, getCoordinates]);
 
-  return <div className={styles.weather}>{contents}</div>;
+  return (
+    <div className={styles.weather}>
+      {contents}
+      <button className={styles.reload} type='button' onClick={reloadHandler}>
+        <ReloadIcon />
+      </button>
+    </div>
+  );
 };
 
 export default Weather;
