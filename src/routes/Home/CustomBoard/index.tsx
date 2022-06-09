@@ -9,6 +9,7 @@ import BOJ from './Plugins/BOJ';
 import Time from './Plugins/Time';
 import ClockPlugin from './Plugins/ClockPlugin';
 import Setting from './Plugins/Setting';
+import Weather from './Plugins/Weather';
 import Todolist from './Plugins/Todolist';
 import SearchBar from './Plugins/SearchBar';
 import Bookmarks from './Plugins/Bookmarks';
@@ -49,6 +50,7 @@ const CustomBoard = () => {
           clock: <ClockPlugin key={layout.i} />,
           BOJ: <BOJ key={layout.i} />,
           setting: <Setting key={layout.i} />,
+          weather: <Weather key={layout.i} layout={layout} />,
           todolist: <Todolist key={layout.i} />,
         }[layout.i];
 

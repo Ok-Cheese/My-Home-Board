@@ -10,6 +10,7 @@ const totalPlugins: Layout[] = [
   { i: 'todolist', w: 2, h: 4, x: 0, y: 0, minW: 2, minH: 6, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'time', w: 2, h: 2, x: 0, y: 0, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'clock', w: 2, h: 4, x: 0, y: 0, minW: 2, minH: 4, maxW: 2, maxH: 4 },
+  { i: 'weather', w: 2, h: 2, x: 0, y: 0, minW: 2, minH: 2, resizeHandles: ['se', 'sw', 'nw'] },
 ];
 
 const initailLayout: Layout[] = [

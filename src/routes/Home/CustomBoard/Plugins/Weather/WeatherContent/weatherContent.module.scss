@@ -1,0 +1,24 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.content {
+  @include flexbox.flexbox;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+
+  svg {
+    width: 50%;
+    height: 100%;
+  }
+
+  .inform {
+    @include flexbox.flexbox;
+    flex-direction: column;
+    width: 50%;
+
+    p {
+      margin: 5px 0;
+    }
+  }
+}
