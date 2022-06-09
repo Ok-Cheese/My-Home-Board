@@ -1,0 +1,30 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.dateInputWrapper {
+  @include flexbox.flexbox;
+  position: relative;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  background: colors.$GRAYD;
+
+  .datepicker {
+    width: 100%;
+  }
+
+  .removeValueButton {
+    @include flexbox.flexbox;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    transform: translateY(-50%);
+
+    svg {
+      height: 50%;
+      fill: colors.$RED;
+    }
+  }
+}

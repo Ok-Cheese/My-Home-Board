@@ -1,41 +1,38 @@
-import { BlankBoxIcon, CheckboxIcon } from 'assets/svgs';
-import { Dispatch, SetStateAction } from 'react';
-import { IEditTarget, ITodoItem } from 'routes/Home/CustomBoard/Plugins/Todolist/index';
+import { CheckCircleIcon, CircleIcon } from 'assets/svgs';
 import styles from './todoItem.module.scss';
 import { SetterOrUpdater } from 'recoil';
+import { ITodoItem } from 'states/plugin';
 
 interface IProps {
   item: ITodoItem;
   index: number;
-  setTodolist: SetterOrUpdater<ITodoItem[]>;
-  setIsEditModalOpened: Dispatch<SetStateAction<boolean>>;
-  setEditTarget: Dispatch<SetStateAction<IEditTarget>>;
+  onItemClick: (index: number, item: ITodoItem) => void;
+  setTodoList: SetterOrUpdater<ITodoItem[]>;
 }
 
-const TodoItem = ({ ...props }: IProps) => {
-  const openEditModal = () => {
-    props.setIsEditModalOpened(true);
-    props.setEditTarget({ index: props.index, item: props.item });
+const TodoItem = ({ item, index, onItemClick, setTodoList }: IProps) => {
+  const itmeClickHandler = () => {
+    onItemClick(index, item);
   };
 
   const checkItemHandler = () => {
-    const editedItem = { ...props.item, complete: !props.item.complete };
+    const editedItem = { ...item, complete: !item.complete };
 
-    props.setTodolist((prev) => {
+    setTodoList((prev) => {
       const editedList = prev.slice();
-      editedList.splice(props.index, 1, editedItem);
+      editedList.splice(index, 1, editedItem);
 
       return editedList;
     });
   };
 
   return (
-    <li key={`${props.item.content}`}>
+    <li key={`${item.content}`}>
       <button type='button' className={styles.todoCheck} onClick={checkItemHandler}>
-        {props.item.complete ? <CheckboxIcon /> : <BlankBoxIcon />}
+        {item.complete ? <CheckCircleIcon /> : <CircleIcon />}
       </button>
-      <button type='button' onClick={openEditModal}>
-        {props.item.content}
+      <button type='button' className={styles.listContent} onClick={itmeClickHandler}>
+        {item.content}
       </button>
     </li>
   );

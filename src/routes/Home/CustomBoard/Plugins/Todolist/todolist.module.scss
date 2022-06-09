@@ -1,27 +1,73 @@
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/constants/colors';
 
-.todolist {
-  @include flexbox.flexbox;
+.todoList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
+  padding: 20px;
+
+  .title {
+    width: 100%;
+    height: 30px;
+
+    p {
+      font-size: 24px;
+    }
+  }
 
   ul {
+    position: relative;
     width: 100%;
     height: 100%;
-    padding: 20px;
+    overflow-y: scroll;
   }
 
   .createButton {
     position: absolute;
-    right: 5%;
-    bottom: 5%;
+    right: 20px;
+    bottom: 20px;
     width: 48px;
     height: 48px;
-    font-size: 32px;
-    font-weight: 800;
-    color: colors.$WHITE;
-    background: colors.$BLUE;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .scrollButton {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    background: colors.$GRAYA;
     border-radius: 50%;
+    opacity: 0.5;
+    transform: translateX(-50%) rotate(180deg);
+    animation: blink 2s linear infinite;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0.5;
   }
 }

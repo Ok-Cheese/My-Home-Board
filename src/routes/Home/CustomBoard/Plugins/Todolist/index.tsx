@@ -1,71 +1,82 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import store from 'store';
 
-import TodoItem from './TodoItem';
-import AddTodoModal from 'components/Modal/AddTodo';
-import EditTodoModal from 'components/Modal/EditTodo';
 import ModalPortal from 'components/Modal/Potal';
-import { todolistState } from 'states/todolist';
+import { AddIcon, ArrowIcon } from 'assets/svgs';
+import { IEditTarget, ITodoItem, todoListAtom } from 'states/plugin';
 
-import styles from './todolist.module.scss';
+import TodoItem from './TodoItem';
+import TodoModal from './TodoModal';
 
-export interface ITodoItem {
-  id: number;
-  content: string;
-  complete: boolean;
-}
+import styles from './todoList.module.scss';
 
-export interface IEditTarget {
-  index: number;
-  item: ITodoItem;
-}
+const TodoList = () => {
+  const [editTarget, setEditTarget] = useState<IEditTarget | null>(null);
+  const [modalType, setModalType] = useState<'add' | 'edit'>('add');
+  const [todoList, setTodoList] = useRecoilState<ITodoItem[]>(todoListAtom);
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
-const Todolist = () => {
-  const [editTarget, setEditTarget] = useState<IEditTarget | null>();
-  const [todolist, setTodolist] = useRecoilState<ITodoItem[]>(todolistState);
-  const [isAddModalOpened, setIsAddModalOpened] = useState(false);
-  const [isEditMidalOpened, setIsEditModalOpened] = useState(false);
+  const scrollRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
-    store.set('todolist', todolist);
-  }, [todolist]);
+    store.set('todoList', todoList);
+  }, [todoList]);
 
-  const todoItems = todolist.map((item, index) => {
+  const onItemClick = (index: number, item: ITodoItem) => {
+    setModalType('edit');
+    setIsModalOpened(true);
+    setEditTarget({ index, item });
+  };
+
+  const todoItems = todoList.map((item, index) => {
     return (
       <TodoItem
         key={`${item.content}${item.id}`}
         item={item}
         index={index}
-        setTodolist={setTodolist}
-        setIsEditModalOpened={setIsEditModalOpened}
-        setEditTarget={setEditTarget as Dispatch<SetStateAction<IEditTarget>>}
+        onItemClick={onItemClick}
+        setTodoList={setTodoList}
       />
     );
   });
 
-  const openAddTodoModal = () => {
-    setIsAddModalOpened(true);
+  const clickAddHandler = () => {
+    setModalType('add');
+    setIsModalOpened(true);
+  };
+
+  const closeTodoModal = () => {
+    setIsModalOpened(false);
+  };
+
+  const scrollToBottom = () => {
+    if (!scrollRef.current) return;
+
+    const listHeight = scrollRef.current.offsetHeight;
+    scrollRef.current.scrollBy({ top: listHeight, behavior: 'smooth' });
   };
 
   return (
-    <div className={styles.todolist}>
-      <ul>{todoItems}</ul>
-      <button type='button' className={styles.createButton} onClick={openAddTodoModal}>
-        +
+    <div className={styles.todoList}>
+      <div className={styles.title}>
+        <p>Todo List</p>
+      </div>
+      <ul ref={scrollRef}>
+        {todoItems}
+        <button type='button' className={styles.scrollButton} onClick={scrollToBottom}>
+          <ArrowIcon />
+        </button>
+      </ul>
+      <button type='button' className={styles.createButton} onClick={clickAddHandler}>
+        <AddIcon />
       </button>
+
       <ModalPortal>
-        {isAddModalOpened && <AddTodoModal setTodoList={setTodolist} setIsModalOpened={setIsAddModalOpened} />}
-        {isEditMidalOpened && (
-          <EditTodoModal
-            editTarget={editTarget as IEditTarget}
-            setTodoList={setTodolist}
-            setIsEditModalOpened={setIsEditModalOpened}
-          />
-        )}
+        {isModalOpened && <TodoModal type={modalType} closeModal={closeTodoModal} editTarget={editTarget || null} />}
       </ModalPortal>
     </div>
   );
 };
 
-export default Todolist;
+export default TodoList;
