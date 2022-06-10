@@ -9,7 +9,7 @@ interface IBookmark {
 export const bookmarkPreset = [
   { name: 'Google', url: 'https://www.google.co.kr/', icon: 'google' },
   { name: 'Youtube', url: 'https://www.youtube.com/', icon: 'youtube' },
-  { name: 'Instagram', url: 'https://www.instagram.com/', icon: 'instagram' },
+  { name: 'instagram', url: 'https://www.instagram.com/', icon: 'instagram' },
   { name: 'Netflix', url: 'https://www.netflix.com/kr/', icon: 'netflix' },
   { name: 'Naver', url: 'https://www.naver.com/', icon: 'naver' },
   { name: 'Facebook', url: 'https://facebook.com/', icon: 'facebook' },

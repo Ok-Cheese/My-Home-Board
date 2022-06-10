@@ -1,0 +1,52 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.bookmarkForm {
+  @include flexbox.flexbox;
+  flex-direction: column;
+  width: 500px;
+  height: 500px;
+  padding: 20px;
+
+  .selectIcon {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 50%;
+    padding: 10px;
+    margin-bottom: 20px;
+    overflow-y: scroll;
+    border: 1px solid black;
+
+    .iconWrapper {
+      width: 50px;
+      height: 50px;
+      padding: 5px;
+      margin: 10px;
+      border-radius: 50%;
+
+      button {
+        width: 100%;
+        height: 100%;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    .selectedIcon {
+      background: red;
+    }
+  }
+
+  .inputWrapper {
+    width: 100%;
+    padding: 10px;
+
+    p {
+      margin-bottom: 5px;
+    }
+  }
+}
