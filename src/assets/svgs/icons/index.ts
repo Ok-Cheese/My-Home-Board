@@ -1,0 +1,11 @@
+export { ReactComponent as BookIcon } from './book.svg';
+export { ReactComponent as BookmarkIcon } from './bookmark.svg';
+export { ReactComponent as ComputerIcon } from './computer.svg';
+export { ReactComponent as ConnectIcon } from './connect.svg';
+export { ReactComponent as EmailIcon } from './email.svg';
+export { ReactComponent as FoodIcon } from './food.svg';
+export { ReactComponent as GameIcon } from './game.svg';
+export { ReactComponent as GraphIcon } from './graph.svg';
+export { ReactComponent as MovieIcon } from './movie.svg';
+export { ReactComponent as PeopleIcon } from './people.svg';
+export { ReactComponent as StarIcon } from './star.svg';

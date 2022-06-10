@@ -1,7 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { cx } from 'styles';
 
-import { GoogleIcon, SearchIcon, YoutubeIcon } from 'assets/svgs';
+import { SearchIcon } from 'assets/svgs';
+import { GoogleIcon, YoutubeIcon } from 'assets/svgs/presets';
 
 import styles from './searchBar.module.scss';
 

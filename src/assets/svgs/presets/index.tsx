@@ -1,0 +1,9 @@
+export { ReactComponent as GoogleIcon } from './google.svg';
+export { ReactComponent as YoutubeIcon } from './youtube.svg';
+export { ReactComponent as GitHubIcon } from './github.svg';
+export { ReactComponent as InstagramIcon } from './instagram.svg';
+export { ReactComponent as NetflixIcon } from './netflix.svg';
+export { ReactComponent as WantedIcon } from './wanted.svg';
+export { ReactComponent as StackOverflowIcon } from './stack-overflow.svg';
+export { ReactComponent as NaverIcon } from './naver.svg';
+export { ReactComponent as FacebookIcon } from './facebook.svg';

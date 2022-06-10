@@ -1,11 +1,4 @@
 export { ReactComponent as SearchIcon } from './search.svg';
-export { ReactComponent as GoogleIcon } from './google.svg';
-export { ReactComponent as YoutubeIcon } from './youtube.svg';
-export { ReactComponent as GitHubIcon } from './github.svg';
-export { ReactComponent as InstagramIcon } from './instagram.svg';
-export { ReactComponent as NetflixIcon } from './netflix.svg';
-export { ReactComponent as WantedIcon } from './wanted.svg';
-export { ReactComponent as StackOverflowIcon } from './stack-overflow.svg';
 export { ReactComponent as SettingIcon } from './setting.svg';
 export { ReactComponent as ColorIcon } from './color.svg';
 export { ReactComponent as CheckboxIcon } from './checkbox.svg';
@@ -16,3 +9,4 @@ export { ReactComponent as ReloadIcon } from './reload.svg';
 export { ReactComponent as AddIcon } from './add.svg';
 export { ReactComponent as CircleIcon } from './circle.svg';
 export { ReactComponent as CheckCircleIcon } from './check_circle.svg';
+export { ReactComponent as TrashIcon } from './trash.svg';
