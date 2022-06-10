@@ -45,7 +45,7 @@ const CustomBoard = () => {
       layoutState.map((layout) => {
         const plugin = {
           search: <SearchBar key={layout.i} />,
-          bookmark: <Bookmarks key={layout.i} />,
+          bookmark: <Bookmarks key={layout.i} layout={layout} />,
           time: <Time key={layout.i} layout={layout} />,
           clock: <ClockPlugin key={layout.i} />,
           BOJ: <BOJ key={layout.i} />,

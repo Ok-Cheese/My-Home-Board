@@ -5,7 +5,7 @@ import store from 'store';
 const totalPlugins: Layout[] = [
   { i: 'BOJ', w: 2, h: 2, x: 0, y: 0, minW: 2, minH: 2, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'search', w: 5, h: 1, x: 0, y: 0, maxH: 1, resizeHandles: ['se', 'sw', 'nw'] },
-  { i: 'bookmark', w: 4, h: 3, x: 0, y: 0, minW: 4, minH: 2, maxW: 4, resizeHandles: ['se', 'sw', 'nw'] },
+  { i: 'bookmark', w: 3, h: 3, x: 0, y: 0, minW: 3, minH: 3, maxW: 3, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'setting', w: 1, h: 1, x: 0, y: 0, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'todoList', w: 2, h: 4, x: 0, y: 0, minW: 2, minH: 4, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'time', w: 2, h: 2, x: 0, y: 0, resizeHandles: ['se', 'sw', 'nw'] },
