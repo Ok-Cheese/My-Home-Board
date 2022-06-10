@@ -1,18 +1,20 @@
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { Layout } from 'react-grid-layout';
 import Slider from 'react-slick';
+import store from 'store';
 
 import { getBookmarkIcon } from './utils';
 import { bookmarkAtom } from 'states/bookmark';
+import { AddIcon, CloseIcon, TrashIcon } from 'assets/svgs';
+
+import BookmarkModal from './BookmarkModal';
+import ModalPortal from 'components/Modal/Potal';
 
 import styles from './bookmarks.module.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './bookmark.scss';
-import { Layout } from 'react-grid-layout';
-import { useState } from 'react';
-import ModalPortal from 'components/Modal/Potal';
-import BookmarkModal from './BookmarkModal';
-import { AddIcon, CloseIcon, TrashIcon } from 'assets/svgs';
 
 interface IProps {
   layout: Layout;
@@ -32,6 +34,10 @@ const Bookmarks = ({ layout }: IProps) => {
     slidesToShow: layout.w % 2 ? layout.w : layout.w - 1,
     speed: 500,
   };
+
+  useEffect(() => {
+    store.set('bookmarkList', bookmarks);
+  }, [bookmarks]);
 
   const visitBookmark = (url: string) => {
     window.open(`${url}`, '_blank');

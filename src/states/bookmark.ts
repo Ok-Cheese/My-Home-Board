@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import store from 'store';
 
 interface IBookmark {
   name: string;
@@ -18,7 +19,9 @@ export const bookmarkPreset = [
   { name: 'Stack-Overflow', url: 'https://stackoverflow.com/', icon: 'sof' },
 ];
 
+const savedBookmarkList = store.get('bookmarkList');
+
 export const bookmarkAtom = atom<IBookmark[]>({
   key: '#bookmark',
-  default: bookmarkPreset,
+  default: savedBookmarkList || bookmarkPreset,
 });
