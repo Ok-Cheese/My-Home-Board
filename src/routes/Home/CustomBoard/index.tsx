@@ -12,7 +12,7 @@ import Setting from './Plugins/Setting';
 import Weather from './Plugins/Weather';
 import TodoList from './Plugins/TodoList';
 import SearchBar from './Plugins/SearchBar';
-import Bookmarks from './Plugins/Bookmarks';
+import Bookmark from './Plugins/Bookmark';
 import ToolBox from './Toolbox';
 
 import styles from './customBoard.module.scss';
@@ -45,7 +45,7 @@ const CustomBoard = () => {
       layoutState.map((layout) => {
         const plugin = {
           search: <SearchBar key={layout.i} />,
-          bookmark: <Bookmarks key={layout.i} layout={layout} />,
+          bookmark: <Bookmark key={layout.i} layout={layout} />,
           time: <Time key={layout.i} layout={layout} />,
           clock: <ClockPlugin key={layout.i} />,
           BOJ: <BOJ key={layout.i} />,
