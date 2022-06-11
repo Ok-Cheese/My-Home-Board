@@ -24,7 +24,6 @@
 }
 
 .slick-dots {
-  position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -36,25 +35,24 @@
 }
 
 .slick-arrow {
+  top: auto;
+  bottom: 20px;
   z-index: 1;
-  width: 35%;
-  height: 90%;
-  opacity: 0.1;
-
-  &:hover {
-    background: colors.$RED;
-  }
+  width: 36px;
+  transform: translateY(-50%);
 
   &::before,
   &::after {
-    display: none;
+    @include flexbox.flexbox;
+    font-size: 36px;
+    color: colors.$GRAYA;
   }
 }
 
 .slick-prev {
-  left: 0%;
+  left: 10px;
 }
 
 .slick-next {
-  right: 0%;
+  right: 10px;
 }
