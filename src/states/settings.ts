@@ -14,16 +14,33 @@ interface ISettings {
   timeLocale: 'ko' | 'en';
   dateType: TDateFormat;
   timeType: TTimeFormat;
+  background: IBackground;
 }
 
-const savedSetting = store.get('setting');
+interface IBackground {
+  gradientAngle: number;
+  gradientPoint: number;
+  opacity: number;
+  firstColor: string;
+  secondColor: string;
+}
+
+const initailColor: IBackground = {
+  gradientAngle: 0,
+  gradientPoint: 0,
+  firstColor: '#bbdfff',
+  secondColor: '#bbdfff',
+  opacity: 1,
+};
 
 const basicSetting: ISettings = {
   timeLocale: 'en',
   dateType: 'dddd MMM D',
   timeType: 'HH : mm',
+  background: initailColor,
 };
 
+const savedSetting = store.get('setting');
 const initalSetting = savedSetting || basicSetting;
 
 export const settingAtom = atom<ISettings>({

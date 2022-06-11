@@ -1,16 +1,16 @@
 import { useRecoilValue } from 'recoil';
 
-import { backgroundColorState } from 'states/color';
+import { settingAtom } from 'states/settings';
 
 import CustomBoard from './CustomBoard';
 
 import styles from './home.module.scss';
 
 const Home = () => {
-  const bgColor = useRecoilValue(backgroundColorState);
+  const { background } = useRecoilValue(settingAtom);
 
   const homeStyle = {
-    background: `linear-gradient(${bgColor.gradientAngle}deg, ${bgColor.firstColor} ${bgColor.gradientPoint}%, ${bgColor.secondColor} 100%)`,
+    background: `linear-gradient(${background.gradientAngle}deg, ${background.firstColor} ${background.gradientPoint}%, ${background.secondColor} 100%)`,
   };
 
   return (

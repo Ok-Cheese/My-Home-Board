@@ -1,12 +1,16 @@
 import { useState, MouseEvent } from 'react';
+import { useRecoilState } from 'recoil';
+import { useMount } from 'react-use';
 import { cx } from 'styles';
+import store from 'store';
 
+import { settingAtom, tempSettingAtom } from 'states/settings';
+
+import GeneralSetting from './menu/General';
+import TimeSetting from './menu/Time';
 import Modal from '../../../../../../components/Modal';
 
 import styles from './preference.module.scss';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { settingAtom, tempSettingAtom } from 'states/settings';
-import TimeSetting from './menu/Time';
 
 type TPreferMenu = 'General' | 'Time';
 
@@ -19,11 +23,16 @@ const sidebarMenuArr: TPreferMenu[] = ['General', 'Time'];
 const Preference = ({ closeModal }: IProps) => {
   const [currentMenu, setCurrentMenu] = useState<TPreferMenu>('General');
 
-  const setSettings = useSetRecoilState(settingAtom);
-  const tempSetting = useRecoilValue(tempSettingAtom);
+  const [setting, setSetting] = useRecoilState(settingAtom);
+  const [tempSetting, setTempSetting] = useRecoilState(tempSettingAtom);
+
+  useMount(() => {
+    setTempSetting(setting);
+  });
 
   const confirmSetting = () => {
-    setSettings(tempSetting);
+    store.set('setting', tempSetting);
+    setSetting(tempSetting);
     closeModal();
   };
 
@@ -37,7 +46,7 @@ const Preference = ({ closeModal }: IProps) => {
 
   const decideContent = (name: TPreferMenu) => {
     return {
-      General: '',
+      General: <GeneralSetting />,
       Time: <TimeSetting />,
     }[name];
   };
