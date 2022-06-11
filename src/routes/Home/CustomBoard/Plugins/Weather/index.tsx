@@ -19,7 +19,7 @@ interface IProps {
 
 const Weather = ({ layout }: IProps) => {
   const [coordiantes, setCoordinates] = useState<ICoords | null>(null);
-  const [isNoWeatherData, setIsNoWeatherData] = useState(false);
+  const [, setIsNoWeatherData] = useState(false);
 
   useMount(() => {
     const savedCoords = store.get('coords');

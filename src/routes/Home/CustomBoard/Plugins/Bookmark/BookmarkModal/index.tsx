@@ -22,14 +22,6 @@ const BoomarkModal = ({ closeModal }: IProps) => {
     setSelectedIcon(id);
   };
 
-  const changeNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setBookmarkName(e.currentTarget.value);
-  };
-
-  const changeUrlHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setBookmarkUrl(e.currentTarget.value);
-  };
-
   const submitBookmarkHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
