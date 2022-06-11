@@ -1,6 +1,6 @@
 import Input from 'components/Input';
 import Modal from 'components/Modal';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { bookmarkAtom } from 'states/bookmark';
 import { cx } from 'styles';
