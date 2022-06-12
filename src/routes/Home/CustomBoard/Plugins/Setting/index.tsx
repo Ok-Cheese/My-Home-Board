@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { ColorIcon, HelpIcon, LayoutIcon, SettingIcon } from 'assets/svgs';
-import { GitHubIcon } from 'assets/svgs/presets';
+import { HelpIcon, LayoutIcon, SettingIcon } from 'assets/svgs';
 import store from 'store';
 import { cx } from 'styles';
 
