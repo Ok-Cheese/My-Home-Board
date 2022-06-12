@@ -11,6 +11,7 @@ import TimeSetting from './menu/Time';
 import Modal from '../../../../../../components/Modal';
 
 import styles from './preference.module.scss';
+import Button from 'components/Button';
 
 type TPreferMenu = 'General' | 'Time';
 
@@ -69,13 +70,13 @@ const Preference = ({ closeModal }: IProps) => {
         <div className={styles.sidebar}>{sidebarMenu}</div>
         <div className={styles.main}>
           <div className={styles.content}>{decideContent(currentMenu)}</div>
-          <div className={styles.bottom}>
-            <button type='button' onClick={confirmSetting}>
+          <div className={styles.buttonWrapper}>
+            <Button type='button' onClick={confirmSetting}>
               확인
-            </button>
-            <button type='button' onClick={cancelSetting}>
+            </Button>
+            <Button type='button' onClick={cancelSetting}>
               취소
-            </button>
+            </Button>
           </div>
         </div>
       </div>
