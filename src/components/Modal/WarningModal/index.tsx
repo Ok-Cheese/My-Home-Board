@@ -17,9 +17,7 @@ const WarningModal = ({ message, closeEvent }: IProps) => {
     <Modal>
       <div className={styles.warning}>
         <p className={styles.message}>{message}</p>
-        <Button size='normal' onClick={confirmHandler}>
-          확인
-        </Button>
+        <Button onClick={confirmHandler}>확인</Button>
       </div>
     </Modal>
   );

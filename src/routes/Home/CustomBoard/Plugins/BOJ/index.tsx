@@ -6,10 +6,10 @@ import { getBOJData } from './utiles';
 
 import Button from 'components/Button';
 import ModalPortal from 'components/Modal/Potal';
-import IdInputModal from 'components/Modal/IdInputModal';
 import UserInform from './userInform';
 
 import styles from './boj.module.scss';
+import { EditIcon } from 'assets/svgs';
 
 const BOJ = () => {
   const [userId, setUserId] = useState('');
@@ -68,12 +68,12 @@ const BOJ = () => {
   return (
     <div className={styles.boj}>
       <ModalPortal>
-        {isModalOpened && <IdInputModal type='BOJ' setUserId={setUserId} setIsModalOpened={setIsModalOpened} />}
+        {/* {isModalOpened && <IdInputModal type='BOJ' setUserId={setUserId} setIsModalOpened={setIsModalOpened} />} */}
       </ModalPortal>
       <div className={styles.title}>
         <span>BAEKJOON</span>
-        <Button size='normal' onClick={openModal}>
-          {buttonContent}
+        <Button size={{ width: '20px', height: '20px' }} onClick={openModal}>
+          <EditIcon />
         </Button>
       </div>
       <div className={styles.content}>{content}</div>
