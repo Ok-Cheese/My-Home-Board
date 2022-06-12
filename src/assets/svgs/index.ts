@@ -10,3 +10,4 @@ export { ReactComponent as AddIcon } from './add.svg';
 export { ReactComponent as CircleIcon } from './circle.svg';
 export { ReactComponent as CheckCircleIcon } from './check_circle.svg';
 export { ReactComponent as TrashIcon } from './trash.svg';
+export { ReactComponent as EditIcon } from './edit.svg';
