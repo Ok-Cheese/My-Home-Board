@@ -1,17 +1,18 @@
 import { useCallback, useMemo, useState } from 'react';
+import { Layout } from 'react-grid-layout';
 import { useMount } from 'react-use';
 import { useQuery } from 'react-query';
 import store from 'store';
 
-import { ICoords } from './weather.d';
+import { ICoords } from './weather';
+import { ReloadIcon } from 'assets/svgs';
 import { getWeahterData } from './utils';
 
-import styles from './weather.module.scss';
-import WeatherContent from './WeatherContent';
-import { Layout } from 'react-grid-layout';
 import NoCoords from './NoCoords';
+import WeatherContent from './WeatherContent';
 import Loading from 'components/Loading';
-import { ReloadIcon } from 'assets/svgs';
+
+import styles from './weather.module.scss';
 
 interface IProps {
   layout: Layout;
@@ -42,8 +43,13 @@ const Weather = ({ layout }: IProps) => {
       lon: position.coords.longitude,
     };
 
-    setCoordinates(coords);
     store.set('coords', coords);
+    setCoordinates(coords);
+  };
+
+  const reloadHandler = () => {
+    store.remove('coordinates');
+    getCoordinates();
   };
 
   const { data, isLoading, isError } = useQuery(
@@ -62,11 +68,6 @@ const Weather = ({ layout }: IProps) => {
     }
   );
 
-  const reloadHandler = () => {
-    store.remove('coordinates');
-    getCoordinates();
-  };
-
   const loadingSize = `${Math.min(layout.w, layout.h) * 30}px`;
 
   const contents = useMemo(() => {
@@ -74,7 +75,7 @@ const Weather = ({ layout }: IProps) => {
 
     if (isLoading) return <Loading size={loadingSize} />;
 
-    return <NoCoords layout={layout} getCoordinates={getCoordinates} isError={isError} />;
+    return <NoCoords getCoordinates={getCoordinates} isError={isError} />;
   }, [layout, data, isLoading, loadingSize, isError, getCoordinates]);
 
   return (

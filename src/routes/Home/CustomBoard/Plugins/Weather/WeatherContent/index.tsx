@@ -1,6 +1,6 @@
 import { Layout } from 'react-grid-layout';
 import { getWeatherIcon } from '../utils';
-import { IWeather } from '../weather.d';
+import { IWeather } from '../weather';
 import styles from './weatherContent.module.scss';
 
 interface IProps {

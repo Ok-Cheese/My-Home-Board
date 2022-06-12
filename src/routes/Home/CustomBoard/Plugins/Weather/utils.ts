@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ICoords } from './weather.d';
+import { ICoords } from './weather';
 import {
   Weather01dIcon,
   Weather01nIcon,
