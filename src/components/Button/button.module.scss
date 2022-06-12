@@ -1,8 +1,10 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
 
 .button {
   width: 80px;
   height: 40px;
+  margin: 0 20px;
   font-size: 12px;
   font-weight: 500;
   background-color: colors.$BG_WHITE;
@@ -11,4 +13,15 @@
   box-shadow: rgba(0, 0, 0, 2%) 1.95px 1.95px 2.6px;
   opacity: 1;
   transition: opacity 0.3s;
+}
+
+.isIcon {
+  @include flexbox.flexbox;
+  width: 20px;
+  height: 20px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 }
