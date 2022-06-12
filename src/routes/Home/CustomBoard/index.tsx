@@ -49,7 +49,6 @@ const CustomBoard = () => {
           bookmark: <Bookmark key={layout.i} layout={layout} />,
           time: <Time key={layout.i} layout={layout} />,
           clock: <ClockPlugin key={layout.i} />,
-          BOJ: <BOJ key={layout.i} />,
           setting: <Setting key={layout.i} />,
           weather: <Weather key={layout.i} layout={layout} />,
           todoList: <TodoList key={layout.i} />,

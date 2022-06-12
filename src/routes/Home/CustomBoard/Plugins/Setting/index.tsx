@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { ColorIcon, SettingIcon } from 'assets/svgs';
+import { ColorIcon, HelpIcon, LayoutIcon, SettingIcon } from 'assets/svgs';
 import { GitHubIcon } from 'assets/svgs/presets';
 import store from 'store';
 import { cx } from 'styles';
@@ -53,15 +53,14 @@ const Setting = () => {
 
   return (
     <div className={styles.setting}>
-      <button type='button' onClick={toggleSetting}>
-        <ColorIcon />
-      </button>
       <button type='button' onClick={toggleEditModeHandler}>
-        <SettingIcon className={cx({ [styles.active]: isEditMode })} />
+        <LayoutIcon className={cx({ [styles.active]: isEditMode })} />
       </button>
-
+      <button type='button' onClick={toggleSetting}>
+        <SettingIcon />
+      </button>
       <button type='button' onClick={moveToGithub}>
-        <GitHubIcon />
+        <HelpIcon />
       </button>
       <ModalPortal>
         {isSettingOpened && <Preference closeModal={closeSetting} />}
