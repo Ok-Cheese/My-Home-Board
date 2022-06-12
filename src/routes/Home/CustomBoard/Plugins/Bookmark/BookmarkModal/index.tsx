@@ -1,39 +1,40 @@
+import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { cx } from 'styles';
+
+import { IBookmark } from '../type';
+import { getBookmarkIcon, iconIds } from '../utils';
+
 import Input from 'components/Input';
 import Modal from 'components/Modal';
-import { FormEvent, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { bookmarkAtom } from 'states/bookmark';
-import { cx } from 'styles';
-import { getBookmarkIcon, iconIds } from '../utils';
+import Button from 'components/Button';
 
 import styles from './bookmarkModal.module.scss';
 
 interface IProps {
+  setBookmarkList: Dispatch<SetStateAction<IBookmark[]>>;
   closeModal: () => void;
 }
 
-const BoomarkModal = ({ closeModal }: IProps) => {
+const BoomarkModal = ({ setBookmarkList, closeModal }: IProps) => {
   const [selectedIcon, setSelectedIcon] = useState('');
   const [bookmarkName, setBookmarkName] = useState('');
   const [bookmarkUrl, setBookmarkUrl] = useState('');
-  const [bookmark, setBookmark] = useRecoilState(bookmarkAtom);
 
   const selectIconHandler = (id: string) => {
     setSelectedIcon(id);
   };
 
-  const submitBookmarkHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (bookmark.find(({ icon }) => icon === selectedIcon)) return;
-
     const newBookmark = { name: bookmarkName, url: bookmarkUrl, icon: selectedIcon };
-    setBookmark((prev) => [...prev, newBookmark]);
+    setBookmarkList((prev) => [...prev, newBookmark]);
     closeModal();
   };
 
   const iconList = iconIds.map((id) => {
     const BookmarkIconPreset = getBookmarkIcon(id);
+
     return (
       <div key={id} className={cx(styles.iconWrapper, { [styles.selectedIcon]: id === selectedIcon })}>
         <button
@@ -48,9 +49,11 @@ const BoomarkModal = ({ closeModal }: IProps) => {
     );
   });
 
+  const isInputValid = Boolean(selectedIcon && bookmarkName && bookmarkUrl);
+
   return (
     <Modal>
-      <form className={styles.bookmarkForm} onSubmit={submitBookmarkHandler}>
+      <form className={styles.bookmarkForm} onSubmit={submitHandler}>
         <div className={styles.selectIcon}>{iconList}</div>
         <div className={styles.inputWrapper}>
           <p>이름</p>
@@ -61,10 +64,10 @@ const BoomarkModal = ({ closeModal }: IProps) => {
           <Input type='text' value={bookmarkUrl} setValue={setBookmarkUrl} />
         </div>
         <div className={styles.buttonWrapper}>
-          <button type='submit'>확인</button>
-          <button type='button' onClick={() => closeModal()}>
-            취소
-          </button>
+          <Button type='submit' disabled={!isInputValid}>
+            확인
+          </Button>
+          <Button onClick={() => closeModal()}>취소</Button>
         </div>
       </form>
     </Modal>

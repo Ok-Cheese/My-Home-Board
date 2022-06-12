@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useCallback, useEffect, useState } from 'react';
 import { Layout } from 'react-grid-layout';
 import Slider from 'react-slick';
 import store from 'store';
 
-import { getBookmarkIcon } from './utils';
-import { bookmarkAtom } from 'states/bookmark';
+import { IBookmark } from './type';
+import { bookmarkPreset, getBookmarkIcon } from './utils';
 import { AddIcon, CloseIcon, TrashIcon } from 'assets/svgs';
 
 import BookmarkModal from './BookmarkModal';
+import Button from 'components/Button';
 import ModalPortal from 'components/Modal/Potal';
 
 import styles from './bookmarks.module.scss';
@@ -20,10 +20,12 @@ interface IProps {
   layout: Layout;
 }
 
+const savedBookmark = store.get('bookmarkList');
+
 const Bookmarks = ({ layout }: IProps) => {
+  const [bookmarkList, setBookmarkList] = useState<IBookmark[]>(savedBookmark || bookmarkPreset);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isRemoveMode, setIsRemoveMode] = useState(false);
-  const [bookmarks, setBookmarks] = useRecoilState(bookmarkAtom);
 
   const settings = {
     className: styles.slider,
@@ -36,44 +38,46 @@ const Bookmarks = ({ layout }: IProps) => {
   };
 
   useEffect(() => {
-    store.set('bookmarkList', bookmarks);
-  }, [bookmarks]);
+    store.set('bookmarkList', bookmarkList);
+  }, [bookmarkList]);
 
-  const visitBookmark = (url: string) => {
+  const openBookmark = (url: string) => {
     window.open(`${url}`, '_blank');
   };
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     setIsModalOpened(true);
-  };
+  }, []);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpened(false);
-  };
+  }, []);
 
   const toggleRemoveMode = () => {
     setIsRemoveMode((prev) => !prev);
   };
 
   const removeBookmark = (index: number) => {
-    const newBookmarks = bookmarks.slice();
+    const newBookmarks = bookmarkList.slice();
     newBookmarks.splice(index, 1);
-    setBookmarks(newBookmarks);
+    setBookmarkList(newBookmarks);
   };
 
-  const sliderItems = bookmarks.map((bm, index) => {
-    const BookmarkIcon = getBookmarkIcon(bm.icon);
+  const sliderItems = bookmarkList.map((bookmark, index) => {
+    const BookmarkIcon = getBookmarkIcon(bookmark.icon);
+    const removeIcon = isRemoveMode && (
+      <button type='button' className={styles.removeIcon} onClick={() => removeBookmark(index)}>
+        <CloseIcon />
+      </button>
+    );
+
     return (
-      <div key={bm.name} className={styles.bookmarkBox}>
-        <button type='button' onClick={() => visitBookmark(bm.url)}>
+      <div key={bookmark.name} className={styles.bookmarkBox}>
+        <button type='button' className={styles.bookmarkIcon} onClick={() => openBookmark(bookmark.url)}>
           <BookmarkIcon />
-          <span>{bm.name}</span>
+          <span>{bookmark.name}</span>
         </button>
-        {isRemoveMode && (
-          <button type='button' className={styles.removeBookmarkButton} onClick={() => removeBookmark(index)}>
-            <CloseIcon />
-          </button>
-        )}
+        {removeIcon}
       </div>
     );
   });
@@ -82,14 +86,16 @@ const Bookmarks = ({ layout }: IProps) => {
     <div className={styles.bookmark}>
       <Slider {...settings}>{sliderItems}</Slider>
       <div className={styles.buttonWrapper}>
-        <button type='button' onClick={openModal}>
+        <Button type='button' isIcon onClick={openModal}>
           <AddIcon />
-        </button>
-        <button type='button' onClick={toggleRemoveMode}>
+        </Button>
+        <Button type='button' isIcon onClick={toggleRemoveMode}>
           <TrashIcon />
-        </button>
+        </Button>
       </div>
-      <ModalPortal>{isModalOpened && <BookmarkModal closeModal={closeModal} />}</ModalPortal>
+      <ModalPortal>
+        {isModalOpened && <BookmarkModal setBookmarkList={setBookmarkList} closeModal={closeModal} />}
+      </ModalPortal>
     </div>
   );
 };

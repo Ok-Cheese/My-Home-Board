@@ -5,7 +5,6 @@
   @include flexbox.flexbox;
   flex-direction: column;
   width: 500px;
-  height: 500px;
   padding: 20px;
 
   .selectIcon {
@@ -16,7 +15,8 @@
     padding: 10px;
     margin-bottom: 20px;
     overflow-y: scroll;
-    border: 1px solid black;
+    border: 1px solid colors.$GRAYA;
+    border-radius: 5px;
 
     .iconWrapper {
       width: 50px;
@@ -37,7 +37,8 @@
     }
 
     .selectedIcon {
-      background: red;
+      background: colors.$YELLOW;
+      opacity: 0.5;
     }
   }
 
@@ -48,5 +49,9 @@
     p {
       margin-bottom: 5px;
     }
+  }
+
+  .buttonWrapper {
+    margin-top: 20px;
   }
 }
