@@ -2,7 +2,9 @@ import { useCallback, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useMount } from 'react-use';
 import RGL, { Layout, WidthProvider } from 'react-grid-layout';
+import { cx } from 'styles';
 
+import { CloseIcon } from 'assets/svgs';
 import { isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
 
 import BOJ from './Plugins/BOJ';
@@ -17,7 +19,7 @@ import ToolBox from './Toolbox';
 
 import styles from './customBoard.module.scss';
 import 'react-grid-layout/css/styles.css';
-import { CloseIcon } from 'assets/svgs';
+import Dday from './Plugins/Dday';
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -52,16 +54,21 @@ const CustomBoard = () => {
           setting: <Setting key={layout.i} />,
           weather: <Weather key={layout.i} layout={layout} />,
           todoList: <TodoList key={layout.i} />,
+          dday: <Dday key={layout.i} layout={layout} />,
         }[layout.i];
+
+        const isNonSettingPlugin = isEditMode && layout.i !== 'setting';
 
         return (
           <div key={layout.i} className={styles.block}>
-            {plugin || <span className={styles.name}>{layout.i}</span>}
-            {isEditMode && layout.i !== 'setting' && (
-              <button type='button' className={styles.removeButton} onClick={() => removePlugin(layout)}>
-                <CloseIcon />
-              </button>
-            )}
+            <div className={cx(styles.plugins, { [styles.editMode]: isNonSettingPlugin })}>
+              {plugin}
+              {isNonSettingPlugin && (
+                <button type='button' className={styles.removeButton} onClick={() => removePlugin(layout)}>
+                  <CloseIcon />
+                </button>
+              )}
+            </div>
           </div>
         );
       }),

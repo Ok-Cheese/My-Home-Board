@@ -7,6 +7,15 @@
   background: colors.$BG_BLOCK !important;
   border-radius: 5px;
 
+  .plugins {
+    width: 100%;
+    height: 100%;
+  }
+
+  .editMode {
+    pointer-events: none;
+  }
+
   .name {
     font-size: 48px;
   }
