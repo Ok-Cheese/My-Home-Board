@@ -16,10 +16,10 @@ import TodoList from './Plugins/TodoList';
 import SearchBar from './Plugins/SearchBar';
 import Bookmark from './Plugins/Bookmark';
 import ToolBox from './Toolbox';
+import Dday from './Plugins/Dday';
 
 import styles from './customBoard.module.scss';
 import 'react-grid-layout/css/styles.css';
-import Dday from './Plugins/Dday';
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -73,7 +73,7 @@ const CustomBoard = () => {
     [isEditMode, layoutState, removePlugin]
   );
 
-  const dragStartHandler = (currentLayout: Layout[]) => {
+  const changeStartHandler = (currentLayout: Layout[]) => {
     setTempSavedLayout(currentLayout);
   };
 
@@ -104,7 +104,8 @@ const CustomBoard = () => {
         isResizable={isEditMode}
         rowHeight={rowHeight}
         layout={layoutState}
-        onDragStart={dragStartHandler}
+        onDragStart={changeStartHandler}
+        onResizeStart={changeStartHandler}
         onLayoutChange={layoutChangeHandler}
       >
         {dom}
