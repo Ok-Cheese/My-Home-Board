@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useMount } from 'react-use';
 import RGL, { Layout, WidthProvider } from 'react-grid-layout';
@@ -27,7 +27,7 @@ const COLUMNS = 10;
 const rowHeight = window.outerHeight * 0.07;
 
 const CustomBoard = () => {
-  const [, setTempSavedLayout] = useState<Layout[]>([]);
+  const [tempSavedLayout, setTempSavedLayout] = useState<Layout[]>([]);
   const isEditMode = useRecoilValue(isEditModeAtom);
   const [layoutState, setLayoutState] = useRecoilState<Layout[]>(layoutAtom);
   const [toolBoxState, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
@@ -61,23 +61,33 @@ const CustomBoard = () => {
 
         return (
           <div key={layout.i} className={styles.block}>
-            <div className={cx(styles.plugins, { [styles.editMode]: isNonSettingPlugin })}>
-              {plugin}
-              {isNonSettingPlugin && (
-                <button type='button' className={styles.removeButton} onClick={() => removePlugin(layout)}>
-                  <CloseIcon />
-                </button>
-              )}
-            </div>
+            <div className={cx(styles.plugins, { [styles.editMode]: isNonSettingPlugin })}>{plugin}</div>
+            {isNonSettingPlugin && (
+              <button type='button' className={styles.removeButton} onClick={() => removePlugin(layout)}>
+                <CloseIcon />
+              </button>
+            )}
           </div>
         );
       }),
     [isEditMode, layoutState, removePlugin]
   );
 
+  const dragStartHandler = (currentLayout: Layout[]) => {
+    setTempSavedLayout(currentLayout);
+  };
+
   const layoutChangeHandler = (currentLayout: Layout[]) => {
     setLayoutState(currentLayout);
   };
+
+  useEffect(() => {
+    const isOverflowed = layoutState.find((layout) => layout.h + layout.y > 10);
+
+    if (isOverflowed) {
+      setLayoutState(tempSavedLayout);
+    }
+  }, [layoutState, setLayoutState, tempSavedLayout]);
 
   return (
     <div>
@@ -94,6 +104,7 @@ const CustomBoard = () => {
         isResizable={isEditMode}
         rowHeight={rowHeight}
         layout={layoutState}
+        onDragStart={dragStartHandler}
         onLayoutChange={layoutChangeHandler}
       >
         {dom}
