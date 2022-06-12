@@ -13,6 +13,7 @@ import Weather from './Plugins/Weather';
 import TodoList from './Plugins/TodoList';
 import SearchBar from './Plugins/SearchBar';
 import Bookmark from './Plugins/Bookmark';
+import Dday from './Plugins/Dday';
 import ToolBox from './Toolbox';
 
 import styles from './customBoard.module.scss';
@@ -52,6 +53,7 @@ const CustomBoard = () => {
           setting: <Setting key={layout.i} />,
           weather: <Weather key={layout.i} layout={layout} />,
           todoList: <TodoList key={layout.i} />,
+          dday: <Dday key={layout.i} />,
         }[layout.i];
 
         return (
