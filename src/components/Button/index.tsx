@@ -11,16 +11,18 @@ interface IProps {
   type?: 'button' | 'submit';
   isIcon?: boolean;
   size?: ISize;
+  disabled?: boolean;
   children: ReactNode;
   onClick?: MouseEventHandler | FormEventHandler;
 }
 
-const Button = ({ type, isIcon, size, children, onClick }: IProps) => {
+const Button = ({ type, isIcon, disabled, size, children, onClick }: IProps) => {
   return (
     <button
       type={type === 'submit' ? 'submit' : 'button'}
       className={cx({ [styles.button]: !isIcon }, { [styles.icon]: isIcon })}
       style={size}
+      disabled={disabled}
       onClick={onClick}
     >
       {children}
