@@ -17,16 +17,12 @@ const UserInform = ({ inform }: IProps) => {
     <div className={styles.inform}>
       <dl>
         <div className={styles.line}>
-          <dt># 티어</dt>
+          <dt>Tier</dt>
           <dd>{tierList[inform.tier - 1]}</dd>
         </div>
         <div className={styles.line}>
-          <dt># 푼 문제</dt>
-          <dd>{inform.solved}문제 </dd>
-        </div>
-        <div className={styles.line}>
-          <dt># 최장 스트릭</dt>
-          <dd>{inform.maxStreak}일</dd>
+          <dt>Solved</dt>
+          <dd>{inform.solved}</dd>
         </div>
       </dl>
     </div>

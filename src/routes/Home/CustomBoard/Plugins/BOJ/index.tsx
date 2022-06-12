@@ -1,34 +1,39 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { Layout } from 'react-grid-layout';
 import { useQuery } from 'react-query';
 import store from 'store';
 
 import { getBOJData } from './utiles';
-
-import Button from 'components/Button';
-import ModalPortal from 'components/Modal/Potal';
-import UserInform from './userInform';
-
-import styles from './boj.module.scss';
 import { EditIcon } from 'assets/svgs';
 
-const BOJ = () => {
-  const [userId, setUserId] = useState('');
+import BOJModal from './BOJModal';
+import UserInform from './userInform';
+import Button from 'components/Button';
+import Loading from 'components/Loading';
+import ModalPortal from 'components/Modal/Potal';
+
+import styles from './boj.module.scss';
+
+interface IProps {
+  layout: Layout;
+}
+
+const SavedBOJId = store.get('BOJ');
+
+const BOJ = ({ layout }: IProps) => {
+  const [userId, setUserId] = useState(SavedBOJId || '');
   const [isModalOpened, setIsModalOpened] = useState(false);
 
-  const { data, isLoading, isError } = useQuery(['getBOJData', userId], () => getBOJData(userId));
-
-  const buttonContent = userId || 'ID 추가';
-
-  useEffect(() => {
-    const savedId = store.get('BOJ_id');
-
-    if (!savedId) return;
-
-    setUserId(savedId);
-  }, []);
+  const { data, isLoading, isError } = useQuery(['getBOJData', userId], () => getBOJData(userId), {
+    enabled: Boolean(userId),
+  });
 
   const openModal = () => {
     setIsModalOpened(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpened(false);
   };
 
   const content = useMemo(() => {
@@ -57,25 +62,23 @@ const BOJ = () => {
     if (isLoading) {
       return (
         <div className={styles.empty}>
-          <p>로딩</p>
+          <Loading size={`${Math.min(layout.w, layout.h) * 25}px`} />
         </div>
       );
     }
 
     return <UserInform inform={informData} />;
-  }, [data?.data, isError, isLoading, userId]);
+  }, [data?.data, isError, isLoading, layout.h, layout.w, userId]);
 
   return (
     <div className={styles.boj}>
       <ModalPortal>
-        {/* {isModalOpened && <IdInputModal type='BOJ' setUserId={setUserId} setIsModalOpened={setIsModalOpened} />} */}
+        {isModalOpened && <BOJModal userId={userId} setUserId={setUserId} closeModal={closeModal} />}
       </ModalPortal>
-      <div className={styles.title}>
-        <span>BAEKJOON</span>
-        <Button size={{ width: '20px', height: '20px' }} onClick={openModal}>
-          <EditIcon />
-        </Button>
-      </div>
+      <p className={styles.title}>BAEKJOON</p>
+      <Button isIcon onClick={openModal}>
+        <EditIcon />
+      </Button>
       <div className={styles.content}>{content}</div>
     </div>
   );
