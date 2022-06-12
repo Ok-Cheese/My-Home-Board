@@ -4,9 +4,9 @@ export interface IDday {
 }
 
 export interface IRemain {
-  date: number;
-  hour: number;
-  minute: number;
-  second: number;
+  date: string;
+  hour: string;
+  minute: string;
+  second: string;
   sign: '+' | '-';
 }

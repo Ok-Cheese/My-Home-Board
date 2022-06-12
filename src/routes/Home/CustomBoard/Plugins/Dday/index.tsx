@@ -1,34 +1,34 @@
-import { EditIcon } from 'assets/svgs';
-import ModalPortal from 'components/Modal/Potal';
-import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import styles from './dday.module.scss';
-import DdayModal from './DdayModal';
-import { IRemain } from './DdayModal/type';
+import { Layout } from 'react-grid-layout';
 import store from 'store';
 
-const savedDday = store.get('dday');
+import { EditIcon } from 'assets/svgs';
+import { IRemain } from './type';
 
-const Dday = () => {
-  const [isModalOpened, setIsModalOpened] = useState(false);
+import DdayModal from './DdayModal';
+import ModalPortal from 'components/Modal/Potal';
+
+import styles from './dday.module.scss';
+import { calculateRemainTime } from './utlis';
+
+interface IProps {
+  layout: Layout;
+}
+
+const savedDday = store.get('dday');
+const initialRemainTime: IRemain = { date: '0', hour: '0', minute: '0', second: '0', sign: '-' };
+
+const Dday = ({ layout }: IProps) => {
   const [dday, setDday] = useState(savedDday || null);
-  const [remainTime, setRemainTime] = useState<IRemain>({ date: 0, hour: 0, minute: 0, second: 0, sign: '-' });
+  const [remainTime, setRemainTime] = useState<IRemain>(initialRemainTime);
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   useEffect(() => {
     store.set('dday', dday);
+    setRemainTime(calculateRemainTime(dday.deadline));
 
     const interval = setInterval(() => {
-      if (!dday) return;
-
-      const sign = Number(dayjs(dday.deadline).format()) - Number(dayjs().format) > 0 ? '+' : '-';
-
-      setRemainTime({
-        date: dayjs(dday.deadline).diff(dayjs(), 'day'),
-        hour: dayjs(dday.deadline).diff(dayjs(), 'hour'),
-        minute: Number(dayjs(dday.deadline).diff(dayjs(), 'minute')) % 60,
-        second: Number(dayjs(dday.deadline).diff(dayjs(), 'second')) % 60,
-        sign,
-      });
+      setRemainTime(calculateRemainTime(dday.deadline));
     }, 1000);
 
     return () => clearInterval(interval);
@@ -42,11 +42,20 @@ const Dday = () => {
     setIsModalOpened(false);
   };
 
+  const ddayStyles = {
+    title: { fontSize: `${Math.min(layout.w, layout.h) * 12}px` },
+    date: { fontSize: `${Math.min(layout.w, layout.h) * 24}px` },
+    time: { fontSize: `${Math.min(layout.w, layout.h) * 12}px` },
+  };
+
   const content = dday ? (
     <div className={styles.content}>
-      <p className='title'>{`${dday.title}`}</p>
-      <p>{`D ${remainTime.sign} ${remainTime.date}`}</p>
-      <p>{`${remainTime.sign} ${remainTime.hour}:${remainTime.minute}:${remainTime.second}`}</p>
+      <p className={styles.title} style={ddayStyles.title}>{`${dday.title}`}</p>
+      <p className={styles.date} style={ddayStyles.date}>{`D ${remainTime.sign} ${remainTime.date}`}</p>
+      <p
+        className={styles.time}
+        style={ddayStyles.time}
+      >{`${remainTime.sign} ${remainTime.hour} : ${remainTime.minute} : ${remainTime.second}`}</p>
     </div>
   ) : (
     <p>일정을 등록해주세요.</p>

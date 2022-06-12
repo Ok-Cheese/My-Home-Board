@@ -53,7 +53,7 @@ const CustomBoard = () => {
           setting: <Setting key={layout.i} />,
           weather: <Weather key={layout.i} layout={layout} />,
           todoList: <TodoList key={layout.i} />,
-          dday: <Dday key={layout.i} />,
+          dday: <Dday key={layout.i} layout={layout} />,
         }[layout.i];
 
         return (

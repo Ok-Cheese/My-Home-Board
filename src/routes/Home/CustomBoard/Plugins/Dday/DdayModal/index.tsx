@@ -1,10 +1,13 @@
-import DatePicker from 'react-datepicker';
-import Modal from 'components/Modal';
-import styles from './ddayModal.module.scss';
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+
+import { IDday } from '../type';
+
 import Input from 'components/Input';
-import { IDday } from './type';
+import Modal from 'components/Modal';
+import Button from 'components/Button';
 import DateInput from 'components/DateInput';
+
+import styles from './ddayModal.module.scss';
 
 interface IProps {
   dday: IDday;
@@ -15,10 +18,6 @@ interface IProps {
 const DdayModal = ({ dday, setDday, closeModal }: IProps) => {
   const [title, setTitle] = useState(dday ? dday.title : '');
   const [deadline, setDeadline] = useState(dday ? dday.deadline : null);
-
-  const changeDeadlineHandler = (date: Date) => {
-    setDeadline(date);
-  };
 
   const cancelEditHandler = () => {
     closeModal();
@@ -45,10 +44,10 @@ const DdayModal = ({ dday, setDday, closeModal }: IProps) => {
           <DateInput value={deadline} setValue={setDeadline} />
         </div>
         <div className={styles.buttonWrapper}>
-          <button type='submit'>확인</button>
-          <button type='button' onClick={cancelEditHandler}>
+          <Button type='submit'>확인</Button>
+          <Button type='button' onClick={cancelEditHandler}>
             취소
-          </button>
+          </Button>
         </div>
       </form>
     </Modal>
