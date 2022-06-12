@@ -3,8 +3,8 @@ import { cx } from 'styles';
 import styles from './button.module.scss';
 
 interface ISize {
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
 }
 
 interface IProps {
