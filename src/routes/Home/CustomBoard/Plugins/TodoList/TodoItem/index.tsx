@@ -1,7 +1,9 @@
-import { CheckCircleIcon, CircleIcon } from 'assets/svgs';
-import styles from './todoItem.module.scss';
 import { SetterOrUpdater } from 'recoil';
-import { ITodoItem } from 'states/plugin';
+
+import { ITodoItem } from '../type';
+import { CheckCircleIcon, CircleIcon } from 'assets/svgs';
+
+import styles from './todoItem.module.scss';
 
 interface IProps {
   item: ITodoItem;

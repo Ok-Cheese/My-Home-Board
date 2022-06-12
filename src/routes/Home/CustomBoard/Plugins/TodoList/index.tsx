@@ -1,20 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import store from 'store';
 
-import ModalPortal from 'components/Modal/Potal';
+import { TModalType, IEditTarget, ITodoItem } from './type';
 import { AddIcon, ArrowIcon } from 'assets/svgs';
-import { IEditTarget, ITodoItem, todoListAtom } from 'states/plugin';
 
 import TodoItem from './TodoItem';
 import TodoModal from './TodoModal';
+import ModalPortal from 'components/Modal/Potal';
 
 import styles from './todoList.module.scss';
 
+const savedTodoList = store.get('todoList');
+
 const TodoList = () => {
+  const [todoList, setTodoList] = useState<ITodoItem[]>(savedTodoList || []);
   const [editTarget, setEditTarget] = useState<IEditTarget | null>(null);
-  const [modalType, setModalType] = useState<'add' | 'edit'>('add');
-  const [todoList, setTodoList] = useRecoilState<ITodoItem[]>(todoListAtom);
+  const [modalType, setModalType] = useState<TModalType>('add');
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const scrollRef = useRef<HTMLUListElement | null>(null);
@@ -22,6 +23,22 @@ const TodoList = () => {
   useEffect(() => {
     store.set('todoList', todoList);
   }, [todoList]);
+
+  const openModal = () => {
+    setModalType('add');
+    setIsModalOpened(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpened(false);
+  };
+
+  const scrollToBottom = () => {
+    if (!scrollRef.current) return;
+
+    const listHeight = scrollRef.current.offsetHeight;
+    scrollRef.current.scrollBy({ top: listHeight, behavior: 'smooth' });
+  };
 
   const onItemClick = (index: number, item: ITodoItem) => {
     setModalType('edit');
@@ -41,22 +58,6 @@ const TodoList = () => {
     );
   });
 
-  const clickAddHandler = () => {
-    setModalType('add');
-    setIsModalOpened(true);
-  };
-
-  const closeTodoModal = () => {
-    setIsModalOpened(false);
-  };
-
-  const scrollToBottom = () => {
-    if (!scrollRef.current) return;
-
-    const listHeight = scrollRef.current.offsetHeight;
-    scrollRef.current.scrollBy({ top: listHeight, behavior: 'smooth' });
-  };
-
   return (
     <div className={styles.todoList}>
       <div className={styles.title}>
@@ -68,12 +69,19 @@ const TodoList = () => {
           <ArrowIcon />
         </button>
       </ul>
-      <button type='button' className={styles.createButton} onClick={clickAddHandler}>
+      <button type='button' className={styles.createButton} onClick={openModal}>
         <AddIcon />
       </button>
-
       <ModalPortal>
-        {isModalOpened && <TodoModal type={modalType} closeModal={closeTodoModal} editTarget={editTarget || null} />}
+        {isModalOpened && (
+          <TodoModal
+            type={modalType}
+            todoList={todoList}
+            setTodoList={setTodoList}
+            closeModal={closeModal}
+            editTarget={editTarget || null}
+          />
+        )}
       </ModalPortal>
     </div>
   );

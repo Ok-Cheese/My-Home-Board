@@ -1,25 +1,25 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useMount } from 'react-use';
 
-import { IEditTarget, todoListAtom } from 'states/plugin';
+import { IEditTarget, ITodoItem } from '../type';
 
-import Modal from 'components/Modal';
 import DateInput from 'components/DateInput';
+import Modal from 'components/Modal';
 
 import styles from './todoModal.module.scss';
 import './datepicker.css';
 
 interface IProps {
   type: 'add' | 'edit';
+  todoList: ITodoItem[];
+  setTodoList: Dispatch<SetStateAction<ITodoItem[]>>;
   closeModal: () => void;
   editTarget: IEditTarget | null;
 }
 
-const TodoModal = ({ type, editTarget, closeModal }: IProps) => {
+const TodoModal = ({ type, todoList, setTodoList, editTarget, closeModal }: IProps) => {
   const [todoCotent, setTodoContent] = useState<string>('');
   const [todoDeadline, setTodoDeadline] = useState<Date | null>(null);
-  const [todoList, setTodoList] = useRecoilState(todoListAtom);
 
   useMount(() => {
     if (type === 'edit' && editTarget) {
@@ -30,6 +30,20 @@ const TodoModal = ({ type, editTarget, closeModal }: IProps) => {
 
   const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTodoContent(e.currentTarget.value);
+  };
+
+  const removeTodoHandler = () => {
+    if (!editTarget) return;
+
+    const newTodoList = todoList.slice();
+    newTodoList.splice(editTarget.index, 1);
+
+    setTodoList(newTodoList);
+    closeModal();
+  };
+
+  const cancelEditHandler = () => {
+    closeModal();
   };
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -49,21 +63,6 @@ const TodoModal = ({ type, editTarget, closeModal }: IProps) => {
     const newTodoItem = { ...todoList[editTarget.index], content: todoCotent, deadline: todoDeadline };
     const newTodoList = todoList.slice();
     newTodoList.splice(editTarget.index, 1, newTodoItem);
-
-    setTodoList(newTodoList);
-    closeModal();
-  };
-
-  const cancelEditHandler = () => {
-    closeModal();
-  };
-
-  const removeTodoHandler = () => {
-    if (!editTarget) return;
-
-    const newTodoList = todoList.slice();
-    newTodoList.splice(editTarget.index, 1);
-
     setTodoList(newTodoList);
     closeModal();
   };

@@ -38,22 +38,3 @@ export const isEditModeAtom = atom<boolean>({
   key: '#isEditModeAtom',
   default: false,
 });
-
-export interface ITodoItem {
-  id: number;
-  content: string;
-  deadline: Date | null;
-  complete: boolean;
-}
-
-export interface IEditTarget {
-  index: number;
-  item: ITodoItem;
-}
-
-const savedTodoList = store.get('todoList');
-
-export const todoListAtom = atom<ITodoItem[]>({
-  key: '#todoListAtom',
-  default: savedTodoList || [],
-});
