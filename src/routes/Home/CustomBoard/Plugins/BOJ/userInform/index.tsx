@@ -2,10 +2,9 @@ import { tierList } from '../utiles';
 
 import styles from './userInform.module.scss';
 
-interface IInform {
+export interface IInform {
   tier: number;
   solved: string;
-  maxStreak: string;
 }
 
 interface IProps {

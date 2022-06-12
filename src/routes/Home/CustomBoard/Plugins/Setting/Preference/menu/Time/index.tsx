@@ -71,11 +71,11 @@ const TimeSetting = () => {
   return (
     <div className={styles.setting}>
       <div className={styles.option}>
-        <p>언어</p>
+        <p>Language</p>
         <Dropdown optionValue={tempSetting.timeLocale} optionArray={['ko', 'en']} setOption={setLocale} />
       </div>
       <div className={styles.option}>
-        <p>날짜 형식</p>
+        <p>Date Format</p>
         <Dropdown
           optionValue={dayjs().format(tempSetting.dateType)}
           optionArray={dateFomats}
@@ -83,7 +83,7 @@ const TimeSetting = () => {
         />
       </div>
       <div className={styles.option}>
-        <p>시간 형식</p>
+        <p>Time Format</p>
         <Dropdown
           optionValue={dayjs().format(tempSetting.timeType)}
           optionArray={timeFomats}

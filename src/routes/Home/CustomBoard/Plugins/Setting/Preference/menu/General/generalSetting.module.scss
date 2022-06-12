@@ -14,6 +14,11 @@
     flex-direction: column;
     width: 100%;
 
+    .optionTitle {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
     .previewWrapper {
       @include flexbox.flexbox;
       flex-direction: column;
@@ -23,7 +28,7 @@
 
       p {
         width: 100%;
-        margin-bottom: 5px;
+        margin-bottom: 15px;
       }
 
       .preview {
@@ -45,7 +50,7 @@
       }
 
       .colorPicker {
-        margin: 0 100px;
+        margin: 0 20px;
 
         p {
           margin-bottom: 5px;

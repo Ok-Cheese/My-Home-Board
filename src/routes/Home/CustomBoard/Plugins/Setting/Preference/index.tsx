@@ -8,10 +8,10 @@ import { settingAtom, tempSettingAtom } from 'states/settings';
 
 import GeneralSetting from './menu/General';
 import TimeSetting from './menu/Time';
+import Button from 'components/Button';
 import Modal from '../../../../../../components/Modal';
 
 import styles from './preference.module.scss';
-import Button from 'components/Button';
 
 type TPreferMenu = 'General' | 'Time';
 

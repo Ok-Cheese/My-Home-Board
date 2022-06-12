@@ -1,5 +1,6 @@
 import { FormEventHandler, MouseEventHandler, ReactNode } from 'react';
 import { cx } from 'styles';
+
 import styles from './button.module.scss';
 
 interface ISize {

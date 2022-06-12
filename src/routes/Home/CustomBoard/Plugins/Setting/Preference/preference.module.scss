@@ -3,8 +3,8 @@
 
 .preference {
   display: flex;
-  width: 1000px;
-  height: 800px;
+  width: 800px;
+  height: 600px;
   background: colors.$MODAL;
 
   .sidebar {
@@ -19,6 +19,7 @@
       @include flexbox.flexbox;
       width: 100%;
       height: 8%;
+      font-size: 16px;
     }
 
     .currentMenu {
@@ -36,13 +37,14 @@
     .content {
       @include flexbox.flexbox;
       width: 100%;
-      height: 90%;
+      height: 85%;
     }
 
     .buttonWrapper {
       @include flexbox.flexbox;
       width: 100%;
-      height: 5%;
+      height: 15%;
+      background: colors.$MODAL;
     }
   }
 }

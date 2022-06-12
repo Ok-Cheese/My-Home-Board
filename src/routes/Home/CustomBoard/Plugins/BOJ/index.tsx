@@ -72,14 +72,14 @@ const BOJ = ({ layout }: IProps) => {
 
   return (
     <div className={styles.boj}>
-      <ModalPortal>
-        {isModalOpened && <BOJModal userId={userId} setUserId={setUserId} closeModal={closeModal} />}
-      </ModalPortal>
       <p className={styles.title}>BAEKJOON</p>
       <Button isIcon onClick={openModal}>
         <EditIcon />
       </Button>
       <div className={styles.content}>{content}</div>
+      <ModalPortal>
+        {isModalOpened && <BOJModal userId={userId} setUserId={setUserId} closeModal={closeModal} />}
+      </ModalPortal>
     </div>
   );
 };

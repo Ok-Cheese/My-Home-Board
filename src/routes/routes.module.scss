@@ -1,6 +1,11 @@
 @use '/src/styles/constants/colors';
 @use '/src/styles/mixins/flexbox';
 
+* {
+  color: colors.$TEXT;
+  letter-spacing: 0.5px;
+}
+
 .app {
   @include flexbox.flexbox;
   width: 100vw;

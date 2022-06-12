@@ -3,8 +3,9 @@ import { useMount } from 'react-use';
 
 import { IEditTarget, ITodoItem } from '../type';
 
-import DateInput from 'components/DateInput';
 import Modal from 'components/Modal';
+import Button from 'components/Button';
+import DateInput from 'components/DateInput';
 
 import styles from './todoModal.module.scss';
 import './datepicker.css';
@@ -79,17 +80,11 @@ const TodoModal = ({ type, todoList, setTodoList, editTarget, closeModal }: IPro
           <DateInput value={todoDeadline} setValue={setTodoDeadline} />
         </div>
         <div className={styles.buttonWrapper}>
-          <button type='submit'>확인</button>
-          {type === 'add' && (
-            <button type='button' onClick={cancelEditHandler}>
-              취소
-            </button>
-          )}
-          {type === 'edit' && (
-            <button type='button' onClick={removeTodoHandler}>
-              삭제
-            </button>
-          )}
+          <Button type='submit' disabled={!todoCotent}>
+            확인
+          </Button>
+          {type === 'add' && <Button onClick={cancelEditHandler}>취소</Button>}
+          {type === 'edit' && <Button onClick={removeTodoHandler}>삭제</Button>}
         </div>
       </form>
     </Modal>

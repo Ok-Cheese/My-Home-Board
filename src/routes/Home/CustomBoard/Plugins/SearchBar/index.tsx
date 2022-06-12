@@ -22,12 +22,11 @@ const SearchBar = () => {
   const serachSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (searchInput.trim() === '') return;
+
     const searchUrl = searchType === 'google' ? GOOGLE : YOUTUBE;
     window.open(`${searchUrl}${searchInput}`, '_blank');
   };
-
-  const typeButtonIcon = searchType === 'google' ? <GoogleIcon /> : <YoutubeIcon />;
-  const placeholder = searchType === 'google' ? 'Search to Google...' : 'Serach to Youtube...';
 
   const toggleSearchType = () => {
     setSearchType(searchType === 'google' ? 'youtube' : 'google');
@@ -36,6 +35,9 @@ const SearchBar = () => {
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.currentTarget.value);
   };
+
+  const typeButtonIcon = searchType === 'google' ? <GoogleIcon /> : <YoutubeIcon />;
+  const placeholder = searchType === 'google' ? 'Search to Google...' : 'Serach to Youtube...';
 
   return (
     <form className={styles.searchBar} onSubmit={serachSubmitHandler}>

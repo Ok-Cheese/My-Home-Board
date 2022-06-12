@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+
 import styles from './input.module.scss';
 
 interface IProps {
@@ -12,7 +13,15 @@ const Input = ({ type, value, setValue }: IProps) => {
     setValue(e.currentTarget.value);
   };
 
-  return <input type={type || 'text'} className={styles.input} value={value} onChange={changeInputHandler} />;
+  return (
+    <input
+      type={type || 'text'}
+      className={styles.input}
+      value={value}
+      onChange={changeInputHandler}
+      spellCheck={false}
+    />
+  );
 };
 
 export default Input;

@@ -32,6 +32,8 @@ const DdayModal = ({ dday, setDday, closeModal }: IProps) => {
     closeModal();
   };
 
+  const isDdayValid = Boolean(title && deadline);
+
   return (
     <Modal>
       <form className={styles.editForm} onSubmit={ddaySubmitHandler}>
@@ -44,7 +46,9 @@ const DdayModal = ({ dday, setDday, closeModal }: IProps) => {
           <DateInput value={deadline} setValue={setDeadline} />
         </div>
         <div className={styles.buttonWrapper}>
-          <Button type='submit'>확인</Button>
+          <Button type='submit' disabled={!isDdayValid}>
+            확인
+          </Button>
           <Button type='button' onClick={cancelEditHandler}>
             취소
           </Button>

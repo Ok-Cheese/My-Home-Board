@@ -67,18 +67,16 @@ const GeneralSetting = () => {
   return (
     <div className={styles.setting}>
       <div className={styles.option}>
-        <p>Background Color</p>
+        <p className={styles.optionTitle}>Background Color</p>
         <div className={styles.previewWrapper}>
           <p>Preview</p>
           <div className={styles.preview} style={previewStyle} />
         </div>
         <div className={styles.detail}>
           <div className={styles.colorPicker}>
-            <p>First Color</p>
             <ChromePicker color={tempBackground.firstColor} onChange={firstColorChangeHandler} />
           </div>
           <div className={styles.colorPicker}>
-            <p>Second Color</p>
             <ChromePicker color={tempBackground.secondColor} onChange={secondColorChangeHandler} />
           </div>
         </div>

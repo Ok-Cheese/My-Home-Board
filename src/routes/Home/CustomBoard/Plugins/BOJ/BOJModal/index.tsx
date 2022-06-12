@@ -28,7 +28,7 @@ const BOJModal = ({ userId, setUserId, closeModal }: IProps) => {
     <Modal>
       <form className={styles.bojForm} onSubmit={submitHandler}>
         <div className={styles.inputWrapper}>
-          <p>백준 아이디</p>
+          <p>백준 ID</p>
           <Input value={id} setValue={setId} />
         </div>
         <div className={styles.buttonWrapper}>
