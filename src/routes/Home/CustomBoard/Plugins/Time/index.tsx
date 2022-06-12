@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Layout } from 'react-grid-layout';
 import dayjs from 'dayjs';
@@ -15,14 +15,23 @@ interface IProps {
 
 const Time = ({ layout }: IProps) => {
   const setting = useRecoilValue(settingAtom);
+  const [now, setNow] = useState(dayjs());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(dayjs());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     dayjs.locale(setting.timeLocale);
   }, [setting.timeLocale]);
 
   const currentTime = {
-    date: dayjs().format(setting.dateType),
-    time: dayjs().format(setting.timeType),
+    date: now.format(setting.dateType),
+    time: now.format(setting.timeType),
   };
 
   const pulginStyles = {
