@@ -24,14 +24,18 @@ const Dday = ({ layout }: IProps) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   useEffect(() => {
-    store.set('dday', dday);
-    setRemainTime(calculateRemainTime(dday.deadline));
+    if (dday) {
+      const interval = setInterval(() => {
+        setRemainTime(calculateRemainTime(dday.deadline));
+      }, 1000);
 
-    const interval = setInterval(() => {
+      store.set('dday', dday);
       setRemainTime(calculateRemainTime(dday.deadline));
-    }, 1000);
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }
+
+    return undefined;
   }, [dday]);
 
   const openModal = () => {
@@ -43,19 +47,19 @@ const Dday = ({ layout }: IProps) => {
   };
 
   const ddayStyles = {
-    title: { fontSize: `${Math.min(layout.w, layout.h) * 12}px` },
-    date: { fontSize: `${Math.min(layout.w, layout.h) * 24}px` },
-    time: { fontSize: `${Math.min(layout.w, layout.h) * 12}px` },
+    title: { fontSize: `${Math.min(layout.w, layout.h) * 10}px` },
+    date: { fontSize: `${Math.min(layout.w, layout.h) * 20}px` },
+    time: { fontSize: `${Math.min(layout.w, layout.h) * 10}px` },
   };
 
   const content = dday ? (
     <div className={styles.content}>
       <p className={styles.title} style={ddayStyles.title}>{`${dday.title}`}</p>
-      <p className={styles.date} style={ddayStyles.date}>{`D ${remainTime.sign} ${remainTime.date}`}</p>
+      <p className={styles.date} style={ddayStyles.date}>{`D${remainTime.sign}${remainTime.date}`}</p>
       <p
         className={styles.time}
         style={ddayStyles.time}
-      >{`${remainTime.sign} ${remainTime.hour} : ${remainTime.minute} : ${remainTime.second}`}</p>
+      >{`${remainTime.sign} ${remainTime.hour}:${remainTime.minute}:${remainTime.second}`}</p>
     </div>
   ) : (
     <p>일정을 등록해주세요.</p>
