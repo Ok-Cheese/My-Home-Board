@@ -12,7 +12,7 @@ import WarningModal from 'components/Modal/WarningModal';
 
 import styles from './setting.module.scss';
 
-const GITHUB_URL = 'https://github.com/Ok-Cheese/My-Home-Board';
+const ManualURL = 'https://metal-lantern-ee6.notion.site/My-Home-Board-Manual-625814f7ce2f4dd7810cad7c2c1239fb';
 
 const Setting = () => {
   const [isSettingOpened, setIsSettingOpened] = useState(false);
@@ -43,7 +43,7 @@ const Setting = () => {
   };
 
   const moveToGithub = () => {
-    window.open(GITHUB_URL, '_blank');
+    window.open(ManualURL, '_blank');
   };
 
   const closeSetting = () => {
