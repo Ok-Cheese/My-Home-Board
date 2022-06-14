@@ -12,7 +12,7 @@ const totalPlugins: Layout[] = [
   { i: 'clock', w: 2, h: 4, x: 0, y: 0, minW: 2, minH: 4, maxW: 2, maxH: 4 },
   { i: 'weather', w: 2, h: 2, x: 0, y: 0, minW: 2, minH: 2, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'dday', w: 2, h: 2, x: 0, y: 0, minW: 2, minH: 2, resizeHandles: ['se', 'sw', 'nw'] },
-  { i: 'github', w: 3, h: 2, x: 0, y: 0, minW: 3, minH: 2, resizeHandles: ['se', 'sw', 'nw'] },
+  { i: 'github', w: 4, h: 3, x: 0, y: 0, minW: 4, minH: 3, resizeHandles: ['se', 'sw', 'nw'] },
 ];
 
 const initailLayout: Layout[] = [

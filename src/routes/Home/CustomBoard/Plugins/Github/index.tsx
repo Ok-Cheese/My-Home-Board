@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import store from 'store';
 
 import { EditIcon } from 'assets/svgs';
@@ -15,8 +15,10 @@ const savedUserId = store.get('githubId');
 const Github = () => {
   const [userId, setUserId] = useState(savedUserId || '');
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isIdUnknown, setIsIdUnknown] = useState(false);
 
   useEffect(() => {
+    setIsIdUnknown(false);
     store.set('githubId', userId);
   }, [userId]);
 
@@ -28,11 +30,18 @@ const Github = () => {
     setIsModalOpened(false);
   };
 
-  const content = userId ? (
-    <img src={`https://ghchart.rshah.org/${userId}`} alt='github commits' />
-  ) : (
-    <p>아이디를 입력하세요.</p>
-  );
+  const githubErrorHandler = () => {
+    setIsIdUnknown(true);
+  };
+
+  const content = useMemo(() => {
+    if (isIdUnknown) return <p>잘못된 아이디입니다.</p>;
+
+    if (userId)
+      return <img src={`https://ghchart.rshah.org/${userId}`} alt='github commits' onError={githubErrorHandler} />;
+
+    return <p>아이디를 입력하세요.</p>;
+  }, [isIdUnknown, userId]);
 
   return (
     <div className={styles.github}>
