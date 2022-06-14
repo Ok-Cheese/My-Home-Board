@@ -33,7 +33,10 @@ const GradientSlideOption = ({ type }: IProps) => {
         return;
       }
 
-      const newBackground = { ...tempBackground, gradientAngle: value };
+      const newBackground =
+        type === 'backgroundAngle'
+          ? { ...tempBackground, gradientAngle: value }
+          : { ...tempBackground, gradientPoint: value };
       setTempSetting((prev) => {
         return {
           ...prev,
@@ -57,17 +60,25 @@ const GradientSlideOption = ({ type }: IProps) => {
     }[type];
   }, [tempBackground, tempPluginColor, type, valueChangeHandler]);
 
+  const optionName = useMemo(() => {
+    return {
+      backgroundAngle: 'Gradient Angle',
+      backgroundPoint: 'Gradient Point',
+      pluginOpacity: 'Opacity',
+    }[type];
+  }, [type]);
+
   const optionValue = useMemo(() => {
     return {
-      backgroundAngle: `(${tempBackground.gradientPoint}%)`,
-      backgroundPoint: `(${tempBackground.gradientAngle}°)`,
+      backgroundAngle: `(${tempBackground.gradientAngle}°)`,
+      backgroundPoint: `(${tempBackground.gradientPoint}%)`,
       pluginOpacity: `(${tempPluginColor.opacity}%)`,
     }[type];
   }, [tempBackground, tempPluginColor, type]);
 
   return (
     <div className={styles.gradientSlider}>
-      <span>Gradient Angle</span>
+      <span>{optionName}</span>
       <Slider className={styles.slider} {...sliderOption} />
       <span className={styles.optionValue}>{optionValue}</span>
     </div>
