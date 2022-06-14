@@ -17,7 +17,7 @@ interface ISettings {
   background: IBackground;
 }
 
-interface IBackground {
+export interface IBackground {
   gradientAngle: number;
   gradientPoint: number;
   opacity: number;
@@ -25,7 +25,7 @@ interface IBackground {
   secondColor: string;
 }
 
-const initailColor: IBackground = {
+export const initailColor: IBackground = {
   gradientAngle: 0,
   gradientPoint: 0,
   firstColor: '#bbdfff',
