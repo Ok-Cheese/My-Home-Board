@@ -4,7 +4,9 @@ import { useMount } from 'react-use';
 import RGL, { Layout, WidthProvider } from 'react-grid-layout';
 import { cx } from 'styles';
 
+import { hexToRgb } from './utils';
 import { CloseIcon } from 'assets/svgs';
+import { settingAtom } from 'states/settings';
 import { isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
 
 import BOJ from './Plugins/BOJ';
@@ -31,6 +33,15 @@ const CustomBoard = () => {
   const isEditMode = useRecoilValue(isEditModeAtom);
   const [layoutState, setLayoutState] = useRecoilState<Layout[]>(layoutAtom);
   const [toolBoxState, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
+
+  const pluginSetting = useRecoilValue(settingAtom).plugin;
+
+  const pluginStyle = useMemo(() => {
+    return {
+      background: `rgba(${hexToRgb(pluginSetting.color)}, ${pluginSetting.opacity / 100})`,
+      color: `${pluginSetting.fontColor}`,
+    };
+  }, [pluginSetting]);
 
   useMount(() => setTempSavedLayout(layoutState));
 
@@ -60,7 +71,7 @@ const CustomBoard = () => {
         const isNonSettingPlugin = isEditMode && layout.i !== 'setting';
 
         return (
-          <div key={layout.i} className={styles.block}>
+          <div key={layout.i} className={styles.block} style={pluginStyle}>
             <div className={cx(styles.plugins, { [styles.editMode]: isNonSettingPlugin })}>{plugin}</div>
             {isNonSettingPlugin && (
               <button type='button' className={styles.removeButton} onClick={() => removePlugin(layout)}>
@@ -70,7 +81,7 @@ const CustomBoard = () => {
           </div>
         );
       }),
-    [isEditMode, layoutState, removePlugin]
+    [isEditMode, layoutState, pluginStyle, removePlugin]
   );
 
   const changeStartHandler = (currentLayout: Layout[]) => {

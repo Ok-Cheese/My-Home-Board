@@ -4,7 +4,6 @@
 .block {
   @include flexbox.flexbox;
   position: relative;
-  background: colors.$BG_BLOCK !important;
   border-radius: 5px;
 
   .plugins {

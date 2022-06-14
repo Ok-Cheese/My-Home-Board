@@ -26,11 +26,17 @@ const GeneralSetting = () => {
           <div className={styles.preview} style={previewStyle} />
         </div>
         <div className={styles.option}>
-          <ColorPickOption type='first' />
-          <ColorPickOption type='second' />
-          <GradientSlideOption type='angle' />
-          <GradientSlideOption type='point' />
+          <ColorPickOption type='backgroundFirst' target='background' />
+          <ColorPickOption type='backgroundSecond' target='background' />
+          <GradientSlideOption type='backgroundAngle' />
+          <GradientSlideOption type='backgroundPoint' />
         </div>
+      </div>
+      <div className={styles.category}>
+        <p className={styles.categoryTitle}>Plugin Color</p>
+        <ColorPickOption type='pluginBackground' target='plugin' />
+        <ColorPickOption type='pluginFont' target='plugin' />
+        <GradientSlideOption type='pluginOpacity' />
       </div>
     </div>
   );

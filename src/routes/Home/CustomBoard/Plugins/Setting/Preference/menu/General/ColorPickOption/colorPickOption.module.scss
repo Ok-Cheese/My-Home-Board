@@ -1,3 +1,6 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
 .colorPickOption {
   position: relative;
   display: flex;
@@ -17,6 +20,7 @@
     div {
       width: 100%;
       height: 100%;
+      border: 1px solid colors.$GRAYD;
       border-radius: 5px;
     }
   }

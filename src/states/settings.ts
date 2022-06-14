@@ -15,29 +15,41 @@ interface ISettings {
   dateType: TDateFormat;
   timeType: TTimeFormat;
   background: IBackground;
+  plugin: IPlugin;
 }
 
 export interface IBackground {
   gradientAngle: number;
   gradientPoint: number;
-  opacity: number;
   firstColor: string;
   secondColor: string;
 }
 
-export const initailColor: IBackground = {
+interface IPlugin {
+  color: string;
+  fontColor: string;
+  opacity: number;
+}
+
+export const initailBackgroundColor: IBackground = {
   gradientAngle: 0,
   gradientPoint: 0,
   firstColor: '#bbdfff',
   secondColor: '#bbdfff',
-  opacity: 1,
+};
+
+const initialPluginColor: IPlugin = {
+  color: '#fefefe',
+  fontColor: '#1d1d1f',
+  opacity: 80,
 };
 
 const basicSetting: ISettings = {
   timeLocale: 'en',
   dateType: 'dddd MMM D',
   timeType: 'HH : mm',
-  background: initailColor,
+  background: initailBackgroundColor,
+  plugin: initialPluginColor,
 };
 
 const savedSetting = store.get('setting');
