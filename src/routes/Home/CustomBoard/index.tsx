@@ -19,6 +19,7 @@ import SearchBar from './Plugins/SearchBar';
 import Bookmark from './Plugins/Bookmark';
 import ToolBox from './Toolbox';
 import Dday from './Plugins/Dday';
+import Github from './Plugins/Github';
 
 import styles from './customBoard.module.scss';
 import 'react-grid-layout/css/styles.css';
@@ -66,6 +67,7 @@ const CustomBoard = () => {
           weather: <Weather key={layout.i} layout={layout} />,
           todoList: <TodoList key={layout.i} />,
           dday: <Dday key={layout.i} layout={layout} />,
+          github: <Github key={layout.i} />,
         }[layout.i];
 
         const isNonSettingPlugin = isEditMode && layout.i !== 'setting';
