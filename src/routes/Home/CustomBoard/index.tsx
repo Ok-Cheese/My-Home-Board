@@ -4,22 +4,12 @@ import { useMount } from 'react-use';
 import RGL, { Layout, WidthProvider } from 'react-grid-layout';
 import { cx } from 'styles';
 
-import { hexToRgb } from './utils';
+import { getPlugin, hexToRgb } from './utils';
 import { CloseIcon } from 'assets/svgs';
 import { settingAtom } from 'states/settings';
 import { isEditModeAtom, layoutAtom, toolBoxAtom } from 'states/plugin';
 
-import BOJ from './Plugins/BOJ';
-import Time from './Plugins/Time';
-import ClockPlugin from './Plugins/ClockPlugin';
-import Setting from './Plugins/Setting';
-import Weather from './Plugins/Weather';
-import TodoList from './Plugins/TodoList';
-import SearchBar from './Plugins/SearchBar';
-import Bookmark from './Plugins/Bookmark';
 import ToolBox from './Toolbox';
-import Dday from './Plugins/Dday';
-import Github from './Plugins/Github';
 
 import styles from './customBoard.module.scss';
 import 'react-grid-layout/css/styles.css';
@@ -31,20 +21,20 @@ const rowHeight = window.outerHeight * 0.07;
 
 const CustomBoard = () => {
   const [tempSavedLayout, setTempSavedLayout] = useState<Layout[]>([]);
-  const isEditMode = useRecoilValue(isEditModeAtom);
   const [layoutState, setLayoutState] = useRecoilState<Layout[]>(layoutAtom);
   const [toolBoxState, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
-
-  const pluginSetting = useRecoilValue(settingAtom).plugin;
-
-  const pluginStyle = useMemo(() => {
-    return {
-      background: `rgba(${hexToRgb(pluginSetting.color)}, ${pluginSetting.opacity / 100})`,
-      color: `${pluginSetting.fontColor}`,
-    };
-  }, [pluginSetting]);
+  const isEditMode = useRecoilValue(isEditModeAtom);
+  const settings = useRecoilValue(settingAtom);
 
   useMount(() => setTempSavedLayout(layoutState));
+
+  const changeStartHandler = (currentLayout: Layout[]) => {
+    setTempSavedLayout(currentLayout);
+  };
+
+  const layoutChangeHandler = (currentLayout: Layout[]) => {
+    setLayoutState(currentLayout);
+  };
 
   const removePlugin = useCallback(
     (item: Layout) => {
@@ -54,45 +44,39 @@ const CustomBoard = () => {
     [setLayoutState, setToolBoxState]
   );
 
-  const dom = useMemo(
-    () =>
-      layoutState.map((layout) => {
-        const plugin = {
-          search: <SearchBar key={layout.i} />,
-          bookmark: <Bookmark key={layout.i} layout={layout} />,
-          time: <Time key={layout.i} layout={layout} />,
-          clock: <ClockPlugin key={layout.i} />,
-          BOJ: <BOJ key={layout.i} layout={layout} />,
-          setting: <Setting key={layout.i} />,
-          weather: <Weather key={layout.i} layout={layout} />,
-          todoList: <TodoList key={layout.i} />,
-          dday: <Dday key={layout.i} layout={layout} />,
-          github: <Github key={layout.i} />,
-        }[layout.i];
+  const layoutStyle = {
+    width: '80vw',
+    height: '90vh',
+    opacity: isEditMode ? 0.75 : 1,
+  };
 
-        const isNonSettingPlugin = isEditMode && layout.i !== 'setting';
+  const pluginStyle = useMemo(() => {
+    return {
+      background: `rgba(${hexToRgb(settings.plugin.color)}, ${settings.plugin.opacity / 100})`,
+      color: `${settings.plugin.fontColor}`,
+    };
+  }, [settings.plugin]);
 
-        return (
-          <div key={layout.i} className={styles.block} style={pluginStyle}>
-            <div className={cx(styles.plugins, { [styles.editMode]: isNonSettingPlugin })}>{plugin}</div>
-            {isNonSettingPlugin && (
-              <button type='button' className={styles.removeButton} onClick={() => removePlugin(layout)}>
-                <CloseIcon />
-              </button>
-            )}
+  const pluginList = useMemo(() => {
+    return layoutState.map((layout) => {
+      const Plugin = getPlugin(layout);
+      const isNonSettingPlugin = isEditMode && layout.i !== 'setting';
+      const removeButton = isNonSettingPlugin && (
+        <button type='button' className={styles.removeButton} onClick={() => removePlugin(layout)}>
+          <CloseIcon />
+        </button>
+      );
+
+      return (
+        <div key={layout.i} className={styles.block} style={pluginStyle}>
+          <div className={cx(styles.plugins, { [styles.editMode]: isNonSettingPlugin })}>
+            <Plugin layout={layout} />
           </div>
-        );
-      }),
-    [isEditMode, layoutState, pluginStyle, removePlugin]
-  );
-
-  const changeStartHandler = (currentLayout: Layout[]) => {
-    setTempSavedLayout(currentLayout);
-  };
-
-  const layoutChangeHandler = (currentLayout: Layout[]) => {
-    setLayoutState(currentLayout);
-  };
+          {removeButton}
+        </div>
+      );
+    });
+  }, [isEditMode, layoutState, pluginStyle, removePlugin]);
 
   useEffect(() => {
     const isOverflowed = layoutState.find((layout) => layout.h + layout.y > 10);
@@ -106,11 +90,7 @@ const CustomBoard = () => {
     <div>
       {isEditMode && <ToolBox items={toolBoxState || []} />}
       <ReactGridLayout
-        style={{
-          width: '80vw',
-          height: '90vh',
-          opacity: isEditMode ? 0.75 : 1,
-        }}
+        style={layoutStyle}
         cols={COLUMNS}
         isBounded
         isDraggable={isEditMode}
@@ -121,7 +101,7 @@ const CustomBoard = () => {
         onResizeStart={changeStartHandler}
         onLayoutChange={layoutChangeHandler}
       >
-        {dom}
+        {pluginList}
       </ReactGridLayout>
     </div>
   );
