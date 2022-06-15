@@ -14,8 +14,6 @@ interface IProps {
 const Dropdown = ({ optionValue, optionArray, setOption }: IProps) => {
   const [isOptionOpened, setIsOptionOpened] = useState(false);
 
-  const arrowStyle = { transform: isOptionOpened ? '' : 'rotate(180deg)' };
-
   const toggleDropdown = () => {
     setIsOptionOpened((prev) => !prev);
   };
@@ -24,6 +22,8 @@ const Dropdown = ({ optionValue, optionArray, setOption }: IProps) => {
     setOption(e.currentTarget.dataset.value);
     setIsOptionOpened(false);
   };
+
+  const arrowStyle = { transform: isOptionOpened ? '' : 'rotate(180deg)' };
 
   const options = optionArray.map((elem) => (
     <li key={elem} className={styles.option}>

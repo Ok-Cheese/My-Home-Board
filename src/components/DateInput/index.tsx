@@ -15,11 +15,11 @@ const DateInput = ({ value, setValue }: IProps) => {
     setValue(date);
   };
 
-  const formatedDate = value ? dayjs(value).format('YYYY-MM-DD / HH:mm') : '';
-
   const removeValue = () => {
     setValue(null);
   };
+
+  const formatedDate = value ? dayjs(value).format('YYYY-MM-DD / HH:mm') : '';
 
   return (
     <div className={styles.dateInputWrapper}>

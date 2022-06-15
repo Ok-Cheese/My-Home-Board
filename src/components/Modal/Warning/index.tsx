@@ -1,7 +1,7 @@
 import Button from 'components/Button';
 import Modal from '..';
 
-import styles from './warningModal.module.scss';
+import styles from './warning.module.scss';
 
 interface IProps {
   message: string;

@@ -5,7 +5,7 @@ import { Layout } from 'react-grid-layout';
 import { layoutAtom, toolBoxAtom } from 'states/plugin';
 
 import ModalPortal from 'components/Modal/Potal';
-import WarningModal from 'components/Modal/WarningModal';
+import WarningModal from 'components/Modal/Warning';
 
 import styles from './toolboxItem.module.scss';
 import _ from 'lodash';
