@@ -15,14 +15,14 @@ const totalPlugins: Layout[] = [
   { i: 'github', w: 4, h: 3, x: 0, y: 0, minW: 4, minH: 3, resizeHandles: ['se', 'sw', 'nw'] },
 ];
 
-const initailLayout: Layout[] = [
+const initialLayoutList: Layout[] = [
   { i: 'search', w: 8, h: 1, x: 0, y: 0, maxH: 1, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'setting', w: 2, h: 1, x: 8, y: 0, resizeHandles: ['se', 'sw', 'nw'] },
 ];
 
-const storedLayout: Layout[] = store.get('layout');
-const defaultLayout = storedLayout || initailLayout;
-const idOfLayout = defaultLayout.map((layout) => layout.i);
+const storedLayoutList: Layout[] = store.get('layout');
+const defaultLayoutList = storedLayoutList || initialLayoutList;
+const idOfLayout = defaultLayoutList.map((layout) => layout.i);
 const toolBoxDefault = totalPlugins.filter(({ i }) => !idOfLayout.find((id) => id === i));
 
 export const toolBoxAtom = atom<Layout[]>({
@@ -32,7 +32,7 @@ export const toolBoxAtom = atom<Layout[]>({
 
 export const layoutAtom = atom<Layout[]>({
   key: '#layoutAtom',
-  default: defaultLayout,
+  default: defaultLayoutList,
 });
 
 export const isEditModeAtom = atom<boolean>({
