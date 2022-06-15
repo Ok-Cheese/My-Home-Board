@@ -1,10 +1,8 @@
 import { ReactNode } from 'react';
-import styles from './modal.module.scss';
 
-interface ISize {
-  width: string;
-  height: string;
-}
+import { ISize } from 'types/type';
+
+import styles from './modal.module.scss';
 
 interface IProps {
   children: ReactNode;

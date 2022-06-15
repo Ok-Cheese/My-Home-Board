@@ -1,7 +1,8 @@
 import { useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 
-import { TDateFormat, tempSettingAtom, TTimeFormat } from 'states/settings';
+import { tempSettingAtom } from 'states/settings';
+import { TDateFormat, TTimeFormat } from 'types/type';
 
 import Dropdown from 'components/Dropdown';
 

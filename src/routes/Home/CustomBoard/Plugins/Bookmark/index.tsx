@@ -3,7 +3,7 @@ import { Layout } from 'react-grid-layout';
 import Slider from 'react-slick';
 import store from 'store';
 
-import { IBookmark } from './type';
+import { IBookmark } from './type.d';
 import { bookmarkPreset, getBookmarkIcon } from './utils';
 import { AddIcon, CloseIcon, TrashIcon } from 'assets/svgs';
 

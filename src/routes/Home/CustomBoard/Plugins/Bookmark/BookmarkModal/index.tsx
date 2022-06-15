@@ -1,7 +1,7 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { cx } from 'styles';
 
-import { IBookmark } from '../type';
+import { IBookmark } from '../type.d';
 import { getBookmarkIcon, iconIds } from '../utils';
 
 import Input from 'components/Input';

@@ -1,12 +1,9 @@
 import { FormEventHandler, MouseEventHandler, ReactNode } from 'react';
 import { cx } from 'styles';
 
-import styles from './button.module.scss';
+import { ISize } from 'types/type';
 
-interface ISize {
-  width?: string;
-  height?: string;
-}
+import styles from './button.module.scss';
 
 interface IProps {
   type?: 'button' | 'submit';

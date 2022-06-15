@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { HelpIcon, LayoutIcon, SettingIcon } from 'assets/svgs';
 import store from 'store';
 import { cx } from 'styles';
 
 import { isEditModeAtom, layoutAtom } from 'states/plugin';
+import { HelpIcon, LayoutIcon, SettingIcon } from 'assets/svgs';
 
 import ModalPortal from 'components/Modal/Potal';
-import Preference from 'routes/Home/CustomBoard/Plugins/Setting/Preference';
 import WarningModal from 'components/Modal/WarningModal';
+import Preference from 'routes/Home/CustomBoard/Plugins/Setting/Preference';
 
 import styles from './setting.module.scss';
 

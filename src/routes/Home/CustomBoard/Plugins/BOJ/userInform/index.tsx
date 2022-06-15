@@ -2,7 +2,7 @@ import { tierList } from '../utiles';
 
 import styles from './userInform.module.scss';
 
-export interface IInform {
+interface IInform {
   tier: number;
   solved: string;
 }

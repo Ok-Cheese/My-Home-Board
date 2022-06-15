@@ -1,5 +1,5 @@
-import { Layout } from 'react-grid-layout';
 import { atom } from 'recoil';
+import { Layout } from 'react-grid-layout';
 import store from 'store';
 
 const totalPlugins: Layout[] = [
