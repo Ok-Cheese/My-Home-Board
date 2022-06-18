@@ -5,16 +5,16 @@ import styles from './warning.module.scss';
 
 interface IProps {
   message: string;
-  closeEvent: () => void;
+  closeModal: () => void;
 }
 
-const WarningModal = ({ message, closeEvent }: IProps) => {
+const WarningModal = ({ message, closeModal }: IProps) => {
   const confirmHandler = () => {
-    closeEvent();
+    closeModal();
   };
 
   return (
-    <Modal>
+    <Modal closeModal={closeModal}>
       <div className={styles.warning}>
         <p className={styles.message}>{message}</p>
         <Button onClick={confirmHandler}>확인</Button>

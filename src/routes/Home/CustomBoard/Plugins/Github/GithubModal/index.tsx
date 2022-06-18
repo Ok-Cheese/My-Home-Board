@@ -25,7 +25,7 @@ const GithubModal = ({ userId, setUserId, closeModal }: IProps) => {
   };
 
   return (
-    <Modal>
+    <Modal closeModal={closeModal}>
       <form className={styles.githubForm} onSubmit={submitHandler}>
         <div className={styles.inputWrapper}>
           <p>Github ID</p>

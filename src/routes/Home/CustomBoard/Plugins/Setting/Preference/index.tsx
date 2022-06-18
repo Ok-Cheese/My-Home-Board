@@ -65,7 +65,7 @@ const Preference = ({ closeModal }: IProps) => {
   ));
 
   return (
-    <Modal>
+    <Modal closeModal={closeModal}>
       <div className={styles.preference}>
         <div className={styles.sidebar}>{sidebarMenu}</div>
         <div className={styles.main}>

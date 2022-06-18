@@ -25,7 +25,7 @@ const BOJModal = ({ userId, setUserId, closeModal }: IProps) => {
   };
 
   return (
-    <Modal>
+    <Modal closeModal={closeModal}>
       <form className={styles.bojForm} onSubmit={submitHandler}>
         <div className={styles.inputWrapper}>
           <p>백준 ID</p>

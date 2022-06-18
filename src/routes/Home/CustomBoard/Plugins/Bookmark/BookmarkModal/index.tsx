@@ -52,7 +52,7 @@ const BoomarkModal = ({ setBookmarkList, closeModal }: IProps) => {
   const isInputValid = Boolean(selectedIcon && bookmarkName && bookmarkUrl);
 
   return (
-    <Modal>
+    <Modal closeModal={closeModal}>
       <form className={styles.bookmarkForm} onSubmit={submitHandler}>
         <div className={styles.selectIcon}>{iconList}</div>
         <div className={styles.inputWrapper}>

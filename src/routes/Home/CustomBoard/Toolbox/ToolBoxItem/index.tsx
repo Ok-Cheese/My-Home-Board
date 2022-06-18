@@ -62,7 +62,7 @@ const ToolBoxItem = ({ item }: IProps) => {
         {item.i}
       </button>
       <ModalPortal>
-        {isModalOpened && <WarningModal message='공간을 확보해주세요.' closeEvent={closeModal} />}
+        {isModalOpened && <WarningModal message='공간을 확보해주세요.' closeModal={closeModal} />}
       </ModalPortal>
     </div>
   );

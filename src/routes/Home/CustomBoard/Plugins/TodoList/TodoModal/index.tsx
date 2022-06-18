@@ -69,7 +69,7 @@ const TodoModal = ({ type, todoList, setTodoList, editTarget, closeModal }: IPro
   };
 
   return (
-    <Modal>
+    <Modal closeModal={closeModal}>
       <form className={styles.todoForm} onSubmit={submitHandler}>
         <div className={styles.inputWrapper}>
           <p>내용</p>

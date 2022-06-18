@@ -64,7 +64,7 @@ const Setting = () => {
       <ModalPortal>
         {isSettingOpened && <Preference closeModal={closeSetting} />}
         {isWarningModalOpened && (
-          <WarningModal message='외부로 벗어난 플러그인이 있습니다. 다시 확인해주세요' closeEvent={closeWarning} />
+          <WarningModal message='외부로 벗어난 플러그인이 있습니다. 다시 확인해주세요' closeModal={closeWarning} />
         )}
       </ModalPortal>
     </div>
