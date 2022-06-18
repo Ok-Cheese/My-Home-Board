@@ -26,6 +26,8 @@ const SearchBar = () => {
 
     const searchUrl = searchType === 'google' ? GOOGLE : YOUTUBE;
     window.open(`${searchUrl}${searchInput}`, '_blank');
+
+    setSearchInput('');
   };
 
   const toggleSearchType = () => {
@@ -48,6 +50,7 @@ const SearchBar = () => {
         type='text'
         className={cx({ [styles.searchYoutube]: searchType === 'youtube' })}
         placeholder={placeholder}
+        value={searchInput}
         onChange={inputChangeHandler}
       />
       <Button type='submit' isIcon size={iconSize}>
