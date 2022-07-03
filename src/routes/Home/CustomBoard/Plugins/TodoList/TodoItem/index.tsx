@@ -29,7 +29,7 @@ const TodoItem = ({ item, index, onItemClick, setTodoList }: IProps) => {
   };
 
   return (
-    <li key={`${item.content}`}>
+    <li key={`${item.content}`} className={styles.todoItem}>
       <button type='button' className={styles.todoCheck} onClick={checkItemHandler}>
         {item.complete ? <CheckCircleIcon /> : <CircleIcon />}
       </button>
