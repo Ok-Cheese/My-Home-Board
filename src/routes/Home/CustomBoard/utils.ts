@@ -10,6 +10,7 @@ import SearchBar from './Plugins/SearchBar';
 import Bookmark from './Plugins/Bookmark';
 import Dday from './Plugins/Dday';
 import Github from './Plugins/Github';
+import BoxOffice from './Plugins/BoxOffice';
 
 export const getPlugin = (layout: Layout) => {
   let plugin;
@@ -25,6 +26,7 @@ export const getPlugin = (layout: Layout) => {
     todoList: TodoList,
     dday: Dday,
     github: Github,
+    boxOffice: BoxOffice,
   }[layout.i];
 
   if (!plugin) plugin = 'Unknown';
