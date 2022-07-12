@@ -49,7 +49,7 @@ const Github = () => {
         <GitHubIcon />
         <p>Github Commits</p>
       </div>
-      <Button isIcon onClick={openModal}>
+      <Button onClick={openModal}>
         <EditIcon />
       </Button>
       <div className={styles.contentWrapper}>{content}</div>

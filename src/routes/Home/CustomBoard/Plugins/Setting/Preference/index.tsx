@@ -71,10 +71,10 @@ const Preference = ({ closeModal }: IProps) => {
         <div className={styles.main}>
           <div className={styles.content}>{decideContent(currentMenu)}</div>
           <div className={styles.buttonWrapper}>
-            <Button size={{ width: '50%' }} type='button' onClick={confirmSetting}>
+            <Button size='fill' type='button' onClick={confirmSetting}>
               확인
             </Button>
-            <Button size={{ width: '50%' }} type='button' onClick={cancelSetting}>
+            <Button size='fill' type='button' onClick={cancelSetting}>
               취소
             </Button>
           </div>

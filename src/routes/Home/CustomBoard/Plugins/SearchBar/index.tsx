@@ -7,6 +7,7 @@ import { GoogleIcon, YoutubeIcon } from 'assets/svgs/presets';
 import Button from 'components/Button';
 
 import styles from './searchBar.module.scss';
+import IconButton from 'components/IconButton';
 
 type TSearchSite = 'google' | 'youtube';
 
@@ -43,9 +44,9 @@ const SearchBar = () => {
 
   return (
     <form className={styles.searchBar} onSubmit={serachSubmitHandler}>
-      <Button type='button' isIcon size={iconSize} onClick={toggleSearchType}>
+      <IconButton type='button' size='vertical' onClick={toggleSearchType}>
         {typeButtonIcon}
-      </Button>
+      </IconButton>
       <input
         type='text'
         className={cx({ [styles.searchYoutube]: searchType === 'youtube' })}
@@ -53,9 +54,9 @@ const SearchBar = () => {
         value={searchInput}
         onChange={inputChangeHandler}
       />
-      <Button type='submit' isIcon size={iconSize}>
+      <IconButton type='submit' size='vertical'>
         <SearchIcon />
-      </Button>
+      </IconButton>
     </form>
   );
 };

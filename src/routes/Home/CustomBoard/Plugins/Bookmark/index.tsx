@@ -86,10 +86,10 @@ const Bookmarks = ({ layout }: IProps) => {
     <div className={styles.bookmark}>
       <Slider {...settings}>{sliderItems}</Slider>
       <div className={styles.buttonWrapper}>
-        <Button type='button' isIcon onClick={openModal}>
+        <Button type='button' onClick={openModal}>
           <AddIcon />
         </Button>
-        <Button type='button' isIcon onClick={toggleRemoveMode}>
+        <Button type='button' onClick={toggleRemoveMode}>
           <TrashIcon />
         </Button>
       </div>
