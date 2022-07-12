@@ -73,13 +73,13 @@ const TimeSetting = () => {
     <div className={styles.setting}>
       <div className={styles.option}>
         <p>Language</p>
-        <Dropdown optionValue={tempSetting.timeLocale} optionArray={['ko', 'en']} setOption={setLocale} />
+        <Dropdown optionValue={tempSetting.timeLocale} optionList={['ko', 'en']} setOption={setLocale} />
       </div>
       <div className={styles.option}>
         <p>Date Format</p>
         <Dropdown
           optionValue={dayjs().format(tempSetting.dateType)}
-          optionArray={dateFomats}
+          optionList={dateFomats}
           setOption={setDateFormat}
         />
       </div>
@@ -87,7 +87,7 @@ const TimeSetting = () => {
         <p>Time Format</p>
         <Dropdown
           optionValue={dayjs().format(tempSetting.timeType)}
-          optionArray={timeFomats}
+          optionList={timeFomats}
           setOption={setTimeFormat}
         />
       </div>

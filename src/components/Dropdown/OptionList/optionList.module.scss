@@ -1,0 +1,28 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/units';
+@use '/src/styles/mixins/flexbox';
+
+.optionList {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background: colors.$BG_INPUT;
+  border-radius: 5px;
+
+  .option {
+    padding: units.$PADDING_INPUT;
+    background: colors.$GRAYD;
+
+    &:hover {
+      background: colors.$GRAYE;
+    }
+
+    .clickable {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

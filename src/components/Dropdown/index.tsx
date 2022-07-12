@@ -1,17 +1,20 @@
 import { SetStateAction, MouseEvent, useState } from 'react';
 import { SetterOrUpdater } from 'recoil';
+import cx from 'classnames';
 
 import { ArrowIcon } from 'assets/svgs';
+
+import OptionList from './OptionList';
 
 import styles from './dropdown.module.scss';
 
 interface IProps {
   optionValue: string;
-  optionArray: string[];
+  optionList: string[];
   setOption: SetStateAction<any> | SetterOrUpdater<any>;
 }
 
-const Dropdown = ({ optionValue, optionArray, setOption }: IProps) => {
+const Dropdown = ({ optionValue, optionList, setOption }: IProps) => {
   const [isOptionOpened, setIsOptionOpened] = useState(false);
 
   const toggleDropdown = () => {
@@ -20,27 +23,14 @@ const Dropdown = ({ optionValue, optionArray, setOption }: IProps) => {
 
   const selectOptionHandler = (e: MouseEvent<HTMLButtonElement>) => {
     setOption(e.currentTarget.dataset.value);
-    setIsOptionOpened(false);
   };
 
-  const arrowStyle = { transform: isOptionOpened ? '' : 'rotate(180deg)' };
-
-  const options = optionArray.map((elem) => (
-    <li key={elem} className={styles.option}>
-      <button type='button' data-value={elem} onClick={selectOptionHandler}>
-        {elem}
-      </button>
-    </li>
-  ));
-
   return (
-    <div className={styles.dropdown}>
-      <button type='button' className={styles.selected} onClick={toggleDropdown}>
-        <span>{optionValue}</span>
-        <ArrowIcon style={arrowStyle} />
-      </button>
-      {isOptionOpened && <ul className={styles.options}>{options}</ul>}
-    </div>
+    <button type='button' className={styles.dropdown} onClick={toggleDropdown}>
+      {optionValue}
+      <ArrowIcon className={cx(styles.arrow, { [styles.reverseArrow]: isOptionOpened })} />
+      {isOptionOpened && <OptionList optionList={optionList} onSelect={selectOptionHandler} />}
+    </button>
   );
 };
 
