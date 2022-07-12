@@ -1,25 +1,25 @@
-import { FormEventHandler, MouseEventHandler, ReactNode } from 'react';
-import { cx } from 'styles';
-
-import { ISize } from 'types/type';
+import { FormEventHandler, MouseEventHandler, ReactNode, useMemo } from 'react';
 
 import styles from './button.module.scss';
 
 interface IProps {
   type?: 'button' | 'submit';
-  isIcon?: boolean;
-  size?: ISize;
+  size?: 'auto' | 'fill' | string;
   disabled?: boolean;
   children: ReactNode;
   onClick?: MouseEventHandler | FormEventHandler;
 }
 
-const Button = ({ type, isIcon, disabled, size, children, onClick }: IProps) => {
+const Button = ({ type, disabled, size, children, onClick }: IProps) => {
+  const buttonStyle = useMemo(() => {
+    return { width: size === 'fill' ? '100%' : size };
+  }, [size]);
+
   return (
     <button
       type={type === 'submit' ? 'submit' : 'button'}
-      className={cx({ [styles.button]: !isIcon }, { [styles.icon]: isIcon })}
-      style={size}
+      className={styles.button}
+      style={buttonStyle}
       disabled={disabled}
       onClick={onClick}
     >
