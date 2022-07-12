@@ -1,6 +1,5 @@
 import { Layout } from 'react-grid-layout';
 
-import BOJ from './Plugins/BOJ';
 import Time from './Plugins/Time';
 import ClockPlugin from './Plugins/ClockPlugin';
 import Setting from './Plugins/Setting';
@@ -16,7 +15,6 @@ export const getPlugin = (layout: Layout) => {
   let plugin;
 
   plugin = {
-    BOJ,
     search: SearchBar,
     bookmark: Bookmark,
     time: Time,

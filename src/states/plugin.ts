@@ -3,7 +3,6 @@ import { Layout } from 'react-grid-layout';
 import store from 'store';
 
 const totalPlugins: Layout[] = [
-  { i: 'BOJ', w: 2, h: 2, x: 0, y: 0, minW: 2, minH: 2, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'search', w: 3, h: 1, x: 0, y: 0, maxH: 1, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'bookmark', w: 3, h: 3, x: 0, y: 0, minW: 2, minH: 3, resizeHandles: ['se', 'sw', 'nw'] },
   { i: 'setting', w: 1, h: 1, x: 0, y: 0, resizeHandles: [] },
