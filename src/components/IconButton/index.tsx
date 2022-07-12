@@ -6,10 +6,11 @@ interface IButtonStyle {
   width: string;
   height: string;
   position: 'static' | 'relative' | 'absolute';
-  top: string;
-  right: string;
-  bottom: string;
-  left: string;
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  transform?: string;
 }
 
 interface IPosition {
@@ -32,10 +33,6 @@ const IconButton = ({ children, onClick, type, size, position }: IProps) => {
     width: 'auto',
     height: 'auto',
     position: 'static',
-    top: '',
-    right: '',
-    bottom: '',
-    left: '',
   });
 
   useEffect(() => {
@@ -68,6 +65,7 @@ const IconButton = ({ children, onClick, type, size, position }: IProps) => {
         right: position.right || '',
         bottom: position.bottom || '',
         left: position.left || '',
+        transform: 'translate(-50%, -50%)',
       };
     });
   }, [position]);
