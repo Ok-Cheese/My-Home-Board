@@ -4,14 +4,11 @@ import { cx } from 'styles';
 import { SearchIcon } from 'assets/svgs';
 import { GoogleIcon, YoutubeIcon } from 'assets/svgs/presets';
 
-import Button from 'components/Button';
+import IconButton from 'components/Icon';
 
 import styles from './searchBar.module.scss';
-import IconButton from 'components/IconButton';
 
 type TSearchSite = 'google' | 'youtube';
-
-const iconSize = { height: '100%' };
 
 const GOOGLE = 'https://google.com/search?q=';
 const YOUTUBE = 'https://www.youtube.com/results?search_query=';

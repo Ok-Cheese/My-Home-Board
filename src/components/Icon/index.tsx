@@ -1,6 +1,6 @@
 import { FormEventHandler, MouseEventHandler, ReactNode, useEffect, useState } from 'react';
 
-import styles from './iconButton.module.scss';
+import styles from './icon.module.scss';
 
 interface IButtonStyle {
   width: string;

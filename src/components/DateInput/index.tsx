@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 import DatePicker from 'react-datepicker';
 import dayjs from 'dayjs';
 
-import IconButton from 'components/IconButton';
+import IconButton from 'components/Icon';
 
 import styles from './dateInput.module.scss';
 
