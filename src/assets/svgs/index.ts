@@ -13,3 +13,4 @@ export { ReactComponent as TrashIcon } from './trash.svg';
 export { ReactComponent as EditIcon } from './edit.svg';
 export { ReactComponent as LayoutIcon } from './layout.svg';
 export { ReactComponent as HelpIcon } from './help.svg';
+export { ReactComponent as WarningIcon } from './warning.svg';
