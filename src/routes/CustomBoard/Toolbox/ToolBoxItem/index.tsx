@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { Layout } from 'react-grid-layout';
+import _ from 'lodash';
 
 import { layoutAtom, toolBoxAtom } from 'states/plugin';
 
@@ -8,7 +9,6 @@ import ModalPortal from 'components/Modal/Potal';
 import WarningModal from 'components/Modal/Warning';
 
 import styles from './toolboxItem.module.scss';
-import _ from 'lodash';
 
 interface IProps {
   item: Layout;
@@ -19,21 +19,25 @@ const ToolBoxItem = ({ item }: IProps) => {
   const [layoutState, setLayoutState] = useRecoilState<Layout[]>(layoutAtom);
   const [toolBoxState, setToolBoxState] = useRecoilState<Layout[]>(toolBoxAtom);
 
-  const filledSpace = Array(10).fill(0);
-  layoutState.forEach((layout) => {
-    for (let i = layout.x; i < layout.x + layout.w; i += 1) {
-      filledSpace[i] += layout.h;
-    }
-  });
+  const filledSpace = useMemo(() => {
+    const space = Array(10).fill(0);
+    layoutState.forEach((layout) => {
+      for (let i = layout.x; i < layout.x + layout.w; i += 1) {
+        space[i] += layout.h;
+      }
+    });
+
+    return space;
+  }, [layoutState]);
 
   const addItemToLayout = () => {
-    const init = { line: -1, sum: 0, isSpaceFound: false };
+    const init = { line: -1, width: 0, isSpaceFound: false };
     const emptySpace = filledSpace.reduce((acc, height, index) => {
       if (acc.isSpaceFound) return acc;
       if (height + item.h > 10) return init;
 
-      const isSpaceExist = acc.sum + 1 >= item.w;
-      return { line: index, sum: acc.sum + 1, isSpaceFound: isSpaceExist };
+      const isSpaceExist = acc.width + 1 >= item.w;
+      return { line: index, width: acc.width + 1, isSpaceFound: isSpaceExist };
     }, init);
 
     if (!emptySpace.isSpaceFound) {
@@ -41,14 +45,13 @@ const ToolBoxItem = ({ item }: IProps) => {
       return;
     }
 
-    const newLayout = _.cloneDeep(toolBoxState.find(({ i }) => i === item.i));
+    const itemToAdd = _.cloneDeep(toolBoxState.find(({ i }) => i === item.i));
 
-    setToolBoxState((prev) => [...prev.filter(({ i }) => i !== item.i)]);
-
-    if (newLayout) {
-      newLayout.x = emptySpace.line - item.w + 1;
-      newLayout.y = filledSpace[emptySpace.line];
-      setLayoutState((prev) => [...prev, newLayout]);
+    if (itemToAdd) {
+      itemToAdd.x = emptySpace.line + 1 - item.w;
+      itemToAdd.y = filledSpace[emptySpace.line];
+      setLayoutState((prev) => [...prev, itemToAdd]);
+      setToolBoxState((prev) => [...prev.filter(({ i }) => i !== item.i)]);
     }
   };
 
