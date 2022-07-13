@@ -37,11 +37,11 @@ const BookmarkItem = ({ bookmark, bookmarkList, setBookmarkList, index, isRemove
   return (
     <div key={bookmark.name} className={styles.wrapper}>
       <div className={styles.bookmarkIcon}>
-        <Icon size='75px' onClick={openBookmark}>
+        <Icon size='100px' onClick={openBookmark}>
           <BookmarkIcon />
         </Icon>
-        <p className={styles.name}>{bookmark.name}</p>
       </div>
+      <p className={styles.name}>{bookmark.name}</p>
       {removeIcon}
     </div>
   );
