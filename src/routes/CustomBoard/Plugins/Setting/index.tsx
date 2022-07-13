@@ -8,7 +8,7 @@ import { HelpIcon, LayoutIcon, SettingIcon } from 'assets/svgs';
 
 import ModalPortal from 'components/Modal/Potal';
 import WarningModal from 'components/Modal/Warning';
-import Preference from 'routes/Home/CustomBoard/Plugins/Setting/Preference';
+import Preference from './Preference';
 
 import styles from './setting.module.scss';
 

@@ -6,10 +6,10 @@ import store from 'store';
 
 import { settingAtom, tempSettingAtom } from 'states/settings';
 
-import GeneralSetting from './menu/General';
-import TimeSetting from './menu/Time';
 import Button from 'components/Button';
-import Modal from '../../../../../../components/Modal';
+import Modal from 'components/Modal';
+import TimeSetting from './menu/Time';
+import GeneralSetting from './menu/General';
 
 import styles from './preference.module.scss';
 
