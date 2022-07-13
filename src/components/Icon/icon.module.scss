@@ -1,9 +1,10 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/constants/units';
 
 .button {
   svg {
-    width: 100%;
-    height: 100%;
+    width: units.$SIZE_ICON;
+    height: units.$SIZE_ICON;
     fill: colors.$SVG_GRAY;
   }
 }
