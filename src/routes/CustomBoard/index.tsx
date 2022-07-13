@@ -61,7 +61,7 @@ const CustomBoard = () => {
 
   return (
     <div>
-      {isEditMode && <ToolBox items={toolBoxState || []} />}
+      {isEditMode && <ToolBox items={toolBoxState} />}
       <ReactGridLayout
         style={layoutStyle}
         cols={COLUMNS}

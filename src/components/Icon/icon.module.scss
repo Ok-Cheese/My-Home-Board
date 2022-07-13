@@ -2,9 +2,12 @@
 @use '/src/styles/constants/units';
 
 .button {
+  width: units.$SIZE_ICON;
+  height: units.$SIZE_ICON;
+
   svg {
-    width: units.$SIZE_ICON;
-    height: units.$SIZE_ICON;
+    width: 100%;
+    height: 100%;
     fill: colors.$SVG_GRAY;
   }
 }

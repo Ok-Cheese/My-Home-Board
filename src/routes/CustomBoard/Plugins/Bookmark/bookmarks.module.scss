@@ -1,77 +1,16 @@
 @use '/src/styles/constants/colors';
 @use '/src/styles/mixins/flexbox';
 
-.bookmark {
-  @include flexbox.flexbox;
+.wrapper {
   width: 100%;
   height: 100%;
 
   .buttonWrapper {
+    @include flexbox.flexbox(between, start);
     position: fixed;
     top: 10px;
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
+    right: 0;
+    width: 85px;
     padding: 0 10px;
-
-    button {
-      width: 24px;
-      height: 24px;
-      margin: 0 5px;
-
-      svg {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-
-  .slider {
-    position: relative;
-    width: 100%;
-    height: 100%;
-
-    .bookmarkBox {
-      position: relative;
-      width: 100%;
-      height: 100%;
-
-      .bookmarkIcon {
-        display: flex !important;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-
-        &:hover {
-          transform: scale(1.2);
-        }
-
-        svg {
-          width: 75%;
-          height: 75%;
-        }
-      }
-
-      .removeIcon {
-        position: absolute;
-        top: 5%;
-        right: 5%;
-        width: 20px;
-        height: 20px;
-        fill: colors.$RED;
-        transform: translate(-50%, -50%);
-
-        &:hover {
-          transform: translate(-50%, -50%) scale(1.2);
-        }
-
-        svg {
-          width: 100%;
-          height: 100%;
-        }
-      }
-    }
   }
 }
