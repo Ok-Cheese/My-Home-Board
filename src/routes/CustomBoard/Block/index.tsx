@@ -24,6 +24,8 @@ interface IProps {
 const Block = ({ layout, isEditMode, setLayout, setToolbox, style, className, children }: IProps, ref: any) => {
   const settings = useRecoilValue(settingAtom);
 
+  const isSettable = isEditMode && layout.i !== 'setting';
+  const Plugin = getPlugin(layout);
   const blockStyle = useMemo(() => {
     return {
       background: `rgba(${hexToRgb(settings.plugin.color)}, ${settings.plugin.opacity / 100})`,
@@ -36,13 +38,12 @@ const Block = ({ layout, isEditMode, setLayout, setToolbox, style, className, ch
     setToolbox((prev) => [...prev, layout]);
   }, [layout, setLayout, setToolbox]);
 
-  const Plugin = getPlugin(layout);
   return (
     <div key={layout.i} className={cx(styles.block, className)} style={{ ...style, ...blockStyle }} ref={ref}>
-      <div className={cx(styles.plugins, { [styles.unclickable]: isEditMode })}>
+      <div className={cx(styles.plugins, { [styles.unclickable]: isSettable })}>
         <Plugin layout={layout} />
       </div>
-      {isEditMode && (
+      {isSettable && (
         <Icon position={{ top: '0', left: '100%' }} onClick={removePlugin}>
           <CloseIcon />
         </Icon>
