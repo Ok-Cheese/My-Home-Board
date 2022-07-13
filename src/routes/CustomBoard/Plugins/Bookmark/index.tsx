@@ -58,7 +58,7 @@ const Bookmarks = ({ layout }: IProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <HorizontalScroll>{bookmarkItems}</HorizontalScroll>
+      <HorizontalScroll reverseScroll>{bookmarkItems}</HorizontalScroll>
       <div className={styles.buttonWrapper}>
         <Icon size='30px' onClick={openModal}>
           <AddIcon />
