@@ -1,14 +1,15 @@
 @use 'src/styles/constants/_colors';
+@use '/src/styles/constants/units';
 @use 'src/styles/mixins/flexbox';
 
-.loadingWrapper {
+.wrapper {
   @include flexbox.flexbox;
   width: 100%;
   height: 100%;
 
   .loading {
-    width: 50px;
-    height: 50px;
+    width: units.$SIZE_ICON;
+    height: units.$SIZE_ICON;
     border: 7px solid colors.$GRAYD;
     border-top: 7px solid colors.$GRAY6;
     border-radius: 50%;
