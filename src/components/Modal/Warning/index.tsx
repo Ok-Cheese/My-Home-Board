@@ -1,5 +1,8 @@
-import Button from 'components/Button';
+import { WarningIcon } from 'assets/svgs';
+
 import Modal from '..';
+import Icon from 'components/Icon';
+import Button from 'components/Button';
 
 import styles from './warning.module.scss';
 
@@ -16,8 +19,13 @@ const WarningModal = ({ message, closeModal }: IProps) => {
   return (
     <Modal closeModal={closeModal}>
       <div className={styles.warning}>
+        <Icon size='50px'>
+          <WarningIcon />
+        </Icon>
         <p className={styles.message}>{message}</p>
-        <Button onClick={confirmHandler}>확인</Button>
+        <Button size='fill' onClick={confirmHandler}>
+          확인
+        </Button>
       </div>
     </Modal>
   );

@@ -4,10 +4,10 @@
 .warning {
   @include flexbox.flexbox;
   flex-direction: column;
-  width: 400px;
-  height: 200px;
+  padding: 20px 40px;
 
-  p {
-    margin-bottom: 50px;
+  .message {
+    margin: 5px 0 20px;
+    font-size: 16px;
   }
 }
