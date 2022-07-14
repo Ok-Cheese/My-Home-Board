@@ -31,7 +31,7 @@ const Weather = ({ layout }: IProps) => {
     setCoords(currentCoords);
   });
 
-  const { data, isLoading, isError } = useQuery(['getWeather', coords], () => {
+  const { data, isLoading } = useQuery(['getWeather', coords], () => {
     if (!coords) {
       setIsNoWeatherData(true);
       return null;
@@ -44,8 +44,8 @@ const Weather = ({ layout }: IProps) => {
     if (data) return <WeatherContent data={data.data} layout={layout} />;
     if (isLoading) return <Loading size='30px' />;
 
-    return <NoCoords getCoords={getCoords} isError={isError} />;
-  }, [layout, data, isLoading, isError]);
+    return <NoCoords getCoords={getCoords} />;
+  }, [layout, data, isLoading]);
 
   return <div className={styles.weather}>{contents}</div>;
 };

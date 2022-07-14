@@ -1,6 +1,8 @@
 import { Layout } from 'react-grid-layout';
-import { getWeatherIcon } from '../utils';
+
 import { IWeather } from '../weather';
+import { getWeatherIcon } from '../utils';
+
 import styles from './weatherContent.module.scss';
 
 interface IProps {
@@ -12,19 +14,19 @@ const WeatherContent = ({ data, layout }: IProps) => {
   const temperature = Math.round(data.main.temp * 10) / 10;
   const WeatherIcon = getWeatherIcon(data.weather[0].icon);
 
-  const pulginStyles = {
-    city: { fontSize: `${Math.min(layout.w, layout.h) * 8}px` },
-    temperature: { fontSize: `${Math.min(layout.w, layout.h) * 12}px` },
+  const weatherStyles = {
+    city: { fontSize: `${Math.min(layout.w, layout.h) * 10}px` },
+    temperature: { fontSize: `${Math.min(layout.w, layout.h) * 16}px` },
   };
 
   return (
-    <div className={styles.content}>
-      <WeatherIcon />
-      <div className={styles.inform}>
-        <p style={pulginStyles.city} className={styles.city}>
+    <div className={styles.wrapper}>
+      <WeatherIcon className={styles.icon} />
+      <div className={styles.content}>
+        <p style={weatherStyles.city} className={styles.item}>
           {data.name}
         </p>
-        <p style={pulginStyles.temperature} className={styles.temperature}>
+        <p style={weatherStyles.temperature} className={styles.item}>
           {temperature}°C
         </p>
       </div>

@@ -1,23 +1,18 @@
+import Button from 'components/Button';
+
 import styles from './noCoords.module.scss';
 
 interface IProps {
-  isError: boolean;
   getCoords: () => void;
 }
 
-const NoCoords = ({ isError, getCoords }: IProps) => {
-  const reloadCoords = () => {
-    getCoords();
-  };
-
-  const content = <p>{isError ? 'Error!' : '위치를 확인할 수 없습니다.'}</p>;
-
+const NoCoords = ({ getCoords }: IProps) => {
   return (
-    <div className={styles.noCoords}>
-      {content}
-      <button type='button' onClick={reloadCoords}>
+    <div className={styles.wrapper}>
+      <p className={styles.message}>위치를 확인할 수 없습니다.</p>
+      <Button size='auto' onClick={getCoords}>
         재확인
-      </button>
+      </Button>
     </div>
   );
 };
