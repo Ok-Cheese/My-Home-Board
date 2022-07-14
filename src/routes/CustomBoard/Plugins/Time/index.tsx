@@ -6,16 +6,14 @@ import dayjs from 'dayjs';
 import { settingAtom } from 'states/settings';
 
 import styles from './time.module.scss';
-import 'dayjs/locale/ko';
-import 'dayjs/locale/en';
 
 interface IProps {
   layout: Layout;
 }
 
 const Time = ({ layout }: IProps) => {
-  const setting = useRecoilValue(settingAtom);
   const [now, setNow] = useState(dayjs());
+  const setting = useRecoilValue(settingAtom);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,24 +23,20 @@ const Time = ({ layout }: IProps) => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    dayjs.locale(setting.timeLocale);
-  }, [setting.timeLocale]);
-
   const currentTime = {
     date: now.format(setting.dateType),
     time: now.format(setting.timeType),
   };
 
   const pulginStyles = {
-    date: { fontSize: `${Math.min(layout.w, layout.h) * 10}px` },
-    time: { fontSize: `${Math.min(layout.w, layout.h) * 20}px` },
+    date: { fontSize: `${Math.min(layout.w, layout.h) * 12}px` },
+    time: { fontSize: `${Math.min(layout.w, layout.h) * 24}px` },
   };
 
   return (
-    <div className={styles.today}>
-      <p className={styles.date} style={pulginStyles.date}>{`${currentTime.date}`}</p>
-      <p className={styles.time} style={pulginStyles.time}>{`${currentTime.time}`}</p>
+    <div className={styles.wrapper}>
+      <p style={pulginStyles.date}>{`${currentTime.date}`}</p>
+      <p style={pulginStyles.time}>{`${currentTime.time}`}</p>
     </div>
   );
 };

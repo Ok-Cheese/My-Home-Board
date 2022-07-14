@@ -1,20 +1,9 @@
-@use 'src/styles/constants/colors';
 @use 'src/styles/mixins/flexbox';
 
-.today {
-  display: flex;
+.wrapper {
+  @include flexbox.flexbox;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
   height: 100%;
-  padding: 20px;
-
-  p {
-    width: 100%;
-    margin: 5px;
-    text-align: center;
-  }
 
   .time {
     font-weight: 600;
