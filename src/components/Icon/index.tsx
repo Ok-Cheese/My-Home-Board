@@ -30,8 +30,8 @@ interface IProps {
 
 const IconButton = ({ children, onClick, type, size, position }: IProps) => {
   const [buttonStyle, setButtonStyle] = useState<IButtonStyle>({
-    width: 'auto',
-    height: 'auto',
+    width: '20px',
+    height: '20px',
     position: 'static',
   });
 
@@ -50,7 +50,7 @@ const IconButton = ({ children, onClick, type, size, position }: IProps) => {
     }
 
     setButtonStyle((prev) => {
-      return { ...prev, widht: size, height: size };
+      return { ...prev, width: size, height: size };
     });
   }, [size]);
 
