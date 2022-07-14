@@ -21,7 +21,10 @@ interface IProps {
   children?: ReactNode[];
 }
 
-const Block = ({ layout, isEditMode, setLayout, setToolbox, style, className, children }: IProps, ref: any) => {
+const Block = (
+  { layout, isEditMode, setLayout, setToolbox, style, className, children, ...rest }: IProps,
+  ref: any
+) => {
   const settings = useRecoilValue(settingAtom);
 
   const isSettable = isEditMode && layout.i !== 'setting';
@@ -39,7 +42,7 @@ const Block = ({ layout, isEditMode, setLayout, setToolbox, style, className, ch
   }, [layout, setLayout, setToolbox]);
 
   return (
-    <div key={layout.i} className={cx(styles.block, className)} style={{ ...style, ...blockStyle }} ref={ref}>
+    <div key={layout.i} className={cx(styles.block, className)} style={{ ...style, ...blockStyle }} {...rest} ref={ref}>
       <div className={cx(styles.plugins, { [styles.unclickable]: isSettable })}>
         <Plugin layout={layout} />
       </div>
