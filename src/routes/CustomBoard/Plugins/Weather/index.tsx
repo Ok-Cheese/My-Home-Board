@@ -5,7 +5,6 @@ import { useQuery } from 'react-query';
 import store from 'store';
 
 import { ICoords } from './weather';
-import { ReloadIcon } from 'assets/svgs';
 import { getCoords, getWeahterData } from './utils';
 
 import NoCoords from './NoCoords';
@@ -22,23 +21,14 @@ const Weather = ({ layout }: IProps) => {
   const [coords, setCoords] = useState<ICoords | null>(null);
   const [, setIsNoWeatherData] = useState(false);
 
-  const updateCoords = async () => {
-    const currentCoords = await getCoords();
-    setCoords(currentCoords);
-  };
-
-  const reloadHandler = () => {
-    store.remove('coordinates');
-    updateCoords();
-  };
-
   useMount(async () => {
     const savedCoords = store.get('coords');
     if (savedCoords) {
       setCoords(savedCoords);
     }
 
-    updateCoords();
+    const currentCoords = await getCoords();
+    setCoords(currentCoords);
   });
 
   const { data, isLoading, isError } = useQuery(['getWeather', coords], () => {
@@ -50,24 +40,14 @@ const Weather = ({ layout }: IProps) => {
     return getWeahterData(coords);
   });
 
-  const loadingSize = `${Math.min(layout.w, layout.h) * 30}px`;
-
   const contents = useMemo(() => {
     if (data) return <WeatherContent data={data.data} layout={layout} />;
-
-    if (isLoading) return <Loading size={loadingSize} />;
+    if (isLoading) return <Loading size='30px' />;
 
     return <NoCoords getCoords={getCoords} isError={isError} />;
-  }, [layout, data, isLoading, loadingSize, isError]);
+  }, [layout, data, isLoading, isError]);
 
-  return (
-    <div className={styles.weather}>
-      {contents}
-      <button className={styles.reload} type='button' onClick={reloadHandler}>
-        <ReloadIcon />
-      </button>
-    </div>
-  );
+  return <div className={styles.weather}>{contents}</div>;
 };
 
 export default Weather;
