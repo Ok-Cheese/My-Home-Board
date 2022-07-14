@@ -17,6 +17,9 @@ const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchType, setSearchType] = useState<TSearchSite>('google');
 
+  const typeButtonIcon = searchType === 'google' ? <GoogleIcon /> : <YoutubeIcon />;
+  const placeholder = searchType === 'google' ? 'Search to Google...' : 'Serach to Youtube...';
+
   const serachSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -36,22 +39,22 @@ const SearchBar = () => {
     setSearchInput(e.currentTarget.value);
   };
 
-  const typeButtonIcon = searchType === 'google' ? <GoogleIcon /> : <YoutubeIcon />;
-  const placeholder = searchType === 'google' ? 'Search to Google...' : 'Serach to Youtube...';
-
   return (
     <form className={styles.searchBar} onSubmit={serachSubmitHandler}>
-      <IconButton type='button' size='vertical' onClick={toggleSearchType}>
+      <IconButton size='auto' onClick={toggleSearchType}>
         {typeButtonIcon}
       </IconButton>
-      <input
-        type='text'
-        className={cx({ [styles.searchYoutube]: searchType === 'youtube' })}
-        placeholder={placeholder}
-        value={searchInput}
-        onChange={inputChangeHandler}
-      />
-      <IconButton type='submit' size='vertical'>
+      <fieldset className={styles.fieldset}>
+        <legend hidden>search input</legend>
+        <input
+          type='text'
+          className={cx({ [styles.youtube]: searchType === 'youtube' })}
+          placeholder={placeholder}
+          value={searchInput}
+          onChange={inputChangeHandler}
+        />
+      </fieldset>
+      <IconButton size='auto' type='submit'>
         <SearchIcon />
       </IconButton>
     </form>

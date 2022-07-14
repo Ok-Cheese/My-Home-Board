@@ -1,34 +1,30 @@
 @use 'src/styles/constants/colors';
+@use 'src/styles/constants/units';
 @use 'src/styles/mixins/flexbox';
 
 .searchBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
+  @include flexbox.flexbox(between, center);
   height: 100%;
-  padding: 0 10px;
+  padding: 5px 10px;
 
-  button {
-    margin: 10px;
-  }
-
-  input {
+  .fieldset {
     width: 90%;
-    height: 70%;
-    padding: 20px;
-    font-size: 16px;
-    background: colors.$WHITE;
-    border: 1px solid colors.$GRAYA;
-    border-radius: 5px;
 
-    &::placeholder {
-      color: colors.$GRAY6;
+    input {
+      width: 100%;
+      padding: units.$FONT_SIZE;
+      background: colors.$GOOGLE_SEARCH;
+      border: 1px solid colors.$GOOGLE_SEARCH_BORDER;
+      border-radius: 5px;
+
+      &::placeholder {
+        color: colors.$GRAYA;
+      }
     }
-  }
 
-  .searchYoutube {
-    background: colors.$YOUTUBE_INPUT;
-    border: 1px solid colors.$YOUTUBE_INPUT_BORDER;
+    .youtube {
+      background: colors.$YOUTUBE_SEARCH;
+      border: 1px solid colors.$YOUTUBE_SEARCH_BORDER;
+    }
   }
 }
