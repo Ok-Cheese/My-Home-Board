@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
   Weather01dIcon,
   Weather01nIcon,
@@ -20,7 +21,7 @@ import {
 } from 'assets/svgs/weather';
 
 interface IWeatherIconList {
-  [prop: string]: any;
+  [prop: string]: FC<React.SVGProps<SVGSVGElement>>;
 }
 
 export const weatherIconList: IWeatherIconList = {
