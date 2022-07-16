@@ -3,7 +3,7 @@ export interface IDday {
   deadline: Date;
 }
 
-export interface IRemain {
+export interface IRemainTime {
   date: string;
   hour: string;
   minute: string;
