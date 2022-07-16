@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Layout } from 'react-grid-layout';
 import store from 'store';
 
-import { calculateRemainTime } from './utlis';
+import { calcRemainTime } from './utlis';
 import { SettingIcon } from 'assets/svgs';
 import { IRemainTime } from './type';
 
@@ -28,11 +28,11 @@ const Dday = ({ layout }: IProps) => {
   useEffect(() => {
     if (dday) {
       const interval = setInterval(() => {
-        setRemainTime(calculateRemainTime(dday.deadline));
+        setRemainTime(calcRemainTime(dday.deadline));
       }, 1000);
 
       store.set('dday', dday);
-      setRemainTime(calculateRemainTime(dday.deadline));
+      setRemainTime(calcRemainTime(dday.deadline));
 
       return () => clearInterval(interval);
     }
