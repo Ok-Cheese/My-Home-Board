@@ -3,13 +3,14 @@
 @use '/src/styles/mixins/flexbox';
 
 .fieldset {
-  position: relative;
   flex-direction: column;
+  width: 100%;
 
   .label {
     width: 100%;
 
     .wrapper {
+      position: relative;
       width: 100%;
       padding: units.$PADDING_INPUT;
       background: colors.$BG_INPUT;

@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import IconButton from 'components/Icon';
 
 import styles from './dateInput.module.scss';
+import './datepicker.css';
 
 interface IProps {
   value?: Date | null;
@@ -30,11 +31,11 @@ const DateInput = ({ value, setValue, label }: IProps) => {
         <span>{label}</span>
         <div className={styles.wrapper}>
           <DatePicker startDate={value || null} value={formatedDate} onChange={changeDate} showTimeInput />
+          <IconButton position={{ top: '50%', right: '10px' }} onClick={removeValue} size='vertical'>
+            <CloseIcon />
+          </IconButton>
         </div>
       </label>
-      <IconButton position={{ top: '50%', right: '10px' }} onClick={removeValue} size='20px'>
-        <CloseIcon />
-      </IconButton>
     </fieldset>
   );
 };
