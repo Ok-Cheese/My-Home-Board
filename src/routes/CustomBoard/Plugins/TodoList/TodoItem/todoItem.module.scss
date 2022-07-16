@@ -1,38 +1,30 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/constants/units';
+@use '/src/styles/mixins/flexbox';
 
 .todoItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 50px;
+  @include flexbox.flexbox(start, center);
+  padding: 0 10px;
   margin: 5px 0;
-  background: colors.$GRAYD;
+  background: colors.$BG_INPUT;
   border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 2%) 1.95px 1.95px 2.6px;
 
-  button {
-    width: 100%;
-    height: 100%;
-  }
+  .content {
+    display: block;
+    flex: 1;
+    height: 50px;
+    margin-left: 16px;
+    overflow-x: hidden;
+    font-size: 16px;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-  .todoCheck {
-    width: 100px;
-    height: 30px;
-
-    svg {
-      height: 100%;
+    &:hover {
+      display: block;
+      overflow-x: auto;
+      text-overflow: clip;
+      white-space: wrap;
     }
   }
-
-  .listContent {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    font-size: 16px;
-  }
-}
-
-.warning {
-  background: red;
 }
