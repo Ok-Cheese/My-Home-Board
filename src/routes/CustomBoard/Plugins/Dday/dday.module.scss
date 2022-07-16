@@ -1,37 +1,9 @@
 @use 'src/styles/constants/colors';
 @use 'src/styles/mixins/flexbox';
 
-.dday {
+.wrapper {
   @include flexbox.flexbox;
   position: relative;
   width: 100%;
   height: 100%;
-
-  .content {
-    @include flexbox.flexbox;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-
-    p {
-      margin: 5px;
-    }
-
-    .date {
-      font-weight: 500;
-    }
-  }
-
-  .openModalButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 20px;
-    height: 20px;
-
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-  }
 }
