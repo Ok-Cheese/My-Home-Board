@@ -19,11 +19,13 @@ const DdayModal = ({ dday, setDday, closeModal }: IProps) => {
   const [title, setTitle] = useState(dday ? dday.title : '');
   const [deadline, setDeadline] = useState(dday ? dday.deadline : null);
 
+  const isDdayValid = Boolean(title && deadline);
+
   const cancelEditHandler = () => {
     closeModal();
   };
 
-  const ddaySubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!title || !deadline) return;
@@ -32,24 +34,20 @@ const DdayModal = ({ dday, setDday, closeModal }: IProps) => {
     closeModal();
   };
 
-  const isDdayValid = Boolean(title && deadline);
-
   return (
     <Modal closeModal={closeModal}>
-      <form className={styles.editForm} onSubmit={ddaySubmitHandler}>
+      <form className={styles.editForm} onSubmit={submitHandler}>
         <div className={styles.inputWrapper}>
-          <p>내용</p>
-          <Input value={title} setValue={setTitle} />
+          <Input label='내용' value={title} setValue={setTitle} />
         </div>
         <div className={styles.inputWrapper}>
-          <p>마감일</p>
-          <DateInput value={deadline} setValue={setDeadline} />
+          <DateInput label='마감일' value={deadline} setValue={setDeadline} />
         </div>
         <div className={styles.buttonWrapper}>
-          <Button type='submit' disabled={!isDdayValid}>
+          <Button type='submit' size='fill' disabled={!isDdayValid}>
             확인
           </Button>
-          <Button type='button' onClick={cancelEditHandler}>
+          <Button size='fill' onClick={cancelEditHandler}>
             취소
           </Button>
         </div>
