@@ -62,9 +62,9 @@ const GradientSlideOption = ({ type }: IProps) => {
 
   const optionName = useMemo(() => {
     return {
-      backgroundAngle: 'Gradient Angle',
-      backgroundPoint: 'Gradient Point',
-      pluginOpacity: 'Opacity',
+      backgroundAngle: '그라디언트 방향',
+      backgroundPoint: '그라디언트 위치',
+      pluginOpacity: '투명도',
     }[type];
   }, [type]);
 

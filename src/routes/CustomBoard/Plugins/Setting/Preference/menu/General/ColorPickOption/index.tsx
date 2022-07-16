@@ -27,10 +27,10 @@ const ColorPickOption = ({ type, target }: IProps) => {
     pluginFont: tempPluginColor.fontColor,
   }[type];
   const pickerName = {
-    backgroundFirst: 'First Color',
-    backgroundSecond: 'Second Color',
-    pluginBackground: 'Color',
-    pluginFont: 'Font Color',
+    backgroundFirst: '1번 색',
+    backgroundSecond: '2번 색',
+    pluginBackground: '배경색',
+    pluginFont: '글자색',
   }[type];
 
   useClickAway(colorRef, () => {

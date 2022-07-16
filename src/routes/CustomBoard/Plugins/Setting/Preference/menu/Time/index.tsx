@@ -34,7 +34,7 @@ const TimeSetting = () => {
   return (
     <div className={styles.setting}>
       <div className={styles.option}>
-        <p>Date Format</p>
+        <p>날짜 형식</p>
         <Dropdown
           optionValue={dayjs().format(tempSetting.dateType)}
           optionList={dateFomats}
@@ -42,7 +42,7 @@ const TimeSetting = () => {
         />
       </div>
       <div className={styles.option}>
-        <p>Time Format</p>
+        <p>시간 형식</p>
         <Dropdown
           optionValue={dayjs().format(tempSetting.timeType)}
           optionList={timeFomats}

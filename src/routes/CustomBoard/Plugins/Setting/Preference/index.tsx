@@ -14,12 +14,11 @@ import GeneralSetting from './menu/General';
 import styles from './preference.module.scss';
 
 type TPreferMenu = 'General' | 'Time';
-
 interface IProps {
   closeModal: () => void;
 }
 
-const sidebarMenuArr: TPreferMenu[] = ['General', 'Time'];
+const sidebarMenuArr = ['일반', 'Time'];
 
 const Preference = ({ closeModal }: IProps) => {
   const [currentMenu, setCurrentMenu] = useState<TPreferMenu>('General');
