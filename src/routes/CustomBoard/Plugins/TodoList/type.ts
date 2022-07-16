@@ -1,7 +1,6 @@
 export interface ITodoItem {
   id: number;
   content: string;
-  deadline: Date | null;
   complete: boolean;
 }
 
