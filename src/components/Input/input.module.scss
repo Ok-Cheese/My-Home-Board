@@ -2,10 +2,19 @@
 @use '/src/styles/constants/units';
 @use '/src/styles/mixins/flexbox';
 
-.input {
+.fieldset {
+  position: relative;
+  flex-direction: column;
   width: 100%;
-  height: units.$HEIGHT_INPUT;
-  padding: units.$PADDING_INPUT;
-  background: colors.$BG_INPUT;
-  border-radius: 5px;
+
+  .label {
+    width: 100%;
+
+    .input {
+      width: 100%;
+      padding: units.$PADDING_INPUT;
+      margin-top: 10px;
+      background: colors.$BG_INPUT;
+    }
+  }
 }
