@@ -46,6 +46,9 @@ const IconButton = ({ children, onClick, type, size, position }: IProps) => {
     }
 
     if (size === 'vertical') {
+      setButtonStyle((prev) => {
+        return { ...prev, height: '100%' };
+      });
       return;
     }
 
