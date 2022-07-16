@@ -2,8 +2,8 @@
 @use '/src/styles/mixins/flexbox';
 
 .button {
-  padding: 5px;
-  margin: 10px;
+  padding: 10px 15px;
+  margin: 5px;
   font-size: 16px;
   font-weight: 500;
   color: colors.$WHITE;
