@@ -2,62 +2,24 @@ import { useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 
 import { tempSettingAtom } from 'states/settings';
-import { TDateFormat, TTimeFormat } from 'types/type';
+import { datePresets, timePresets } from './utils';
 
 import Dropdown from 'components/Dropdown';
 
 import styles from './timeSetting.module.scss';
 
-interface IDatePreset {
-  locale: 'ko' | 'en';
-  format: TDateFormat;
-  ex: string;
-}
-
-interface ITimePreset {
-  locale: 'ko' | 'en' | 'all';
-  format: TTimeFormat;
-  ex: string;
-}
-
-const datePresets: IDatePreset[] = [
-  { locale: 'ko', format: 'MM월 DD일 ddd', ex: dayjs().format('MM월 DD일 ddd') },
-  { locale: 'ko', format: 'MM월 DD일 dddd', ex: dayjs().format('MM월 DD일 dddd') },
-  { locale: 'ko', format: 'YY년 MM월 DD일', ex: dayjs().format('YY년 MM월 DD일') },
-  { locale: 'en', format: 'dddd MMM D', ex: dayjs().format('dddd MMM D') },
-  { locale: 'en', format: 'ddd MM DD', ex: dayjs().format('ddd MM DD') },
-  { locale: 'en', format: 'MM DD YYYY', ex: dayjs().format('MM DD YYYY') },
-];
-
-const timePresets: ITimePreset[] = [
-  { locale: 'all', format: 'HH : mm', ex: dayjs().format('HH : mm') },
-  { locale: 'all', format: 'hh : mm', ex: dayjs().format('hh : mm') },
-  { locale: 'ko', format: 'HH시 mm분', ex: dayjs().format('HH시 mm분') },
-  { locale: 'ko', format: 'hh시 mm분', ex: dayjs().format('hh시 mm분') },
-];
-
 const TimeSetting = () => {
   const [tempSetting, setTempSetting] = useRecoilState(tempSettingAtom);
 
-  const dateFomats = datePresets
-    .filter((preset) => preset.locale === tempSetting.timeLocale)
-    .map((preset) => preset.ex);
+  const dateFomats = datePresets.map((preset) => preset.ex);
 
-  const timeFomats = timePresets
-    .filter((preset) => preset.locale === 'all' || preset.locale === tempSetting.timeLocale)
-    .map((preset) => preset.ex);
-
-  const setLocale = (value: 'ko' | 'en') => {
-    setTempSetting((prev) => {
-      return { ...prev, timeLocale: value };
-    });
-  };
+  const timeFomats = timePresets.map((preset) => preset.ex);
 
   const setDateFormat = (value: string) => {
     const selectedPreset = datePresets[datePresets.findIndex(({ ex }) => ex === value)];
 
     setTempSetting((prev) => {
-      return { ...prev, timeLocale: selectedPreset.locale, dateType: selectedPreset.format };
+      return { ...prev, dateType: selectedPreset.format };
     });
   };
 
@@ -71,10 +33,6 @@ const TimeSetting = () => {
 
   return (
     <div className={styles.setting}>
-      <div className={styles.option}>
-        <p>Language</p>
-        <Dropdown optionValue={tempSetting.timeLocale} optionList={['ko', 'en']} setOption={setLocale} />
-      </div>
       <div className={styles.option}>
         <p>Date Format</p>
         <Dropdown
