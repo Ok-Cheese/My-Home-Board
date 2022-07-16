@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 
 import BoxOfficeItem from './boxOfficeItem';
@@ -7,18 +7,14 @@ import { getBoxOffice } from './utils';
 
 import styles from './boxOffice.module.scss';
 
-const BoxOffice = () => {
-  const [targetRange, setTargetRange] = useState('daily');
+const targetRange = 'daily';
 
+const BoxOffice = () => {
   const getApiData = () => {
     return getBoxOffice(targetRange);
   };
 
   const { data } = useQuery(['#boxOffice', targetRange], getApiData);
-
-  const toggleTargetRange = () => {
-    setTargetRange((prev) => (prev === 'daily' ? 'weekly' : 'daily'));
-  };
 
   const boxOfficeContent = useMemo(() => {
     if (!data) return [];
@@ -28,10 +24,7 @@ const BoxOffice = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.top}>
-        박스 오피스
-        <button type='button'>targetRange</button>
-      </div>
+      <div className={styles.top}>박스 오피스</div>
       <ul className={styles.boxOffice}>{boxOfficeContent}</ul>
     </div>
   );
