@@ -1,4 +1,3 @@
-import { time } from 'console';
 import { useMemo } from 'react';
 import { cx } from 'styles';
 import styles from './boxOfficeItem.module.scss';

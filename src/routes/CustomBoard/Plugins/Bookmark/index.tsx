@@ -14,13 +14,9 @@ import Icon from 'components/Icon';
 
 import styles from './bookmarks.module.scss';
 
-interface IProps {
-  layout: Layout;
-}
-
 const savedBookmark = store.get('bookmarkList');
 
-const Bookmarks = ({ layout }: IProps) => {
+const Bookmarks = () => {
   const [bookmarkList, setBookmarkList] = useState<IBookmark[]>(savedBookmark || bookmarkPreset);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isRemoveMode, setIsRemoveMode] = useState(false);
