@@ -6,7 +6,6 @@ import ColorPickOption from './ColorPickOption';
 import GradientSlideOption from './GradientSlideOption';
 
 import styles from './generalSetting.module.scss';
-import 'rc-slider/assets/index.css';
 
 const GeneralSetting = () => {
   const tempSetting = useRecoilValue(tempSettingAtom);
