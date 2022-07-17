@@ -4,7 +4,7 @@ import { cx } from 'styles';
 import { SearchIcon } from 'assets/svgs';
 import { GoogleIcon, YoutubeIcon } from 'assets/svgs/presets';
 
-import IconButton from 'components/Icon';
+import Icon from 'components/Icon';
 
 import styles from './searchBar.module.scss';
 
@@ -41,9 +41,9 @@ const SearchBar = () => {
 
   return (
     <form className={styles.searchBar} onSubmit={serachSubmitHandler}>
-      <IconButton size='auto' onClick={toggleSearchType}>
+      <Icon type='button' size='auto' onClick={toggleSearchType}>
         {typeButtonIcon}
-      </IconButton>
+      </Icon>
       <fieldset className={styles.fieldset}>
         <legend hidden>search input</legend>
         <input
@@ -54,9 +54,9 @@ const SearchBar = () => {
           onChange={inputChangeHandler}
         />
       </fieldset>
-      <IconButton size='auto' type='submit'>
+      <Icon size='auto' type='submit'>
         <SearchIcon />
-      </IconButton>
+      </Icon>
     </form>
   );
 };
