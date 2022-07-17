@@ -6,9 +6,10 @@ import { cx } from 'styles';
 import { isEditModeAtom, layoutAtom } from 'states/plugin';
 import { HelpIcon, LayoutIcon, SettingIcon } from 'assets/svgs';
 
+import Preference from './Preference';
 import ModalPortal from 'components/Modal/Potal';
 import WarningModal from 'components/Modal/Warning';
-import Preference from './Preference';
+import Icon from 'components/Icon';
 
 import styles from './setting.module.scss';
 
@@ -27,7 +28,6 @@ const Setting = () => {
   const toggleEditModeHandler = () => {
     if (isEditMode) {
       const overflowedItems = layoutState.filter((layout) => layout.h + layout.y > 10);
-
       if (overflowedItems.length) {
         setIsWarningModalOpened(true);
         return;
@@ -42,25 +42,25 @@ const Setting = () => {
     setIsWarningModalOpened(false);
   };
 
-  const moveToGithub = () => {
-    window.open(ManualURL, '_blank');
-  };
-
   const closeSetting = () => {
     setIsSettingOpened(false);
   };
 
+  const moveToManual = () => {
+    window.open(ManualURL, '_blank');
+  };
+
   return (
     <div className={styles.setting}>
-      <button type='button' onClick={toggleEditModeHandler}>
+      <Icon size='100%' onClick={toggleEditModeHandler}>
         <LayoutIcon className={cx({ [styles.active]: isEditMode })} />
-      </button>
-      <button type='button' onClick={toggleSetting}>
+      </Icon>
+      <Icon size='100%' onClick={toggleSetting}>
         <SettingIcon />
-      </button>
-      <button type='button' onClick={moveToGithub}>
+      </Icon>
+      <Icon size='100%' onClick={moveToManual}>
         <HelpIcon />
-      </button>
+      </Icon>
       <ModalPortal>
         {isSettingOpened && <Preference closeModal={closeSetting} />}
         {isWarningModalOpened && (
