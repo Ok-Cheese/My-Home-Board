@@ -1,9 +1,9 @@
-import { useState, MouseEvent } from 'react';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useMount } from 'react-use';
-import { cx } from 'styles';
 import store from 'store';
 
+import { TPreferMenu } from './type.d';
 import { settingAtom, tempSettingAtom } from 'states/settings';
 
 import Button from 'components/Button';
@@ -12,13 +12,11 @@ import TimeSetting from './menu/Time';
 import GeneralSetting from './menu/General';
 
 import styles from './preference.module.scss';
+import Sidebar from './Sidebar';
 
-type TPreferMenu = 'General' | 'Time';
 interface IProps {
   closeModal: () => void;
 }
-
-const sidebarMenuArr = ['일반', 'Time'];
 
 const Preference = ({ closeModal }: IProps) => {
   const [currentMenu, setCurrentMenu] = useState<TPreferMenu>('General');
@@ -30,50 +28,34 @@ const Preference = ({ closeModal }: IProps) => {
     setTempSetting(setting);
   });
 
-  const confirmSetting = () => {
+  const confirmSettingHandler = () => {
     store.set('setting', tempSetting);
     setSetting(tempSetting);
     closeModal();
   };
 
-  const cancelSetting = () => {
+  const cancelSettingHandler = () => {
     closeModal();
   };
 
-  const changeMenu = (e: MouseEvent<HTMLButtonElement>) => {
-    setCurrentMenu(e.currentTarget.dataset.menu as TPreferMenu);
-  };
-
-  const decideContent = (name: TPreferMenu) => {
+  const selectedContent = (name: TPreferMenu) => {
     return {
       General: <GeneralSetting />,
       Time: <TimeSetting />,
     }[name];
   };
 
-  const sidebarMenu = sidebarMenuArr.map((menu) => (
-    <button
-      key={menu}
-      type='button'
-      className={cx({ [styles.currentMenu]: currentMenu === menu })}
-      data-menu={menu}
-      onClick={changeMenu}
-    >
-      {menu}
-    </button>
-  ));
-
   return (
     <Modal closeModal={closeModal}>
       <div className={styles.preference}>
-        <aside className={styles.sidebar}>{sidebarMenu}</aside>
+        <Sidebar currentMenu={currentMenu} setCurrentMenu={setCurrentMenu} />
         <div className={styles.main}>
-          <div className={styles.content}>{decideContent(currentMenu)}</div>
+          <div className={styles.content}>{selectedContent(currentMenu)}</div>
           <div className={styles.buttonWrapper}>
-            <Button size='fill' type='button' onClick={confirmSetting}>
+            <Button size='fill' type='button' onClick={confirmSettingHandler}>
               확인
             </Button>
-            <Button size='fill' type='button' onClick={cancelSetting}>
+            <Button size='fill' type='button' onClick={cancelSettingHandler}>
               취소
             </Button>
           </div>
